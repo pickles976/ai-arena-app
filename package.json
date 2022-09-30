@@ -1,0 +1,23 @@
+{
+  "name": "mern_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "author": "Sebastian Gomez",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "concurrently": "^7.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
