@@ -94,21 +94,67 @@ h3 {
   height: 94vh;
 }
 
+/* LEFT PANEL */
+
 .left-panel {
   order: -1;
+  flex-grow: 5;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+}
+
+/* MIDDLE PANEL */
+
+.middle-panel {
+  order: 0;
+  flex-grow: 3;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+
+  /* Container properties */
+  display: flex;
+  flex-direction: column;
+}
+
+.game-panel {
+  order: 1;
+  flex-grow: 2;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+}
+
+.data-panel {
+  order: 1;
+  flex-grow: 1;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+
+  /* Container properties */
+  display: flex;
+  flex-direction: row;
+}
+
+.gameObject-panel {
+  order: 1;
   flex-grow: 1;
   border-radius: 1px;
   border-color: #000;
   border: solid;
 }
 
-.middle-panel {
-  order: 0;
-  flex-grow: 2;
+.inspector-panel {
+  order: 1;
+  flex-grow: 3;
   border-radius: 1px;
   border-color: #000;
   border: solid;
 }
+
+/* RIGHT PANEL */
 
 .right-panel {
   order: 1;
@@ -116,7 +162,33 @@ h3 {
   border-radius: 1px;
   border-color: #000;
   border: solid;
+
+  /* Container properties */
+  display: flex;
+  flex-direction: column;
 }
+
+.score-panel {
+  order: 1;
+  flex-grow: 2;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+}
+
+.ship-panel {
+  order: 1;
+  flex-grow: 5;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+}
+
+
+
+
+
+
 
 .heading {
   font-size: 2rem;
