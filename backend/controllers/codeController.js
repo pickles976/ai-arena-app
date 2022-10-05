@@ -33,7 +33,7 @@ const setCode = asyncHandler(async (req, res) => {
 // @access private
 const updateCode = asyncHandler(async (req, res) => {
 
-    const code = await code.findById(req.params.id)
+    const code = await Code.findById(req.params.id)
 
     if(!code){
         res.status(400)
@@ -50,7 +50,7 @@ const updateCode = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    const updatedcode = await code.findByIdAndUpdate(req.params.id,req.body,{new: true})
+    const updatedcode = await Code.findByIdAndUpdate(req.params.id,req.body,{new: true})
 
     res.status(200).json(updatedcode)
 })
@@ -59,7 +59,7 @@ const updateCode = asyncHandler(async (req, res) => {
 // @route DELETE /api/code
 // @access private
 const deleteCode = asyncHandler(async (req, res) => {
-    const code = await code.findById(req.params.id)
+    const code = await Code.findById(req.params.id)
 
     if (!code){
         res.status(400)
@@ -76,7 +76,7 @@ const deleteCode = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    await code.remove()
+    await Code.remove()
 
     res.status(200).json({ id: req.params.id})
 })

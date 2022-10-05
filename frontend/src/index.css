@@ -37,19 +37,29 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  /* max-width: 960px; */
   margin: 0 auto;
-  padding: 0 20px;
+  /* padding: 0 20px; */
   text-align: center;
+}
+
+/* HEADER */
+
+.logo {
+  padding: 8px;
+  height: 6vh;
+  border: 8;
+  top: 50%
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  width: 100%;
   border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 60px;
+  height: 6vh;
+  white-space: nowrap;
 }
 
 .header ul {
@@ -73,6 +83,39 @@ h3 {
 
 .header ul li a svg {
   margin-right: 5px;
+}
+
+/* HOMEPAGE */
+
+.home-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 94vh;
+}
+
+.left-panel {
+  order: -1;
+  flex-grow: 1;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+}
+
+.middle-panel {
+  order: 0;
+  flex-grow: 2;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
+}
+
+.right-panel {
+  order: 1;
+  flex-grow: 1;
+  border-radius: 1px;
+  border-color: #000;
+  border: solid;
 }
 
 .heading {

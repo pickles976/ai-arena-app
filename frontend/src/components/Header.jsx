@@ -2,6 +2,7 @@ import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
+import logo  from '../static/logo_med.png'
 
 function Header() {
 
@@ -18,7 +19,7 @@ function Header() {
     return (
         <header className='header'>
             <div>
-                
+                <img src={logo} class="logo" />
             </div>
             <div>
                 <Link to='/'>AI-ARENA</Link>
