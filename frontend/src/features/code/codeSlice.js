@@ -1,19 +1,19 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import goalService from '../goals/goalService'
+import codeService from './codeService'
 
 const initialState = {
-    goals: [],
+    code: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: ''
 }
 
-// Create new goal
-export const createGoal = createAsyncThunk('goals/create', async (goalData, thunkAPI) => {
+// Create new code
+export const createCode = createAsyncThunk('code/create', async (codeData, thunkAPI) => {
     try{
         const token = thunkAPI.getState().auth.user.token
-        return await goalService.createGoal(goalData, token)
+        return await codeService.createCode(codeData, token)
     }catch (error) {
         const message = 
             (error.response && 
@@ -25,11 +25,11 @@ export const createGoal = createAsyncThunk('goals/create', async (goalData, thun
     }
 })
 
-// Get user goals
-export const getGoals = createAsyncThunk('goals/getAll', async (_, thunkAPI) => {
+// Get user code
+export const getCode = createAsyncThunk('code/getAll', async (_, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.user.token
-        return await goalService.getGoals(token)
+        return await codeService.getCode(token)
     }catch (error){
         const message = 
             (error.response && 
@@ -41,11 +41,11 @@ export const getGoals = createAsyncThunk('goals/getAll', async (_, thunkAPI) => 
     }
 })
 
-// Create new goal
-export const deleteGoal = createAsyncThunk('goals/delete', async (id, thunkAPI) => {
+// Create new code
+export const deleteCode = createAsyncThunk('code/delete', async (id, thunkAPI) => {
     try{
         const token = thunkAPI.getState().auth.user.token
-        return await goalService.deleteGoal(id, token)
+        return await codeService.deleteCode(id, token)
     }catch (error) {
         const message = 
             (error.response && 
@@ -57,49 +57,49 @@ export const deleteGoal = createAsyncThunk('goals/delete', async (id, thunkAPI) 
     }
 })
 
-export const goalSlice = createSlice({
-    name: 'goal',
+export const codeSlice = createSlice({
+    name: 'code',
     initialState,
     reducers: {
         reset: (state) => initialState
     },
     extraReducers: (builder) => {
         builder
-        .addCase(createGoal.pending, (state) => {
+        .addCase(createCode.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(createGoal.fulfilled, (state, action) => {
+        .addCase(createCode.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
-            state.goals.push(action.payload)
+            state.code.push(action.payload)
         })
-        .addCase(createGoal.rejected, (state, action) => {
+        .addCase(createCode.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
         })
-        .addCase(getGoals.pending, (state) => {
+        .addCase(getCode.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(getGoals.fulfilled, (state, action) => {
+        .addCase(getCode.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
-            state.goals = action.payload
+            state.code = action.payload
         })
-        .addCase(getGoals.rejected, (state, action) => {
+        .addCase(getCode.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
         })
-        .addCase(deleteGoal.pending, (state) => {
+        .addCase(deleteCode.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(deleteGoal.fulfilled, (state, action) => {
+        .addCase(deleteCode.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
-            state.goals = state.goals.filter((goal) => goal._id !== action.payload.id)
+            state.code = state.code.filter((code) => code._id !== action.payload.id)
         })
-        .addCase(deleteGoal.rejected, (state, action) => {
+        .addCase(deleteCode.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload
@@ -107,5 +107,5 @@ export const goalSlice = createSlice({
     }
 })
 
-export const {reset} = goalSlice.actions
-export default goalSlice.reducer
+export const {reset} = codeSlice.actions
+export default codeSlice.reducer

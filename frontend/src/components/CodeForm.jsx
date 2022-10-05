@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
-import {createGoal} from '../features/goals/goalsSlice'
+import {createCode} from '../features/code/codeSlice'
 
-function GoalForm() {
+function CodeForm() {
 
     const [text, setText] = useState('')
 
@@ -11,7 +11,7 @@ function GoalForm() {
     const onSubmit = e => {
         e.preventDefault()
 
-        dispatch(createGoal({text}))
+        dispatch(createCode({text}))
         setText('')
     }
 
@@ -19,12 +19,12 @@ function GoalForm() {
         <section className='form'>
             <form onSubmit={onSubmit}>
                 <div className='form-group'>
-                    <label htmlFor='text'>Goal</label>
+                    <label htmlFor='text'>Code</label>
                     <input type='text' name='text' id='text' value={text} onChange={(e) => setText(e.target.value)}/>
                 </div>
                 <div className="form-group">
                     <button className='btn btn-block' type='submit'>
-                        Add Goal
+                        Add Code
                     </button>
                 </div>
             </form>
@@ -32,4 +32,4 @@ function GoalForm() {
     )
 }
 
-export default GoalForm
+export default CodeForm
