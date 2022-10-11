@@ -2,25 +2,30 @@ import React from 'react'
 import { useEffect } from 'react';
 import { SetupGame } from '../features/game/game'
 
-const WIDTH = 640
-const HEIGHT = 480
-
 function Home() {
 
     useEffect(() => {
-        SetupGame(WIDTH, HEIGHT);
+        SetupGame();
     }, []);
 
   return (
     <>
-    <div className='home-container'>
+    <div className='home-container body-home'>
         <div className='left-panel'>
             Code Panel
         </div>
         <div className='middle-panel'>
             <div className='game-panel'>
-                <canvas id="game-canvas" width={WIDTH} height={HEIGHT} className='game-canvas'></canvas>
+                <canvas id="game-canvas" className='game-canvas'></canvas>
             </div>
+
+            <div className="game-controls">
+                <button id="run" className="btn-game">Run</button>
+                <button id="pause" className="btn-game">Pause</button>
+                <button id="step" className="btn-game">Step</button>
+                <button id="warp" className="btn-game">Warp</button>
+            </div>
+
             <div className='data-panel'>
                 <div className='gameObject-panel'>
                     Game Object Panel

@@ -3,7 +3,7 @@ import { setTicksPerFrame, stopGame, setCanvas, testPackage, runGame, togglePaus
 // import { getCodeFromEditor } from './editor.js'
 
 
-export const SetupGame = (width, height) => {
+export const SetupGame = () => {
 
     // INITIALIZATION
     console.log(testPackage())
@@ -12,16 +12,80 @@ export const SetupGame = (width, height) => {
     console.log(canvas)
     setCanvas(canvas)
     const ctx = canvas.getContext('2d')
-    ctx.fillRect(0,0,width,height)
+    ctx.fillRect(0,0,640,480)
 
     setBaseStartCode(0,localStorage.getItem("Base Start") || BaseStart)
     setBaseUpdateCode(0,localStorage.getItem("Base Update") || BaseUpdate)
     setShipStartCode(0,localStorage.getItem("Ship Start") || ShipStart)
     setShipUpdateCode(0,localStorage.getItem("Ship Update") || ShipUpdate)
 
+    let ObjectDict = {}
+
+    let PAUSED = false;
     let TICKS_PER_FRAME = 1;
+    let WARP_SPEED = 8;
+    let RUNNING = false;
 
     setTicksPerFrame(TICKS_PER_FRAME)
+
+    let startTime = performance.now()
+
+    let uuid = undefined
+
+    // BUTTON CALLBACKS
+    let pause = event => {
+        togglePause()
+        PAUSED = !PAUSED
+        document.getElementById("pause").innerHTML = PAUSED ? "Play" : "Pause"
+    };
+    document.getElementById("pause").addEventListener("click", pause)
+
+    let step = event => {
+        stepFrame()
+        PAUSED = true
+        document.getElementById("pause").innerHTML = "Play"
+    };
+    document.getElementById("step").addEventListener("click", step)
+
+    // let compile = event => {
+    //     var code = getCodeFromEditor()
+    //     setBaseStartCode(0,code["Base Start"])
+    //     setBaseUpdateCode(0,code["Base Update"])
+    //     setShipStartCode(0,code["Ship Start"])
+    //     setShipUpdateCode(0,code["Ship Update"])
+    // };
+    // document.getElementById("compile").addEventListener("click", compile)
+
+    let run = event => {
+        startTime = performance.now()
+
+        if (RUNNING)
+            stopGame()
+        else
+            try {
+                runGame()
+            } 
+            catch(e)
+            {
+                alert(" Your code broke my site dude!!! \n" + e)
+            }
+
+        RUNNING = !RUNNING
+        document.getElementById("run").innerHTML = RUNNING ? "Stop" : "Run"
+    }
+    document.getElementById("run").addEventListener("click", run)
+
+    let warp = event => {
+        if(PAUSED){
+            togglePause()
+            PAUSED = false
+        }
+        TICKS_PER_FRAME = TICKS_PER_FRAME === 1 ? WARP_SPEED : 1
+        setTicksPerFrame(TICKS_PER_FRAME)
+        document.getElementById("pause").innerHTML = "Pause"
+        document.getElementById("warp").innerHTML = TICKS_PER_FRAME === 1 ? "Warp" : "Normal"
+    }
+    document.getElementById("warp").addEventListener("click", warp)
 
     runGame();
 
