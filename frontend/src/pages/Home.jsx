@@ -1,6 +1,16 @@
 import React from 'react'
+import { useEffect } from 'react';
+import { SetupGame } from '../features/game/game'
+
+const WIDTH = 640
+const HEIGHT = 480
 
 function Home() {
+
+    useEffect(() => {
+        SetupGame(WIDTH, HEIGHT);
+    }, []);
+
   return (
     <>
     <div className='home-container'>
@@ -9,7 +19,7 @@ function Home() {
         </div>
         <div className='middle-panel'>
             <div className='game-panel'>
-                Game Panel
+                <canvas id="game-canvas" width={WIDTH} height={HEIGHT} className='game-canvas'></canvas>
             </div>
             <div className='data-panel'>
                 <div className='gameObject-panel'>

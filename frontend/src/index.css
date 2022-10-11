@@ -98,10 +98,18 @@ h3 {
 
 .left-panel {
   order: -1;
-  flex-grow: 5;
-  border-radius: 1px;
-  border-color: #000;
-  border: solid;
+  /* flex-grow: 5; */
+  /* border-radius: 1px; */
+  /* border-color: #000; */
+  /* border: solid; */
+  width: 40%;
+  min-width: 40%;
+  height: 100%;
+  float: left;
+  border-collapse: collapse;
+  border: 0;
+  margin: 0;
+  display: flex;
 }
 
 /* MIDDLE PANEL */
@@ -121,27 +129,35 @@ h3 {
 .game-panel {
   order: 1;
   flex-grow: 2;
-  border-radius: 1px;
-  border-color: #000;
-  border: solid;
+  border: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-canvas {
+  width: 100%;
+  float: left;
 }
 
 .data-panel {
   order: 1;
-  flex-grow: 1;
-  border-radius: 1px;
-  border-color: #000;
-  border: solid;
 
   /* Container properties */
   display: flex;
   flex-direction: row;
+
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: calc(93.5vh - (100vw / (1.5 / 0.48)));
+  align-items: stretch;
 }
 
 .gameObject-panel {
   order: 1;
   flex-grow: 1;
-  border-radius: 1px;
+  border-radius: 0.1px;
   border-color: #000;
   border: solid;
 }
@@ -158,14 +174,18 @@ h3 {
 
 .right-panel {
   order: 1;
-  flex-grow: 1;
-  border-radius: 1px;
-  border-color: #000;
-  border: solid;
+  /* flex-grow: 1; */
 
   /* Container properties */
   display: flex;
   flex-direction: column;
+
+  width: 12%;
+  height: 100%;
+  float: right;
+  border-collapse: collapse;
+  border: 0;
+  margin: 0;
 }
 
 .score-panel {

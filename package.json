@@ -12,6 +12,7 @@
   "author": "Sebastian Gomez",
   "license": "MIT",
   "dependencies": {
+    "ai-arena": "1.0.6",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "concurrently": "^7.4.0",

@@ -19,7 +19,7 @@ function Header() {
     return (
         <header className='header'>
             <div>
-                <img src={logo} class="logo" />
+                <img src={logo} className="logo" />
             </div>
             <div>
                 <Link to='/'>AI-ARENA</Link>
