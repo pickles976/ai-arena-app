@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
-import { SetupGame } from '../features/game/game'
+import CodeEditor from '../components/CodeEditor';
+import { SetupGame } from '../utilities/game/game'
 
 function Home() {
 
@@ -12,7 +13,22 @@ function Home() {
     <>
     <div className='home-container body-home'>
         <div className='left-panel'>
-            Code Panel
+            {/* stacking */}
+            <div style={{ 'margin': 'auto', 'width': '100%', 'margin-top': '-0.1%' }}>
+                <div class="code-controls">
+                    <div class="container">
+                        <select class="btn-main dropdown-toggle" id="select-script">
+                            <option selected>Ship Update</option>
+                            <option>Ship Start</option>
+                            <option>Base Update</option>
+                            <option>Base Start</option>
+                        </select>
+                        <button id="compile" class="btn-main">Compile</button>
+                    </div>
+                </div>
+
+                <CodeEditor />
+            </div>
         </div>
         <div className='middle-panel'>
             <div className='game-panel'>

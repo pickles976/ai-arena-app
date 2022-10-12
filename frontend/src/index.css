@@ -63,6 +63,14 @@ h3 {
   text-align: center;
 }
 
+/* .container {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin: 0 auto;
+  display: flex;
+} */
+
 /* HEADER */
 
 .logo {
@@ -131,6 +139,37 @@ h3 {
   margin: 0;
   display: flex;
 }
+
+.code-controls {
+  position: relative;
+  height: 4vh;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  display: block;
+}
+
+#editor { 
+  position: relative;
+  min-height: 100px;
+  height: 89.5vh;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.code-container {
+    position:relative;
+    width:100%;
+    height: 100%;
+    border: 0;
+    margin: 0;
+    display: block;
+    margin: auto;
+}
+
 
 /* MIDDLE PANEL */
 
@@ -318,6 +357,18 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.btn-main:hover {
+  background-color: var(--secondary);
+}
+
+.btn-main {
+  color: var(--text-2);
+  background-color: var(--primary);
+  border: none;
+  margin: 0.2%;
+  font-family: monospace;
 }
 
 .btn svg {
