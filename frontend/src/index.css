@@ -86,14 +86,6 @@ h3 {
   text-align: center;
 }
 
-/* .container {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  margin: 0 auto;
-  display: flex;
-} */
-
 /* HEADER */
 
 .logo {
@@ -170,6 +162,14 @@ h3 {
   border: 0;
   margin: 0;
   display: block;
+}
+
+.code-controls-container {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  display: flex;
 }
 
 #editor { 

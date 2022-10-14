@@ -14,11 +14,11 @@ function Home() {
     <div className='home-container body-home'>
         <div className='left-panel'>
             {/* stacking */}
-            <div style={{ 'margin': 'auto', 'width': '100%', 'margin-top': '-0.1%' }}>
+            <div style={{ 'margin': 'auto', 'width': '100%', 'marginTop': '-0.1%' }}>
                 <div className="code-controls">
-                    <div className="container">
-                        <select className="btn-main dropdown-toggle" id="select-script">
-                            <option selected>Ship Update</option>
+                    <div className="code-controls-container">
+                        <select className="btn-main dropdown-toggle" id="select-script" defaultValue={"Ship Update"}>
+                            <option>Ship Update</option>
                             <option>Ship Start</option>
                             <option>Base Update</option>
                             <option>Base Start</option>

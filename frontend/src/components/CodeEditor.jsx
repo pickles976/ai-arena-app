@@ -9,22 +9,32 @@ import 'brace/mode/javascript';
 import 'brace/theme/tomorrow_night_eighties';
 
 import { customCompleter } from '../utilities/editor/completions';
-import { SetupEditor } from '../utilities/editor/editor';
+import { useState } from 'react';
 
 function CodeEditor (){
 
-    let langTools = ace.acequire('ace/ext/language_tools');
+    let langTools = ace.require('ace/ext/language_tools');
+
+    const [sessions, setSessions] = useState({
+        'Base Start' : localStorage.getItem("Base Start") || '// Your code here',
+        'Base Update' : localStorage.getItem("Base Update") || '// Your code here',
+        'Ship Start' : localStorage.getItem("Ship Start") || '// Your code here',
+        'Ship Update' : localStorage.getItem("Ship Update") || '// Your code here',
+    })
+
+    let currentCode = ""
 
     const onLoad = (newValue) => {
-
+        console.log("Loaded")
     }
 
     const onChange = (newValue) => {
-        console.log('change', newValue);
+        console.log('change', newValue)
+        currentCode = newValue
     }
 
     useEffect(() => {
-        langTools.addCompleter(customCompleter);
+        langTools.addCompleter(customCompleter)
     }, [])
 
     return (
