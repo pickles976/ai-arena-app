@@ -17,6 +17,29 @@
   --text-2: #8bcc8b;
 }
 
+/* SCROLLBARS */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; */
+  background: var(--secondary);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /* background: var(--secondary); */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
@@ -158,6 +181,23 @@ h3 {
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.ace_scroller {
+  bottom: 0px!important;
+}
+
+
+.ace_editor.ace_autocomplete {
+  width: 60%!important;
+}
+
+body .ace_scrollbar-v {
+  overflow-y: auto;
+}
+
+body .ace_scrollbar-h {
+  overflow-x: hidden;
 }
 
 .code-container {

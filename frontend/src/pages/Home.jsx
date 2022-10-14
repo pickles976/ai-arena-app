@@ -15,15 +15,15 @@ function Home() {
         <div className='left-panel'>
             {/* stacking */}
             <div style={{ 'margin': 'auto', 'width': '100%', 'margin-top': '-0.1%' }}>
-                <div class="code-controls">
-                    <div class="container">
-                        <select class="btn-main dropdown-toggle" id="select-script">
+                <div className="code-controls">
+                    <div className="container">
+                        <select className="btn-main dropdown-toggle" id="select-script">
                             <option selected>Ship Update</option>
                             <option>Ship Start</option>
                             <option>Base Update</option>
                             <option>Base Start</option>
                         </select>
-                        <button id="compile" class="btn-main">Compile</button>
+                        <button id="compile" className="btn-main">Compile</button>
                     </div>
                 </div>
 
