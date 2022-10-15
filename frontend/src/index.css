@@ -300,16 +300,26 @@ body .ace_scrollbar-h {
 }
 
 .score-panel {
-  order: 1;
-  flex-grow: 2;
-  border-radius: 1px;
-  border-color: #000;
-  border: solid;
+  order: -1;
+  height: 12.5vh;
+  font-size: 16px;
+  font-size: 1.7vmin;
+  background-color: var(--secondary);
+  margin: 5px;
+}
+
+.timer-panel {
+  order: 0;
+  height: 3vh;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  background-color: var(--secondary);
 }
 
 .ship-panel {
   order: 1;
-  flex-grow: 5;
+  flex-grow: 1;
   border-radius: 1px;
   border-color: #000;
   border: solid;
@@ -484,4 +494,60 @@ body .ace_scrollbar-h {
   .heading p {
     font-size: 1.5rem;
   }
+}
+
+/* FLEXBOX GRID */
+/* 
+.score-panel {
+  height: 12.5vh;
+  font-size: 16px;
+  font-size: 1.7vmin;
+  background-color: var(--secondary);
+} */
+
+.teams-info {
+  padding: 8px;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.cell {
+  /* border:1px solid white; */
+  background-color: var(--primary);
+  margin: 5%;
+}
+
+.col-left {
+  width: 33%;
+  height: 100%;
+  border-collapse: collapse;
+  border: 0;
+  margin: 0;
+  float: left;
+  padding: 2px;
+  white-space: nowrap;
+}
+
+.col-middle {
+  width: 33%;
+  height: 100%;
+  border-collapse: collapse;
+  border: 0;
+  margin: 0;
+  float: left;
+  padding: 2px;
+  white-space: nowrap;
+}
+
+.col-right {
+  width: 33%;
+  height: 100%;
+  border-collapse: collapse;
+  border: 0;
+  margin: 0;
+  float: left;
+  padding: 2px;
+  white-space: nowrap;
 }

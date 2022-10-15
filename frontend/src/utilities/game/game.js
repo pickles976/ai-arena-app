@@ -2,8 +2,35 @@ import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './ai-controls.js'
 import { setTicksPerFrame, stopGame, setCanvas, testPackage, runGame, togglePause, stepFrame, getGameInfo, setUICallbacks, getGameState, getShipsInfo, setShipStartCode, setShipUpdateCode, setBaseStartCode, setBaseUpdateCode, updateGameSpeed} from 'ai-arena'
 // import { getCodeFromEditor } from './editor.js'
 
+let startTime = performance.now()
 
-export const SetupGame = () => {
+// IN-GAME CALLBACKS
+var uiCallback = (scoreCallback, timerCallback) => {
+
+    scoreCallback(getGameInfo())
+
+    const start = performance.now()
+    timerCallback('Timesteps: ' + ((performance.now() - startTime) * 60 / 1000).toFixed(0))
+
+
+    // // Draw an index for every object in the game
+    // const gameState = getGameState()
+    // drawMemoryTags(memoryList,gameState)
+
+    // // Load selected object into memory panel if it exists
+    // if(ObjectDict[uuid])
+    //     populateMemoryPanel(ObjectDict[uuid])
+
+    // // Draw all the ships on the ship panel
+    // const ships = getShipsInfo()
+    // if (ships['team0'] && ships['team1'])
+    //     populateShipPanel(ships['team0'],document.getElementById('ship-panel-0'))
+    //     populateShipPanel(ships['team1'],document.getElementById('ship-panel-1'))
+
+    // console.log(performance.now() - start)
+}
+
+export const SetupGame = (scoreCallback, timerCallback) => {
 
     // INITIALIZATION
     console.log(testPackage())
@@ -87,7 +114,8 @@ export const SetupGame = () => {
     }
     document.getElementById("warp").addEventListener("click", warp)
 
-    runGame();
+    setUICallbacks(uiCallback.bind(uiCallback,scoreCallback, timerCallback))
+    runGame()
 
 }
 

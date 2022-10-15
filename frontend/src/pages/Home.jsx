@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor';
-import { SetupGame } from '../utilities/game/game'
+import Game from '../components/Game';
+import Score from '../components/Score';
+import Timer from '../components/Timer';
 
 function Home() {
 
+    // State for Code
     const [sessions, setSessions] = useState({
         'Base Start' : localStorage.getItem("Base Start") || '// Your code here',
         'Base Update' : localStorage.getItem("Base Update") || '// Your code here',
@@ -26,9 +29,35 @@ function Home() {
         setCurrentSession(event.target.value)
     }
 
-    useEffect(() => {
-        SetupGame();
-    }, []);
+    // State for scores
+    const [score, setScore] = useState({
+        'team 0' : {
+            'kills' : 0,
+            'deaths' : 0,
+            'metal' : 0,
+            'energy' : 0,
+        },
+        'team 1' : {
+            'kills' : 0,
+            'deaths' : 0,
+            'metal' : 0,
+            'energy' : 0,
+        }
+    })
+
+    const scoreCallback = (newScore) => {
+        setScore(score => ({
+            ...score,
+            ...newScore
+        }))
+    }
+
+    // State for Timer
+    const [timer, setTimer] = useState('Timesteps: 0.0')
+
+    const timerCallback = (value) => {
+        setTimer(value)
+    }
 
   return (
     <>
@@ -52,9 +81,7 @@ function Home() {
             </div>
         </div>
         <div className='middle-panel'>
-            <div className='game-panel'>
-                <canvas id="game-canvas" className='game-canvas'></canvas>
-            </div>
+            <Game scoreCallback={scoreCallback} timerCallback={timerCallback}/>
 
             <div className="game-controls">
                 <button id="run" className="btn-game">Run</button>
@@ -73,9 +100,8 @@ function Home() {
             </div>
         </div>
         <div className='right-panel'>
-            <div className='score-panel'>
-                Score Panel
-            </div>
+            <Score score={score} />
+            <Timer time={timer} />
             <div className='ship-panel'>
                 Ship Panel
             </div>

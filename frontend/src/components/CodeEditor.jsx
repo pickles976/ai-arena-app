@@ -58,7 +58,6 @@ const CodeEditor = React.memo((props) => {
                 enableLiveAutocompletion={true}
                 width='100%'
                 height='89.5vh'
-                // showGutter={false}
                 value={currentCode}
             />
         </div>
