@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor';
 import { SetupGame } from '../utilities/game/game'
 
 function Home() {
+
+    const [sessions, setSessions] = useState({
+        'Base Start' : localStorage.getItem("Base Start") || '// Your code here',
+        'Base Update' : localStorage.getItem("Base Update") || '// Your code here',
+        'Ship Start' : localStorage.getItem("Ship Start") || '// Your code here',
+        'Ship Update' : localStorage.getItem("Ship Update") || '// Your code here',
+    })
+
+    const [currentSession, setCurrentSession] = useState('Ship Update')
+
+    const updateSessions = (session, code) => {
+        // localStorage.setItem(session, code || " ")
+        setSessions(sessions => ({
+            ...sessions,
+            ...{ [session] : code }
+        }))
+    }
+
+    const selectScript = (event) => {
+        setCurrentSession(event.target.value)
+    }
 
     useEffect(() => {
         SetupGame();
@@ -17,7 +38,7 @@ function Home() {
             <div style={{ 'margin': 'auto', 'width': '100%', 'marginTop': '-0.1%' }}>
                 <div className="code-controls">
                     <div className="code-controls-container">
-                        <select className="btn-main dropdown-toggle" id="select-script" defaultValue={"Ship Update"}>
+                        <select className="btn-main dropdown-toggle" id="select-script" defaultValue={"Ship Update"} onChange={selectScript}>
                             <option>Ship Update</option>
                             <option>Ship Start</option>
                             <option>Base Update</option>
@@ -27,7 +48,7 @@ function Home() {
                     </div>
                 </div>
 
-                <CodeEditor />
+                <CodeEditor session={currentSession} code={sessions[currentSession]} callback={updateSessions} />
             </div>
         </div>
         <div className='middle-panel'>

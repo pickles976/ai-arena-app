@@ -9,20 +9,13 @@ import 'brace/mode/javascript';
 import 'brace/theme/tomorrow_night_eighties';
 
 import { customCompleter } from '../utilities/editor/completions';
-import { useState } from 'react';
 
-function CodeEditor (){
+let currentCode = '';
+let currentSession = '';
+
+const CodeEditor = React.memo((props) => {
 
     let langTools = ace.require('ace/ext/language_tools');
-
-    const [sessions, setSessions] = useState({
-        'Base Start' : localStorage.getItem("Base Start") || '// Your code here',
-        'Base Update' : localStorage.getItem("Base Update") || '// Your code here',
-        'Ship Start' : localStorage.getItem("Ship Start") || '// Your code here',
-        'Ship Update' : localStorage.getItem("Ship Update") || '// Your code here',
-    })
-
-    let currentCode = ""
 
     const onLoad = (newValue) => {
         console.log("Loaded")
@@ -33,9 +26,19 @@ function CodeEditor (){
         currentCode = newValue
     }
 
+    // load in initial values
     useEffect(() => {
         langTools.addCompleter(customCompleter)
+        currentCode = props.code
+        currentSession = props.session
     }, [])
+
+    // update sessions
+    useEffect(() => {
+        props.callback(currentSession, currentCode)
+        currentSession = props.session
+        currentCode = props.code
+    }, [props.session])
 
     return (
         <div className='code-container'>
@@ -56,11 +59,11 @@ function CodeEditor (){
                 width='100%'
                 height='89.5vh'
                 // showGutter={false}
-                
+                value={currentCode}
             />
         </div>
     );
 
-}
+})
 
 export default CodeEditor
