@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react';
 import CodeEditor from '../components/CodeEditor';
 import Game from '../components/Game';
+import MemorySelector from '../components/MemorySelector';
 import Score from '../components/Score';
 import Timer from '../components/Timer';
 
@@ -59,6 +59,13 @@ function Home() {
         setTimer(value)
     }
 
+    // State for Gameobjects
+    const [gameObjects, setGameObjects] = useState([])
+
+    const gameObjectsCallback = (value) => {
+        setGameObjects(value)
+    }
+
   return (
     <>
     <div className='home-container body-home'>
@@ -81,7 +88,7 @@ function Home() {
             </div>
         </div>
         <div className='middle-panel'>
-            <Game scoreCallback={scoreCallback} timerCallback={timerCallback}/>
+            <Game scoreCallback={scoreCallback} timerCallback={timerCallback} gameObjectsCallback={gameObjectsCallback} />
 
             <div className="game-controls">
                 <button id="run" className="btn-game">Run</button>
@@ -91,9 +98,7 @@ function Home() {
             </div>
 
             <div className='data-panel'>
-                <div className='gameObject-panel'>
-                    Game Object Panel
-                </div>
+                <MemorySelector gameObjects={gameObjects}/>
                 <div className='inspector-panel'>
                     Inspector Panel
                 </div>

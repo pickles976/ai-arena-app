@@ -5,7 +5,7 @@ import { SetupGame } from '../utilities/game/game';
 function Game(props) {
 
     useEffect(() => {
-        SetupGame(props.scoreCallback, props.timerCallback);
+        SetupGame(props);
     }, []);
 
   return (

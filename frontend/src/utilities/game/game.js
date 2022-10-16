@@ -5,12 +5,14 @@ import { setTicksPerFrame, stopGame, setCanvas, testPackage, runGame, togglePaus
 let startTime = performance.now()
 
 // IN-GAME CALLBACKS
-var uiCallback = (scoreCallback, timerCallback) => {
+var uiCallback = (props) => {
 
-    scoreCallback(getGameInfo())
+    props.scoreCallback(getGameInfo())
 
     const start = performance.now()
-    timerCallback('Timesteps: ' + ((performance.now() - startTime) * 60 / 1000).toFixed(0))
+    props.timerCallback('Timesteps: ' + ((performance.now() - startTime) * 60 / 1000).toFixed(0))
+
+    props.gameObjectsCallback(getGameState())
 
 
     // // Draw an index for every object in the game
@@ -30,7 +32,7 @@ var uiCallback = (scoreCallback, timerCallback) => {
     // console.log(performance.now() - start)
 }
 
-export const SetupGame = (scoreCallback, timerCallback) => {
+export const SetupGame = (props) => {
 
     // INITIALIZATION
     console.log(testPackage())
@@ -114,7 +116,7 @@ export const SetupGame = (scoreCallback, timerCallback) => {
     }
     document.getElementById("warp").addEventListener("click", warp)
 
-    setUICallbacks(uiCallback.bind(uiCallback,scoreCallback, timerCallback))
+    setUICallbacks(uiCallback.bind(uiCallback, props))
     runGame()
 
 }
