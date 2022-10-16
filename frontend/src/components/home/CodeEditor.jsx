@@ -8,7 +8,7 @@ import 'brace/ext/language_tools';
 import 'brace/mode/javascript';
 import 'brace/theme/tomorrow_night_eighties';
 
-import { customCompleter } from '../utilities/editor/completions';
+import { customCompleter } from '../../utilities/editor/completions';
 
 let currentCode = '';
 let currentSession = '';

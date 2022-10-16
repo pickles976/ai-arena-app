@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react';
-import { SetupGame } from '../utilities/game/game';
+import { SetupGame } from '../../utilities/game/game';
 
 function Game(props) {
 

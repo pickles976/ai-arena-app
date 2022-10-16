@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import CodeEditor from '../components/CodeEditor';
-import Game from '../components/Game';
-import MemObject from '../components/MemObject';
-import MemorySelector from '../components/MemorySelector';
-import Score from '../components/Score';
-import Timer from '../components/Timer';
+import CodeEditor from '../components/home/CodeEditor';
+import Game from '../components/home/Game';
+import ShipPanel from '../components/home/ShipPanel';
+import MemObject from '../components/home/MemObject';
+import MemorySelector from '../components/home/MemorySelector';
+import Score from '../components/home/Score';
+import Timer from '../components/home/Timer';
 import { drawCircle } from '../utilities/game/game';
 
 function Home() {
@@ -63,9 +64,16 @@ function Home() {
 
     // State for Gameobjects List
     const [gameObjects, setGameObjects] = useState([])
+    const [ships, setShips] = useState({'Team 0' : [], 'Team 1': []})
 
     const gameObjectsCallback = (value) => {
         setGameObjects(value)
+
+        let newShips = {}
+        newShips['Team 0'] = value.filter((obj) => (obj !== null && obj.type === "SHIP" && obj.team !== undefined && obj.team === 0))
+        newShips['Team 1'] = value.filter((obj) => (obj !== null && obj.type === "SHIP" && obj.team !== undefined && obj.team === 1))
+
+        setShips(newShips)
     }
 
     // State for the GameObject we are currently inspecting
@@ -132,9 +140,7 @@ function Home() {
         <div className='right-panel'>
             <Score score={score} />
             <Timer time={timer} />
-            <div className='ship-panel'>
-                Ship Panel
-            </div>
+            <ShipPanel ships={ships} callback={currentGameObjectCallback}/>
         </div>
     </div>
     </>

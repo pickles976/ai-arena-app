@@ -149,10 +149,6 @@ h3 {
 
 .left-panel {
   order: -1;
-  /* flex-grow: 5; */
-  /* border-radius: 1px; */
-  /* border-color: #000; */
-  /* border: solid; */
   width: 40%;
   min-width: 40%;
   height: 100%;
@@ -226,8 +222,8 @@ body .ace_scrollbar-h {
   order: 0;
   flex-grow: 3;
   border-radius: 1px;
-  border-color: #000;
-  border: solid;
+  /* border-color: #000;
+  border: solid; */
 
   max-height: inherit;
 
@@ -323,6 +319,23 @@ body .ace_scrollbar-h {
   overflow-y: auto;
 }
 
+.ship-object {
+  font-size: 1.5vmin;
+  cursor: pointer; 
+  margin: 4%; 
+  width: 95%;
+  min-width: 10%;
+  display: block;
+  flex-direction: column;
+  background-color: var(--primary);
+  text-align: left;
+}
+
+.ship-text {
+  margin: auto; 
+  margin-left: 1%;
+}
+
 /* RIGHT PANEL */
 
 .right-panel {
@@ -362,9 +375,6 @@ body .ace_scrollbar-h {
 .ship-panel {
   order: 1;
   flex-grow: 1;
-  border-radius: 1px;
-  border-color: #000;
-  border: solid;
 }
 
 
