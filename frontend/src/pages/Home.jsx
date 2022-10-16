@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CodeEditor from '../components/CodeEditor';
 import Game from '../components/Game';
+import MemObject from '../components/MemObject';
 import MemorySelector from '../components/MemorySelector';
 import Score from '../components/Score';
 import Timer from '../components/Timer';
+import { drawCircle } from '../utilities/game/game';
 
 function Home() {
 
@@ -59,12 +61,37 @@ function Home() {
         setTimer(value)
     }
 
-    // State for Gameobjects
+    // State for Gameobjects List
     const [gameObjects, setGameObjects] = useState([])
 
     const gameObjectsCallback = (value) => {
         setGameObjects(value)
     }
+
+    // State for the GameObject we are currently inspecting
+    const [currentGameObject, setCurrentGameObject] = useState({})
+
+    const currentGameObjectCallback = (value) => {
+        
+        if (gameObjects !== undefined && gameObjects.length > 0){
+
+            const go = gameObjects.filter((g) => g !== null && g.uuid === value)
+
+            if (go.length > 0){
+                // console.log(go[0])
+                setCurrentGameObject(go[0])
+                // TODO: remove this from the nasty-ass React loop
+                drawCircle(currentGameObject)
+            }
+        }
+
+    }
+
+    useEffect(() => {
+        if (currentGameObject !== undefined && currentGameObject.uuid !== undefined){
+            currentGameObjectCallback(currentGameObject.uuid)
+        }
+    }, [gameObjects])
 
   return (
     <>
@@ -98,10 +125,8 @@ function Home() {
             </div>
 
             <div className='data-panel'>
-                <MemorySelector gameObjects={gameObjects}/>
-                <div className='inspector-panel'>
-                    Inspector Panel
-                </div>
+                <MemorySelector gameObjects={gameObjects} callback={currentGameObjectCallback}/>
+                <MemObject object={currentGameObject} />
             </div>
         </div>
         <div className='right-panel'>

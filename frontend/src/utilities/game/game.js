@@ -3,6 +3,7 @@ import { setTicksPerFrame, stopGame, setCanvas, testPackage, runGame, togglePaus
 // import { getCodeFromEditor } from './editor.js'
 
 let startTime = performance.now()
+let ctx;
 
 // IN-GAME CALLBACKS
 var uiCallback = (props) => {
@@ -13,16 +14,7 @@ var uiCallback = (props) => {
     props.timerCallback('Timesteps: ' + ((performance.now() - startTime) * 60 / 1000).toFixed(0))
 
     props.gameObjectsCallback(getGameState())
-
-
-    // // Draw an index for every object in the game
-    // const gameState = getGameState()
-    // drawMemoryTags(memoryList,gameState)
-
-    // // Load selected object into memory panel if it exists
-    // if(ObjectDict[uuid])
-    //     populateMemoryPanel(ObjectDict[uuid])
-
+    
     // // Draw all the ships on the ship panel
     // const ships = getShipsInfo()
     // if (ships['team0'] && ships['team1'])
@@ -40,7 +32,7 @@ export const SetupGame = (props) => {
     const canvas = document.getElementById("game-canvas")
     console.log(canvas)
     setCanvas(canvas)
-    const ctx = canvas.getContext('2d')
+    ctx = canvas.getContext('2d')
     ctx.fillRect(0,0,640,480)
 
     setBaseStartCode(0,localStorage.getItem("Base Start") || BaseStart)
@@ -121,3 +113,14 @@ export const SetupGame = (props) => {
 
 }
 
+export const drawCircle = function(obj){
+    if(obj && obj.transform && obj.transform.position){
+        let pos = obj.transform.position
+        ctx.fillStyle = "#FFFF00"
+        ctx.globalAlpha = 0.3
+        ctx.beginPath()
+        ctx.arc(pos.x,pos.y,25,0,Math.PI*2)
+        ctx.fill()
+        ctx.globalAlpha = 1.0
+    }
+}
