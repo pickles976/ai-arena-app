@@ -21,7 +21,8 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.3",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "slim-js": "^5.0.10"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
