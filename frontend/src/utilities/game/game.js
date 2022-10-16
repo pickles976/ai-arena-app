@@ -2,7 +2,7 @@ import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './ai-controls.js'
 import { setTicksPerFrame, stopGame, setCanvas, testPackage, runGame, togglePause, stepFrame, getGameInfo, setUICallbacks, getGameState, getShipsInfo, setShipStartCode, setShipUpdateCode, setBaseStartCode, setBaseUpdateCode, updateGameSpeed} from 'ai-arena'
 // import { getCodeFromEditor } from './editor.js'
 
-let startTime = performance.now()
+let steps = 0
 let ctx;
 
 // IN-GAME CALLBACKS
@@ -11,7 +11,8 @@ var uiCallback = (props) => {
     props.scoreCallback(getGameInfo())
 
     const start = performance.now()
-    props.timerCallback('Timesteps: ' + ((performance.now() - startTime) * 60 / 1000).toFixed(0))
+    steps++
+    props.timerCallback('Timesteps: ' + (steps).toFixed(0))
 
     props.gameObjectsCallback(getGameState())
     
@@ -49,7 +50,7 @@ export const SetupGame = (props) => {
 
     setTicksPerFrame(TICKS_PER_FRAME)
 
-    let startTime = performance.now()
+    steps = 0
 
     let uuid = undefined
 
@@ -78,7 +79,7 @@ export const SetupGame = (props) => {
     // document.getElementById("compile").addEventListener("click", compile)
 
     let run = event => {
-        startTime = performance.now()
+        steps = 0
 
         if (RUNNING)
             stopGame()
