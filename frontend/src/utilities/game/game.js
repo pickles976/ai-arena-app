@@ -1,5 +1,5 @@
 import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './ai-controls'
-import { setTicksPerFrame, stopGame, setCanvas, testPackage, runGame, togglePause, stepFrame, getGameInfo, setUICallbacks, getGameState, getShipsInfo, setShipStartCode, setShipUpdateCode, setBaseStartCode, setBaseUpdateCode } from 'ai-arena'
+import { setConfig, stopGame, testPackage, runGame, togglePause, stepFrame, getScore, setCallbacks, getGameState, getShipsInfo, setUserCode } from 'ai-arena'
 import { getCodeFromEditor } from './editor.js'
 import { LoadTemplates } from './templates';
 
@@ -23,28 +23,40 @@ export const SetupGame = () => {
     console.log(testPackage())
 
     memoryList = document.getElementById('memory-select')
-
     canvas = document.getElementById("game-canvas")
-    setCanvas(canvas)
     ctx = canvas.getContext('2d')
     ctx.fillRect(0,0,2000,2000)
 
-    setBaseStartCode(0,localStorage.getItem("Base Start") || BaseStart)
-    setBaseUpdateCode(0,localStorage.getItem("Base Update") || BaseUpdate)
-    setShipStartCode(0,localStorage.getItem("Ship Start") || ShipStart)
-    setShipUpdateCode(0,localStorage.getItem("Ship Update") || ShipUpdate)
-
     startTime = performance.now()
     steps = 0
-
-    setTicksPerFrame(TICKS_PER_FRAME)
 
     document.getElementById("pause").addEventListener("click", pause)
     document.getElementById("step").addEventListener("click", step)
     document.getElementById("compile").addEventListener("click", compile)
     document.getElementById("run").addEventListener("click", run)
     document.getElementById("warp").addEventListener("click", warp)
-    setUICallbacks(callback)
+
+    setCallbacks({
+        'ui': callback,
+    })
+
+    setConfig({
+        canvas: canvas,
+        graphics: true,
+        ticksPerFrame: TICKS_PER_FRAME,
+        framerate: 60,
+        streaming: false,
+        nodejs: false,
+    })
+
+    setUserCode({
+        team0: {
+            BaseStartCode : localStorage.getItem("Base Start") || BaseStart,
+            BaseUpdateCode : localStorage.getItem("Base Update") || BaseUpdate,
+            ShipStartCode : localStorage.getItem("Ship Start") || ShipStart,
+            ShipUpdateCode : localStorage.getItem("Ship Update") || ShipUpdate,
+        }
+    })
 
 }
 
@@ -63,10 +75,15 @@ let step = event => {
 
 let compile = event => {
     var code = getCodeFromEditor()
-    setBaseStartCode(0,code["Base Start"])
-    setBaseUpdateCode(0,code["Base Update"])
-    setShipStartCode(0,code["Ship Start"])
-    setShipUpdateCode(0,code["Ship Update"])
+
+    setUserCode({
+        team0: {
+            BaseStartCode : code["Base Start"],
+            BaseUpdateCode : code["Base Update"],
+            ShipStartCode : code["Ship Start"],
+            ShipUpdateCode : code["Ship Update"]
+        }
+    })
 };
 
 let run = event => {
@@ -94,7 +111,9 @@ let warp = event => {
         PAUSED = false
     }
     TICKS_PER_FRAME = TICKS_PER_FRAME === 1 ? WARP_SPEED : 1
-    setTicksPerFrame(TICKS_PER_FRAME)
+    setConfig({
+        ticksPerFrame : TICKS_PER_FRAME
+    })
     document.getElementById("pause").innerHTML = "Pause"
     document.getElementById("warp").innerHTML = TICKS_PER_FRAME === 1 ? "Warp" : "Normal"
 }
@@ -104,7 +123,7 @@ var callback = function(){
 
     const start = performance.now()
 
-    const teamInfo = getGameInfo()
+    const teamInfo = getScore()
     const team0 = teamInfo['team 0']
     const team1 = teamInfo['team 1']
 
@@ -120,7 +139,6 @@ var callback = function(){
 
     steps++
     document.getElementById('timer').innerHTML = 'Timesteps: ' + steps
-
 
     // Draw an index for every object in the game
     const gameState = getGameState()
