@@ -77,12 +77,7 @@ let compile = event => {
     var code = getCodeFromEditor()
 
     setUserCode({
-        team0: {
-            BaseStartCode : code["Base Start"],
-            BaseUpdateCode : code["Base Update"],
-            ShipStartCode : code["Ship Start"],
-            ShipUpdateCode : code["Ship Update"]
-        }
+        team0: code
     })
 };
 

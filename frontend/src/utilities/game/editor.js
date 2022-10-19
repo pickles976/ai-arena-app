@@ -6,7 +6,7 @@ import * as theme from 'ace-builds/src-min-noconflict/theme-tomorrow_night_eight
 import * as javascript from 'ace-builds/src-min-noconflict/mode-javascript'
 
 
-var oldSessionValue = "Ship Update"
+var oldSessionValue = "ShipUpdateCode"
 var editor
 
 export const SetupEditor = () => {
@@ -71,8 +71,8 @@ export var getCodeFromEditor = function(){
 
 // Load the previous session from storage, or load the default code
 var sessions = {
-    'Base Start' : localStorage.getItem("Base Start") || BaseStart,
-    'Base Update' : localStorage.getItem("Base Update") || BaseUpdate,
-    'Ship Start' : localStorage.getItem("Ship Start") || ShipStart,
-    'Ship Update' : localStorage.getItem("Ship Update") || ShipUpdate,
+    'BaseStartCode' : localStorage.getItem("BaseStartCode") || BaseStart,
+    'BaseUpdateCode' : localStorage.getItem("BaseUpdateCode") || BaseUpdate,
+    'ShipStartCode' : localStorage.getItem("ShipStartCode") || ShipStart,
+    'ShipUpdateCode' : localStorage.getItem("ShipUpdateCode") || ShipUpdate,
 }

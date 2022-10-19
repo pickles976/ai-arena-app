@@ -21,11 +21,11 @@ function Game() {
                     {/* <!-- CODE CONTROLS --> */}
                     <div className="code-controls">
                         <div className="code-controls-container">
-                            <select className="btn-main dropdown-toggle" id="select-script" defaultValue={'Ship Update'}>
-                                <option>Ship Update</option>
-                                <option>Ship Start</option>
-                                <option>Base Update</option>
-                                <option>Base Start</option>
+                            <select className="btn-main dropdown-toggle" id="select-script" defaultValue={'ShipUpdateCode'}>
+                                <option value='ShipUpdateCode'>Ship Update</option>
+                                <option value='ShipStartCode'>Ship Start</option>
+                                <option value='BaseUpdateCode'>Base Update</option>
+                                <option value='BaseStartCode'>Base Start</option>
                             </select>
                             <button id="compile" className="btn-main">Compile</button>
                         </div>
