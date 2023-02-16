@@ -1,0 +1,6 @@
+- [x] Code store object
+- [x] Create Code object in supabase
+- [x] CRUD Code object in supabase
+- [x] Allow users to access their own code objects with RLS
+- [ ] Auth object in central store
+- [ ] Redirect to login if user is not authenticated
