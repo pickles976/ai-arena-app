@@ -2,5 +2,7 @@
 - [x] Create Code object in supabase
 - [x] CRUD Code object in supabase
 - [x] Allow users to access their own code objects with RLS
-- [ ] Auth object in central store
-- [ ] Redirect to login if user is not authenticated
+- [x] Auth object in central store
+- [x] Redirect to login if user is not authenticated on code submit
+- [ ] Allow users to update code
+- [x] Add policy so that the owner of a code object is whoever submitted it
