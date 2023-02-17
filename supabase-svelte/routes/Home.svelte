@@ -9,7 +9,7 @@
     let localCodeObjects = {}
     let remoteCodeObjects = {}
 
-    // Upsert ccode on submit
+    // Upsert code on submit
     function trySubmitCode() {
 
       if (!$auth.session) {
@@ -25,10 +25,11 @@
         return
       }
 
-      // Check if authenticated
-      submitCode($code, $auth)
+      // Popup modal with submission status
+      getModal('submission-status').open()
 
-      // TODO: popup modal with submission status
+      // Upload code
+      submitCode($code, $auth)
     }
 
     // Get a list of code from localstorage
@@ -70,14 +71,15 @@
         getModal('save-as').open()
         return
       }
+
       storeCodeLocally($code)
       getModal('save-as').close(1)
 
     }
 
     function tryNew() {
-      // TODO: Warn user about data loss
-      code.set(defaultCode)
+      // Warn user about data loss
+      getModal('unsaved-warning').open()
     }
 
 </script>
@@ -88,7 +90,8 @@
   <button on:click={tryFetchAllCode}>Load Code</button>
   <button on:click={trySave}>Save</button>
 
-  <h1>Form</h1>
+  <h2>{$code.name === "" ? "untitled" : $code.name}</h2>
+
   <form class="content">
     <label>Base Start</label>
       <input type="text" bind:value={$code.baseStart} />
@@ -101,11 +104,26 @@
   </form>
   <button on:click={trySubmitCode}>Submit Code</button>
 
+  <!-- TODO: replace with those little status thingies that follow you between pages -->
+  <Modal id='submission-status'>
+    <h2>Submission Status</h2>
+    <p>Evaluation status: </p>
+    <p>Your code ran in X seconds!</p>
+    <button on:click={() => getModal('submission-status').close(1)}>close</button>
+  </Modal>
+
   <Modal id='save-as'>
     <h2>Save As:</h2>
     <label>Code name</label>
       <input type="text" bind:value={$code.name} />
     <button on:click={trySave}>Save</button>
+  </Modal>
+
+  <Modal id='unsaved-warning'>
+    <h2>Unsaved Progress!</h2>
+    <p>All unsaved progress will be lost! are you sure you want to start a new project?</p>
+    <button on:click={() => { code.set(defaultCode); getModal('unsaved-warning').close(1)}}>Create New</button>
+    <button on:click={() => getModal('unsaved-warning').close(1)}>Cancel</button>
   </Modal>
 
   <Modal id='load-code'>

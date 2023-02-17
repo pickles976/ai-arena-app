@@ -16,8 +16,8 @@
 - [x] Add upsert to code submit
 - [x] Allow users to update their code
 - [x] Allow users to view a list of their previous code
-- [ ] Show name of code in editor
-- [ ] Finish todos in home page
+- [x] Show name of code in editor
+- [x] Finish todos in home page
 
 - [ ] Add code browser so players can view all players code (only view for now)
 - [ ] pagination
