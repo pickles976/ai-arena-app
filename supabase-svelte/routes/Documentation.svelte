@@ -3,7 +3,8 @@
 <script>
 	import Router, {location, link, params} from 'svelte-spa-router';
   	import { each } from 'svelte/internal';
-	import * as data from '../src/assets/json/apidoc.json';
+	// import * as data from '../src/assets/json/apidoc.json';
+	import * as data from '../src/assets/json/api.json';
 	
 	let objects =data.default
 	console.log(objects)
@@ -19,42 +20,35 @@
 </h1>
 <div>
 
-	{#if $params}
+	{#each Object.entries(objects) as [key, val]}
+	<div>
+		<a href="/#/documentation-object/{key}">{key}</a>
+	</div>
+	{/each}
+
+	<!-- {#if $params}
 		<h2>{$params.object}</h2>
 		<h3>Description</h3>
-		<p>{objects[$params.object].Description}</p>
-		<h3>Fields</h3>
-		<p>{objects[$params.object].Fields}</p>
-		<!-- TODO: LOOP -->
+		<p>{objects[$params.object].description}</p>
+		<h3>Objects</h3>
+			{#each Object.entries(objects[$params.object].fields) as [key, val]}
+			<div>
+				<a href="/#/documentation-object/{val}">{val}</a>
+			</div>
+			{/each}
 		<h3>Functions</h3>
-		<p>{objects[$params.object].Functions}</p>
+			{#each Object.entries(objects[$params.object].functions) as [key, val]}
+			<div>
+				<a>{val}</a>
+			</div>
+			{/each}
 	{:else}
 		{#each Object.entries(objects) as [key, val]}
 		<div>
 			<a href="/#/documentation/{key}">{key}</a>
 		</div>
 		{/each}
-	{/if}
+	{/if} -->
 
 
 </div>
-
-	<!-- {#each Object.entries(objects) as [key, val]}
-	<div>
-		<h2>{key}</h2>
-		<h3>Description</h3>
-		<p>{val.Description}</p>
-
-		<h4>Fields</h4>
-		<p>{val.Fields}</p>
-		{#each Object.entries(val.Fields) as [fieldKey, fieldVal]}
-			<div>
-				<h4>{fieldKey}</h4>
-				<p>{fieldVal}</p>
-			</div>
-		{/each}
-
-		<h4>Functions</h4>
-		<p>{val.Functions}</p>
-	</div>
-	{/each} -->

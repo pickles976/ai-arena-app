@@ -1,0 +1,169 @@
+{
+    "console" : {
+        "description" : "Used for printing to the dev console.",
+        "link" : "https://developer.mozilla.org/en-US/docs/Web/API/console",
+        "fields" : {},
+        "methods" : {}
+    }, 
+    "Math" : {
+        "description" : "Provides basic math functions.",
+        "link" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math",
+        "fields" : {},
+        "methods" : {}
+    }, 
+    "Vector2D" : {
+        "description": "A 2D vector utility class.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L6",
+        "fields" : 
+        {
+            "x" : {
+                "description" : "x value of the vector.",
+                "type" : "number",
+                "usage" : "let v = new Vector2D(0,1); \n console.log(v.x) \n",
+                "output" : "0.0"
+            },
+            "y" : {
+                "description" : "y value of the vector.",
+                "type" : "number",
+                "usage" : "let v = new Vector2D(0,1); \n console.log(v.y) \n",
+                "output" : "1.0"
+            },
+            "magnitude" : {
+                "description" : "Magnitude of the vector.",
+                "type" : "number",
+                "usage" : "let v = new Vector2D(3,4); \n console.log(v.magnitude) \n",
+                "output" : "5.0"
+            }
+        },
+        "methods" : 
+        {
+            "new" : 
+                {
+                    "description" : "Creates a new Vector2D",
+                    "arguments" : {
+                        "x" : "number",
+                        "y" : "number"
+                    },
+                    "returnType" : "Vector2D",
+                    "usage" : "let v = new Vector2D(0.0, 1.0)",
+                    "output" : "Vector2D(0,0)"
+                }, 
+            "add" : 
+            {
+                "description" : "Adds two vectors. Returns a new vector.",
+                "arguments" : {
+                    "newVector" : "Vector2D"
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v1 = new Vector2D(0.0, 1.0) \n let v2 = new Vector2D(1.0, 0.0) \n let newVector = v1.add(v2)",
+                "output" : "Vector2D(1.0,1.0)"
+            }, 
+            "subtract" : 
+            {
+                "description" : "Subtracts two vectors. Returns a new vector.",
+                "arguments" : {
+                    "newVector" : "Vector2D"
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v1 = new Vector2D(0.0, 1.0) \n let v2 = new Vector2D(0.0, 1.0) \n let newVector = v1.subtract(v2)",
+                "output" : "Vector2D(0,0)"
+            }, 
+            "multiply" : 
+            {
+                "description" : "Multiply a vector by a scalar. Returns a new vector.",
+                "arguments" : {
+                    "scalar" : "number"
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v = new Vector2D(0.0, 1.0) \n let newVector = v.multiply(3.0)",
+                "output" : "Vector2D(0,3.0)"
+            }, 
+            "divide" : 
+            {
+                "description" : "Divide a vector by a scalar. Returns a new vector.",
+                "arguments" : {
+                    "scalar" : "number"
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v = new Vector2D(0.0, 1.0) \n let newVector = v.divide(2.0)",
+                "output" : "Vector2D(0,0.5)"
+            }, 
+            "dot" : 
+            {
+                "description" : "Dot product of two vectors. Returns a new vector.",
+                "arguments" : {
+                    "newVector" : "Vector2D"
+                },
+                "returnType" : "number",
+                "usage" : "let v1 = new Vector2D(3.0, 2.0) \n let v2 = new Vector2D(1.0, 5.0) \n let newVector = v1.dot(v2)",
+                "output" : "13.0"
+            }, 
+            "normal" : 
+            {
+                "description" : "Normalizes a vector. Returns a new vector.",
+                "arguments" : {
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v = new Vector2D(100.0, 0.0) \n let newVector = v.normal()",
+                "output" : "Vector2D(1.0,0)"
+            }, 
+            "copy" : 
+            {
+                "description" : "Copies a vector. Returns a new vector.",
+                "arguments" : {
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v = new Vector2D(0.0, 1.0) let newVector = v.copy()",
+                "output" : "Vector2D(0,1.0)"
+            }, 
+            "rotate" : 
+            {
+                "description" : "Rotates a vector counter-clockwise",
+                "arguments" : {
+                    "degrees" : "number"
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v = new Vector2D(0.0, 1.0) \n let newVector = v.rotate(90)",
+                "output" : "Vector2D(0.0,1.0)"
+            }, 
+            "random" : 
+            {
+                "description" : "Generates a normalized Vector2D pointing in a random direction.",
+                "arguments" : {
+                },
+                "returnType" : "Vector2D",
+                "usage" : "let v = Vector2D.random()",
+                "output" : "Vector2D(?,?)"
+            },
+            "dist" : 
+            {
+                "description" : "Return the distance between two vectors.",
+                "arguments" : {
+                    "v1" : "Vector2D",
+                    "v2" : "Vector2D"
+                },
+                "returnType" : "number",
+                "usage" : "let v1 = new Vector2D(0,0) \n let v2 = new Vector2D(3.0, 4.0) \n let d = Vector2D.dist(v1,v2)",
+                "output" : "5.0"
+            }
+        }
+    },
+    "transform" : {
+        "description" : "Holds mass, position, and velocity information about a game object.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "fields" : {},
+        "methods" : {}
+    },
+    "collider" : {
+        "description" : "",
+        "link" : "",
+        "fields" : {},
+        "methods" : {}
+    },
+    "resources" : {
+        "description" : "",
+        "link" : "",
+        "fields" : {},
+        "methods" : {}
+    }
+}
