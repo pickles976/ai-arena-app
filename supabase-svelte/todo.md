@@ -1,40 +1,16 @@
-- [x] Code store object
-- [x] Create Code object in supabase
-- [x] CRUD Code object in supabase
-- [x] Allow users to access their own code objects with RLS
-- [x] Auth object in central store
-- [x] Redirect to login if user is not authenticated on code submit
-- [x] Allow users to create code
-- [x] Add policy so that the owner of a code object is whoever submitted it
+2/16
+- [x] Started project in svelte/supabase
 
 2/17
-- [x] Add save + save as to local storage
-- [x] Add the ability to create new code
-- [x] Add popup modals
-- [x] Add ability to load code from local storage and remote
-- [x] Consolidate localstorage format + remote code format\
-- [x] Add upsert to code submit
-- [x] Allow users to update their code
-- [x] Allow users to view a list of their previous code
-- [x] Show name of code in editor
-- [x] Finish todos in home page
-- [x] Allow users to rename code
-- [x] Allow users to delete code
+- [x] Allowed users to full CRUD code
+- [x] Added documentation
 
-- [x] Add Vector2D docs
-- [x] Add transform docs
-- [x] Add collider docs
-- [x] Add resources docs
-- [x] Add base docs
-- [x] Add ship docs
-- [x] Add Gameobject docs
-- [x] Add Game docs
-- [x] Add Asteroid docs
-- [x] Add graphics docs
-
-- [x] Add all information about game to docs
-- [x] Add Ability to load docs from json
-- [x] Use routing to make each json field its own page
-- [x] Make Fields and Methods their own components
-- [x] Add code styling to documentation
+2/18
 - [ ] Finish styling the documentation components
+- [ ] Clean up project organization
+- [ ] Add code editor to home page
+- [ ] Create resizable panels
+- [ ] Import AI-Arena into home page
+- [ ] Add game controls to home page
+- [ ] Add game visualization components to home page
+
