@@ -4,6 +4,7 @@
     import { auth } from "../src/stores.js";
     import {push, pop, replace} from 'svelte-spa-router'
 
+    // TODO: Upsert code on submit
     function trySubmitCode() {
 
       if (!$auth.session) {
@@ -24,15 +25,7 @@
     }
 
     function tryLoadCode() {
-
-      if (!$auth.session) {
-        // Force user to log in
-        alert("Please log in")
-        push('/login/')
-        return
-      }
-
-      getCode()
+      push('/browser/')
     }
 
 </script>

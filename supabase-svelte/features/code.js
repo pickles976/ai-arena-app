@@ -12,17 +12,17 @@ export async function submitCode(code, session) {
           name: code.name, 
           owner: session.session.user.id, // TODO: should be easier to get user id
           code: {
-            'BaseStart' : code.BaseStart,
-            'BaseUpdate' : code.BaseUpdate,
-            'ShipStart' : code.ShipStart,
-            'ShipUpdate' : code.ShipUpdate
+            "BaseStart" : code.baseStart,
+            "BaseUpdate" : code.baseUpdate,
+            "ShipStart" : code.shipStart,
+            "ShipUpdate" : code.shipUpdate,
           },
         },
     ])
 }
 
 /**
- * Get the code for a given user
+ * Get a specific piece of code by id
  */
 export async function getCode(name) {
         
@@ -32,4 +32,16 @@ export async function getCode(name) {
     .eq('name', 'Second Code') // filtering
 
     console.log(TacticalCode)
+}
+
+/**
+ * Get the code for a given user
+ */
+export async function getUserCode() {
+        
+  let { data: TacticalCode, error } = await supabase
+  .from('TacticalCode')
+  .select('*')
+  return TacticalCode
+
 }
