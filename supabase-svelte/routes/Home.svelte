@@ -9,7 +9,7 @@
     let localCodeObjects = {}
     let remoteCodeObjects = {}
 
-    // TODO: Upsert code on submit
+    // Upsert ccode on submit
     function trySubmitCode() {
 
       if (!$auth.session) {
@@ -20,27 +20,30 @@
       }
 
       if ($code.name === "") {
-        // TODO: force user to enter a name for their code
-        alert("Please select a name for your code")
+        // Force user to enter a name for their code
+        trySave()
         return
       }
 
       // Check if authenticated
       submitCode($code, $auth)
+
+      // TODO: popup modal with submission status
     }
 
     // Get a list of code from localstorage
     function tryFetchAllCode() {
 
-      // TODO: get code from db as well
+      // Get code from db
       if ($auth.session) {
         getUserCode().then((data) => {
           data.forEach((entry) => {
-            console.log(entry)
             remoteCodeObjects[entry.name] = entry.code
+            remoteCodeObjects[entry.name].id = entry.id // id needed for upsert
           })
         })
       }
+
 
       localCodeObjects = getAllLocalCode()
       getModal('load-code').open()
@@ -107,29 +110,30 @@
 
   <Modal id='load-code'>
     <div class="code-objects">
+
+      <!-- Code from cookies -->
       <h2>Code saved locally</h2>
       {#each Object.values(localCodeObjects) as codeObject}
         <div>
           <p>{codeObject.name}</p>
                 <!-- <p>{JSON.stringify(codeObject.code)}</p> -->
                 <button on:click={() => tryLoadLocalCode(codeObject.name)}>Open</button> 
-                <!-- TODO: ADD functionality to this button -->
             </div>
       {:else}
-        <!-- this block renders when photos.length === 0 -->
+        <!-- this block renders when localCodeObjects.length === 0 -->
         <p>loading...</p>
       {/each}
 
+      <!-- Code from server -->
       <h2>Code on this account</h2>
       {#each Object.values(remoteCodeObjects) as codeObject}
         <div>
           <p>{codeObject.name}</p>
                 <!-- <p>{JSON.stringify(codeObject.code)}</p> -->
                 <button on:click={() => tryLoadRemoteCode(codeObject.name)}>Open</button> 
-                <!-- TODO: ADD functionality to this button -->
             </div>
       {:else}
-        <!-- this block renders when photos.length === 0 -->
+        <!-- this block renders when remoteCodeObjects.length === 0 -->
         <p>loading...</p>
       {/each}
     </div>

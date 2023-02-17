@@ -2,6 +2,7 @@
 import { writable } from 'svelte/store';
 
 export const defaultCode = {
+  id : undefined,
   name: "",
   baseStart: "",
   baseUpdate: "",

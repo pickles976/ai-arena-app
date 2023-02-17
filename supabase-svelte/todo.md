@@ -8,15 +8,16 @@
 - [x] Add policy so that the owner of a code object is whoever submitted it
 
 2/17
-- [ ] Add save + save as to local storage
-- [ ] Add the ability to create new code
-- [ ] Add popup modals
-- [ ] Add ability to load code from local storage and remote
-- [ ] Consolidate localstorage format + remote code format
-
-
-- [ ] Allow users to view a list of their previous code
-- [ ] Allow users to update their code
+- [x] Add save + save as to local storage
+- [x] Add the ability to create new code
+- [x] Add popup modals
+- [x] Add ability to load code from local storage and remote
+- [x] Consolidate localstorage format + remote code format\
+- [x] Add upsert to code submit
+- [x] Allow users to update their code
+- [x] Allow users to view a list of their previous code
+- [ ] Show name of code in editor
+- [ ] Finish todos in home page
 
 - [ ] Add code browser so players can view all players code (only view for now)
 - [ ] pagination

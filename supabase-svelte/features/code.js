@@ -7,8 +7,9 @@ export async function submitCode(code, session) {
     
     const { data, error } = await supabase
     .from('TacticalCode')
-    .insert([
+    .upsert([
         { 
+          id : code.id,
           name: code.name, 
           owner: session.session.user.id, // TODO: should be easier to get user id
           code: {
@@ -20,6 +21,8 @@ export async function submitCode(code, session) {
           },
         },
     ])
+
+    console.log(code)
 }
 
 /**
