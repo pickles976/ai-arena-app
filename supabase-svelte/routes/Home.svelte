@@ -1,12 +1,13 @@
 <script>
     import { code, defaultCode } from "../src/stores.js";
-    import { getCode, submitCode } from '../features/code.js'
+    import { getCode, getUserCode, submitCode } from '../features/code.js'
     import { auth } from "../src/stores.js";
     import {push, pop, replace} from 'svelte-spa-router'
     import {getAllLocalCode, storeCodeLocally } from  "../features/storage.js"
     import Modal,{getModal} from '../src/components/Modal.svelte'
 
-    let codeObjects = {}
+    let localCodeObjects = {}
+    let remoteCodeObjects = {}
 
     // TODO: Upsert code on submit
     function trySubmitCode() {
@@ -30,15 +31,33 @@
 
     // Get a list of code from localstorage
     function tryFetchAllCode() {
+
       // TODO: get code from db as well
-      codeObjects = getAllLocalCode()
-      console.log(Object.values(codeObjects))
+      if ($auth.session) {
+        getUserCode().then((data) => {
+          data.forEach((entry) => {
+            console.log(entry)
+            remoteCodeObjects[entry.name] = entry.code
+          })
+        })
+      }
+
+      localCodeObjects = getAllLocalCode()
       getModal('load-code').open()
     }
 
-    function tryLoadCode(name) {
-      code.set(codeObjects[name])
+    function tryLoadLocalCode(name) {
+      code.set(localCodeObjects[name])
       getModal('load-code').close(1)
+      localCodeObjects = {}
+      remoteCodeObjects = {}
+    }
+
+    function tryLoadRemoteCode(name) {
+      code.set(remoteCodeObjects[name])
+      getModal('load-code').close(1)
+      localCodeObjects = {}
+      remoteCodeObjects = {}
     }
 
     function trySave() {
@@ -88,11 +107,25 @@
 
   <Modal id='load-code'>
     <div class="code-objects">
-      {#each Object.values(codeObjects) as codeObject}
+      <h2>Code saved locally</h2>
+      {#each Object.values(localCodeObjects) as codeObject}
         <div>
           <p>{codeObject.name}</p>
                 <!-- <p>{JSON.stringify(codeObject.code)}</p> -->
-                <button on:click={() => tryLoadCode(codeObject.name)}>Open</button> 
+                <button on:click={() => tryLoadLocalCode(codeObject.name)}>Open</button> 
+                <!-- TODO: ADD functionality to this button -->
+            </div>
+      {:else}
+        <!-- this block renders when photos.length === 0 -->
+        <p>loading...</p>
+      {/each}
+
+      <h2>Code on this account</h2>
+      {#each Object.values(remoteCodeObjects) as codeObject}
+        <div>
+          <p>{codeObject.name}</p>
+                <!-- <p>{JSON.stringify(codeObject.code)}</p> -->
+                <button on:click={() => tryLoadRemoteCode(codeObject.name)}>Open</button> 
                 <!-- TODO: ADD functionality to this button -->
             </div>
       {:else}
@@ -103,6 +136,3 @@
   </Modal>
 
 </div>
-<p>
-	{JSON.stringify($code, 0, 2)}
-</p>

@@ -8,6 +8,13 @@
 - [x] Add policy so that the owner of a code object is whoever submitted it
 
 2/17
+- [ ] Add save + save as to local storage
+- [ ] Add the ability to create new code
+- [ ] Add popup modals
+- [ ] Add ability to load code from local storage and remote
+- [ ] Consolidate localstorage format + remote code format
+
+
 - [ ] Allow users to view a list of their previous code
 - [ ] Allow users to update their code
 

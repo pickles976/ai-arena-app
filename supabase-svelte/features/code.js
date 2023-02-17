@@ -12,10 +12,11 @@ export async function submitCode(code, session) {
           name: code.name, 
           owner: session.session.user.id, // TODO: should be easier to get user id
           code: {
-            "BaseStart" : code.baseStart,
-            "BaseUpdate" : code.baseUpdate,
-            "ShipStart" : code.shipStart,
-            "ShipUpdate" : code.shipUpdate,
+            "name" : code.name,
+            "baseStart" : code.baseStart,
+            "baseUpdate" : code.baseUpdate,
+            "shipStart" : code.shipStart,
+            "shipUpdate" : code.shipUpdate,
           },
         },
     ])
