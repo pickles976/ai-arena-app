@@ -19,9 +19,11 @@
 - [x] Show name of code in editor
 - [x] Finish todos in home page
 - [x] Allow users to rename code
-- [ ] Allow users to delete code
+- [x] Allow users to delete code
 
 
-- [ ] Add all information about game to docs
+- [x] Add all information about game to docs
+- [ ] Add Ability to load docs from json
+- [ ] Use routing to make each json field its own page
 - [ ] Add images
 - [ ] Make it look like actual docs

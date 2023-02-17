@@ -16,6 +16,7 @@
 <Router routes={{
 	'/home': Home,
 	'/documentation': Documentation,
+	'/documentation/:object': Documentation,
   	'/login': Login,
 	// '/blog/:blogName': Blog
 }} />
