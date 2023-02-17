@@ -18,7 +18,7 @@
 	'/home': Home,
 	'/documentation': Documentation,
 	'/documentation/:object': Documentation,
-	'/documentation-object/:object': DocumentationPage,
+	'/documentation-page/:object': DocumentationPage,
   	'/login': Login,
 	// '/blog/:blogName': Blog
 }} />

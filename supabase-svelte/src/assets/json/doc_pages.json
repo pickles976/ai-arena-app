@@ -3,6 +3,10 @@
         "description" : "Javascript's void operator.",
         "link" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void"
     }, 
+    "string" : {
+        "description" : "Javascript's string object.",
+        "link" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"
+    }, 
     "boolean" : {
         "description" : "Javascript's boolean object.",
         "link" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"

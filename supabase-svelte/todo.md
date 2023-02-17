@@ -30,7 +30,7 @@
 - [x] Add Gameobject docs
 - [x] Add Game docs
 - [x] Add Asteroid docs
-- [ ] Add graphics docs
+- [x] Add graphics docs
 
 - [x] Add all information about game to docs
 - [x] Add Ability to load docs from json
