@@ -18,9 +18,9 @@
 - [x] Allow users to view a list of their previous code
 - [x] Show name of code in editor
 - [x] Finish todos in home page
+- [x] Allow users to rename code
+- [ ] Allow users to delete code
 
-- [ ] Add code browser so players can view all players code (only view for now)
-- [ ] pagination
 
 - [ ] Add all information about game to docs
 - [ ] Add images

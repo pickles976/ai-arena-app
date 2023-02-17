@@ -1,9 +1,9 @@
 <script>
     import { code, defaultCode } from "../src/stores.js";
-    import { getCode, getUserCode, submitCode } from '../features/code.js'
+    import { deleteCode, getCode, getUserCode, submitCode } from '../features/code.js'
     import { auth } from "../src/stores.js";
     import {push, pop, replace} from 'svelte-spa-router'
-    import {getAllLocalCode, storeCodeLocally } from  "../features/storage.js"
+    import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../features/storage.js"
     import Modal,{getModal} from '../src/components/Modal.svelte'
 
     let localCodeObjects = {}
@@ -35,6 +35,9 @@
     // Get a list of code from localstorage
     function tryFetchAllCode() {
 
+      localCodeObjects = {}
+      remoteCodeObjects = {}
+
       // Get code from db
       if ($auth.session) {
         getUserCode().then((data) => {
@@ -53,15 +56,20 @@
     function tryLoadLocalCode(name) {
       code.set(localCodeObjects[name])
       getModal('load-code').close(1)
-      localCodeObjects = {}
-      remoteCodeObjects = {}
     }
 
     function tryLoadRemoteCode(name) {
       code.set(remoteCodeObjects[name])
       getModal('load-code').close(1)
-      localCodeObjects = {}
-      remoteCodeObjects = {}
+    }
+
+    function tryDeleteLocalCode(name) {
+      deleteCodeLocally(name)
+      tryFetchAllCode()
+    }
+
+    async function tryDeleteRemoteCode(id) {
+      deleteCode(id).then(() => tryFetchAllCode())
     }
 
     function trySave() {
@@ -89,6 +97,7 @@
   <button on:click={tryNew}>New</button>
   <button on:click={tryFetchAllCode}>Load Code</button>
   <button on:click={trySave}>Save</button>
+  <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
 
   <h2>{$code.name === "" ? "untitled" : $code.name}</h2>
 
@@ -136,6 +145,7 @@
           <p>{codeObject.name}</p>
                 <!-- <p>{JSON.stringify(codeObject.code)}</p> -->
                 <button on:click={() => tryLoadLocalCode(codeObject.name)}>Open</button> 
+                <button on:click={() => tryDeleteLocalCode(codeObject.name)}>Delete</button> 
             </div>
       {:else}
         <!-- this block renders when localCodeObjects.length === 0 -->
@@ -149,6 +159,7 @@
           <p>{codeObject.name}</p>
                 <!-- <p>{JSON.stringify(codeObject.code)}</p> -->
                 <button on:click={() => tryLoadRemoteCode(codeObject.name)}>Open</button> 
+                <button on:click={() => tryDeleteRemoteCode(codeObject.id)}>Delete</button> 
             </div>
       {:else}
         <!-- this block renders when remoteCodeObjects.length === 0 -->

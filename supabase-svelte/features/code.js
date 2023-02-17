@@ -49,3 +49,13 @@ export async function getUserCode() {
   return TacticalCode
 
 }
+
+/**
+ * Delete a specific piece of code by id
+ */
+export async function deleteCode(id) {
+  let { data: TacticalCode, error } = await supabase
+  .from('TacticalCode')
+  .delete()
+  .eq('id', id) // filtering
+}

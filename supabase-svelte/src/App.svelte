@@ -4,7 +4,6 @@
 	import Documentation from '../routes/Documentation.svelte';
   	import Login from '../routes/Login.svelte';
 	import { auth } from './stores';
- 	 import Browser from '../routes/Browser.svelte';
 </script>
 
 <nav>
@@ -18,7 +17,6 @@
 	'/home': Home,
 	'/documentation': Documentation,
   	'/login': Login,
-	'/browser' : Browser,
 	// '/blog/:blogName': Blog
 }} />
 
