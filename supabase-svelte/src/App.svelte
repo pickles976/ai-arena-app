@@ -22,10 +22,3 @@
   	'/login': Login,
 	// '/blog/:blogName': Blog
 }} />
-
-<hr>
-/#{$location}
-
-<p>
-	{JSON.stringify($auth, 0, 2)}
-</p>
