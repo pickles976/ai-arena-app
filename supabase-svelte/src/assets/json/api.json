@@ -193,8 +193,7 @@
                 "type" : "number",
                 "usage" : "// Where object is some Game Object \n let radius = object.collider.radius"
             }
-        },
-        "methods" : {}
+        }
     },
     "resources" : {
         "description" : "Most Game Objects in AI-Arena have resources. Ships, Asteroids, Bases, and Energy Beacons can all contain resources.",
@@ -215,8 +214,7 @@
                 "type" : "number",
                 "usage" : "// Where object is some Game Object \n let pos = object.resources.energy"
             }
-        },
-        "methods" : {}
+        }
     },
     "Base" : {
         "description" : "Your Base is your lifeline in AI-Arena. When your Base health drops to zero, you lose the game. The Base can purchase upgrades and build ships.",
@@ -372,68 +370,261 @@
         "description" : "Holds mass, position, and velocity information about a game object.",
         "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
         "fields" : {
-            "position" : {
-                "description" : "Position of the object in the world.",
-                "type" : "Vector2D",
-                "usage" : "// Where object is some Game Object \n let pos = object.transform.position"
+            "uuid" : {
+                "description" : "uuid of a ship object. Useful for keeping track of ships directly.",
+                "type" : "string",
+                "usage" : "// Where ship is some Ship \n let id = ship.uuid"
+            },
+            "team" : {
+                "description" : "Team affiliation of a ship object. Changes between games. You can either be team 0 or 1.",
+                "type" : "number",
+                "usage" : "// Where ship is some Ship \n let team = ship.team"
+            },
+            "maxEnergy" : {
+                "description" : "The maximum energy a ship can hold. 100 by default.",
+                "type" : "number",
+                "usage" : "// Where ship is some Ship \n let maxEnergy = ship.maxEnergy"
+            },
+            "damage" : {
+                "description" : "The amount of damage that a ship's bullets can do. 5 by default.",
+                "type" : "number",
+                "usage" : "// Where ship is some Ship \n let damage = ship.damage"
+            },
+            "upgradeMaxEnergyCost" : {
+                "description" : "The cost of upgrading a ship's max energy. 50 metal by default.",
+                "type" : "number",
+                "usage" : "// Where ship is some Ship \n let cost = ship.upgradeMaxEnergyCost"
+            },
+            "upgradeDamageCost" : {
+                "description" : "The cost of upgrading a ship's damage. 50 metal by default.",
+                "type" : "number",
+                "usage" : "// Where ship is some Ship \n let cost = ship.upgradeDamageCost"
             }
         },
         "methods" : {
-            "spawnShip" : 
+            "upgradeMaxEnergy" : 
             {
-                "description" : "Spawns a new ship near the base. \n Spawns the ship with the specified amount of energy, unless the base has less than specified.  \n If respawn is set to true, you will respawn a deceased ship. If respawn is set to false you will purchase a new ship slot.",
+                "description" : "Upgrade a ship's max energy.",
+                "returnType" : "void",
+                "usage" : "// Where ship is some Ship \n let cost = ship.upgradeMaxEnergy()"
+            },
+            "upgradeDamage" : 
+            {
+                "description" : "Upgrade a ship's damage output.",
+                "returnType" : "void",
+                "usage" : "// Where ship is some Ship \n let cost = ship.upgradeDamage()"
+            },
+            "seekTarget" : 
+            {
+                "description" : "Causes a ship to move towards a GameObject at a specified speed. Faster movement uses more energy.",
                 "arguments" : {
-                    "energy" : "number",
-                    "respawn" : "boolean"
+                    "target" : "GameObject",
+                    "speed" : "number"
                 },
                 "returnType" : "void",
-                "usage" : "// Purchase a new ship slot \n base.spawnShip(50.0, false) \n // Respawn a deceased ship \n base.spawnShip(50.0, true)"
+                "usage" : "// Pursue a target \n let target = Game.getAsteroids()[0] \n ship.seekTarget(target,2.5)"
+            },
+            "moveTo" : 
+            {
+                "description" : "Causes a ship to move towards a Vector2D at a specified speed. Faster movement uses more energy.",
+                "arguments" : {
+                    "position" : "Vector2D",
+                    "speed" : "number"
+                },
+                "returnType" : "void",
+                "usage" : "// Move to a position \n let position = new Vector2D(100.0, 40.0) \n ship.moveTo(position,2.5)"
+            },
+            "shoot" : 
+            {
+                "description" : "Shoots a bullet in a direction for an energy cost equal to the damage of that bullet. ",
+                "arguments" : {
+                    "direction" : "Vector2D"
+                },
+                "returnType" : "void",
+                "usage" : "// Shoot in a direction \n let direction = new Vector2D(10.0, 5.0) \n ship.shoot(direction)"
+            }
+        }
+    },
+    "GameObject" : {
+        "description" : "Every object you see in AI-Arena is a GameObject. All game object share certain properties in common.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/gameObject.ts",
+        "fields" : {
+            "uuid" : {
+                "description" : "Unique identifier of a Game Object",
+                "type" : "string",
+                "usage" : "// Where object is some Game Object \n let id = object.uuid"
+            },
+            "transform" : {
+                "description" : "Transform holds position, velocity, acceleration, and mass information about a Game Object.",
+                "type" : "transform",
+                "usage" : "// Where object is some Game Object \n let transform = object.transform"
+            },
+            "collider" : {
+                "description" : "Every Game Object has a collider that determines its size",
+                "type" : "collider",
+                "usage" : "// Where object is some Game Object \n let collider = object.collider"
+            }
+        }
+    },
+    "Asteroid" : {
+        "description" : "Asteroid objects contain resources to collect.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/objects.ts#L110",
+        "fields" : {
+            "resources" : {
+                "description" : "Resources contained in the asteroid",
+                "type" : "resources",
+                "usage" : "let resources = asteroid.resources"
             }
         }
     },
     "Game" : {
         "description" : "Holds mass, position, and velocity information about a game object.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/renderer.ts",
         "fields" : {
-            "position" : {
-                "description" : "Position of the object in the world.",
-                "type" : "Vector2D",
-                "usage" : "// Where object is some Game Object \n let pos = object.transform.position"
+            "H" : {
+                "description" : "Height of the game world.",
+                "type" : "number",
+                "usage" : "let height = Game.H"
+            },
+            "W" : {
+                "description" : "Width of the game world.",
+                "type" : "number",
+                "usage" : "let width = Game.W"
             }
         },
         "methods" : {
-            "spawnShip" : 
+            "getAsteroids" : 
             {
-                "description" : "Spawns a new ship near the base. \n Spawns the ship with the specified amount of energy, unless the base has less than specified.  \n If respawn is set to true, you will respawn a deceased ship. If respawn is set to false you will purchase a new ship slot.",
+                "description" : "Return an array of Asteroid objects.",
+                "returnType" : "Asteroid[]",
+                "usage" : "let asteroids = Game.getAsteroids()"
+            },
+            "getClosestAsteroid" : 
+            {
+                "description" : "Returns the closest Asteroid object to a position.",
                 "arguments" : {
-                    "energy" : "number",
-                    "respawn" : "boolean"
+                    "position" : "Vector2D"
                 },
-                "returnType" : "void",
-                "usage" : "// Purchase a new ship slot \n base.spawnShip(50.0, false) \n // Respawn a deceased ship \n base.spawnShip(50.0, true)"
+                "returnType" : "Asteroid",
+                "usage" : "let vec = new Vector2D(30.0, 20.0) \n let closest = Game.getClosestAsteroid(vec)"
+            },
+            "getObstacles" : 
+            {
+                "description" : "Return an array of obstacles. (Resource-less asteroids)",
+                "returnType" : "GameObject[]",
+                "usage" : "let obstacles = Game.getObstacles()"
+            },
+            "getClosestObstacle" : 
+            {
+                "description" : "Returns the closest Obstacle object to a position.",
+                "arguments" : {
+                    "position" : "Vector2D"
+                },
+                "returnType" : "GameObject",
+                "usage" : "let vec = new Vector2D(30.0, 20.0) \n let closest = Game.getClosestObstacle(vec)"
+            },
+            "getEnergyCells" : 
+            {
+                "description" : "Return an array of Energy Cells.",
+                "returnType" : "GameObject[]",
+                "usage" : "let energyCells = Game.getObstacles()"
+            },
+            "getClosestEnergyCell" : 
+            {
+                "description" : "Returns the closest EnergyCell object to a position.",
+                "arguments" : {
+                    "position" : "Vector2D"
+                },
+                "returnType" : "GameObject",
+                "usage" : "let vec = new Vector2D(30.0, 20.0) \n let closest = Game.getClosestEnergyCell(vec)"
+            },
+            "getShips" : 
+            {
+                "description" : "Return an array of Ship objects.",
+                "returnType" : "Ship",
+                "usage" : "let ships = Game.getShips()"
+            },
+            "getShipsByTeam" : 
+            {
+                "description" : "Return an array of Ship objects for a given team.",
+                "arguments" : {
+                    "team" : "number"
+                },
+                "returnType" : "Ship[]",
+                "usage" : "let ships = Game.getShipsByTeam(0)"
+            },
+            "getBullets" : 
+            {
+                "description" : "Returns an array of active Bullet objects.",
+                "returnType" : "GameObject[]",
+                "usage" : "let bullets = Game.getBullets()"
+            },
+            "getBases" : 
+            {
+                "description" : "Return an array of Base objects",
+                "returnType" : "Base[]",
+                "usage" : "let bases = Game.getBases()"
+            },
+            "getBaseByTeam" : 
+            {
+                "description" : "Return the base belonging to a specified team",
+                "arguments" : {
+                    "team," : "number"
+                },
+                "returnType" : "Base",
+                "usage" : "let base = Game.getBaseByTeam(0)"
             }
         }
     },
     "Graphics" : {
         "description" : "Holds mass, position, and velocity information about a game object.",
         "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
-        "fields" : {
-            "position" : {
-                "description" : "Position of the object in the world.",
-                "type" : "Vector2D",
-                "usage" : "// Where object is some Game Object \n let pos = object.transform.position"
-            }
-        },
         "methods" : {
-            "spawnShip" : 
+            "drawText" : 
             {
-                "description" : "Spawns a new ship near the base. \n Spawns the ship with the specified amount of energy, unless the base has less than specified.  \n If respawn is set to true, you will respawn a deceased ship. If respawn is set to false you will purchase a new ship slot.",
+                "description" : "Draws text on the screen",
                 "arguments" : {
-                    "energy" : "number",
-                    "respawn" : "boolean"
+                    "text" : "string",
+                    "position" : "Vector2D",
+                    "size" : "number",
+                    "color" : "string"
                 },
                 "returnType" : "void",
-                "usage" : "// Purchase a new ship slot \n base.spawnShip(50.0, false) \n // Respawn a deceased ship \n base.spawnShip(50.0, true)"
+                "usage" : "// Print the resources a ship contains near the ship \n Graphics.drawText(ship.resources.toString(),ship.transform.position,10,'#FFFFFF')"
+            },
+            "drawLine" : 
+            {
+                "description" : "Draw a line that starts and ends at specified positions, with a specified color.",
+                "arguments" : {
+                    "start" : "Vector2D",
+                    "end" : "Vector2D",
+                    "color" : "string"
+                },
+                "returnType" : "void",
+                "usage" : "let start = new Vector2D(0.0, 100.0) \n let end = new Vector2D(100.0, 100.0) \n Graphics.drawline(start, end, '#FFFFFF')"
+            },
+            "drawCircle" : 
+            {
+                "description" : "Draw a circle of a specified color and radius at a given position.",
+                "arguments" : {
+                    "pos" : "Vector2D",
+                    "radius" : "number",
+                    "color" : "string"
+                },
+                "returnType" : "void",
+                "usage" : "Graphics.drawCircle(new Vector2D(10.0, 20.0), 10.0, '#FFFFFFF')"
+            },
+            "drawCircleTransparent" : 
+            {
+                "description" : "Draw a circle of a specified color, opacity, and radius at a given position.",
+                "arguments" : {
+                    "pos" : "Vector2D",
+                    "radius" : "number",
+                    "color" : "string",
+                    "opacity" : "number"
+                },
+                "returnType" : "void",
+                "usage" : "Graphics.drawCircle(new Vector2D(10.0, 20.0), 10.0, '#FFFFFFF', 0.2)"
             }
         }
     }

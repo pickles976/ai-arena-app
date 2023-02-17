@@ -26,12 +26,16 @@
 - [x] Add collider docs
 - [x] Add resources docs
 - [x] Add base docs
-- [ ] Add ship docs
-- [ ] Add Game docs
+- [x] Add ship docs
+- [x] Add Gameobject docs
+- [x] Add Game docs
+- [x] Add Asteroid docs
 - [ ] Add graphics docs
 
 - [x] Add all information about game to docs
 - [x] Add Ability to load docs from json
 - [x] Use routing to make each json field its own page
 - [ ] Add images to documentation?
-- [ ] Make it look like actual docs
+- [ ] Add code styling to documentation
+- [ ] Make Fields and Methods their own components
+- [ ] Finish styling the documentation components

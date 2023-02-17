@@ -7,10 +7,8 @@
 	
 	let objects=data.default
     let object = {}
-	console.log(objects)
 
 	$: if ($params) {
-		console.log($params.object)
         object = objects[$params.object]
 	}
 
@@ -48,7 +46,7 @@
                 <p>{arg} : <a href="/#/documentation-object/{argtype}">{argtype}</a> </p>
             {/each}
             {/if}
-            <p>returns: <a href="/#/documentation-object/{val.returnType}">{val.returnType}</a></p>
+            <p>returns: <a href="/#/documentation-object/{val.returnType.replace("[]", "")}">{val.returnType}</a></p>
             <p>Usage:</p>
             <p>{val.usage}</p>
             <p>Output:</p>
