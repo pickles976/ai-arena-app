@@ -25,7 +25,7 @@
 - [x] Add transform docs
 - [x] Add collider docs
 - [x] Add resources docs
-- [ ] Add base docs
+- [x] Add base docs
 - [ ] Add ship docs
 - [ ] Add Game docs
 - [ ] Add graphics docs

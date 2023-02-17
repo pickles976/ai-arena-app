@@ -1,4 +1,16 @@
 {
+    "void" : {
+        "description" : "Javascript's void operator.",
+        "link" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void"
+    }, 
+    "boolean" : {
+        "description" : "Javascript's boolean object.",
+        "link" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+    }, 
+    "number" : {
+        "description" : "Javascript's number object.",
+        "link" : "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"
+    }, 
     "console" : {
         "description" : "Used for printing to the dev console.",
         "link" : "https://developer.mozilla.org/en-US/docs/Web/API/console"
@@ -304,91 +316,124 @@
         "methods" : {
             "spawnShip" : 
             {
-                "description" : "Creates a new Vector2D",
+                "description" : "Spawns a new ship near the base. \n Spawns the ship with the specified amount of energy, unless the base has less than specified.  \n If respawn is set to true, you will respawn a deceased ship. If respawn is set to false you will purchase a new ship slot.",
                 "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
+                    "energy" : "number",
+                    "respawn" : "boolean"
                 },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "returnType" : "void",
+                "usage" : "// Purchase a new ship slot \n base.spawnShip(50.0, false) \n // Respawn a deceased ship \n base.spawnShip(50.0, true)"
             }, 
             "upgradeHealRate" : 
             {
-                "description" : "Creates a new Vector2D",
-                "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
-                },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "description" : "Upgrades the heal rate of your base for some metal cost.",
+                "returnType" : "void",
+                "usage" : "base.upgradeHealRate()"
             }, 
             "upgradeMaxEnergy" : 
             {
-                "description" : "Creates a new Vector2D",
-                "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
-                },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "description" : "Upgrades the max energy of your base for some metal cost.",
+                "returnType" : "void",
+                "usage" : "base.upgradeMaxEnergy()"
             }, 
             "upgradeRefiningRate" : 
             {
-                "description" : "Creates a new Vector2D",
-                "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
-                },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "description" : "Upgrades the refining rate of your base for some metal cost.",
+                "returnType" : "void",
+                "usage" : "base.upgradeRefiningRate()"
             }, 
             "upgradeInteractRadius" : 
             {
-                "description" : "Creates a new Vector2D",
-                "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
-                },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "description" : "Upgrades the interact radius of your base for some metal cost.",
+                "returnType" : "void",
+                "usage" : "base.upgradeInteractRadius()"
             }, 
             "upgradeRefiningEfficiency" : 
             {
-                "description" : "Creates a new Vector2D",
-                "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
-                },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "description" : "Upgrades the refining efficiency of your base for some metal cost.",
+                "returnType" : "void",
+                "usage" : "base.upgradeRefiningEfficiency()"
             }, 
             "upgradeRepairRate" : 
             {
-                "description" : "Creates a new Vector2D",
-                "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
-                },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "description" : "Upgrades the repair rate of your base for some metal cost.",
+                "returnType" : "void",
+                "usage" : "base.upgradeRepairRate()"
             }, 
             "upgradeMaxHealth" : 
             {
-                "description" : "Creates a new Vector2D",
+                "description" : "Upgrades the max health of your base for some metal cost.",
+                "returnType" : "void",
+                "usage" : "base.upgradeMaxHealth()"
+            }
+        }
+    },
+    "Ship" : {
+        "description" : "Holds mass, position, and velocity information about a game object.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "fields" : {
+            "position" : {
+                "description" : "Position of the object in the world.",
+                "type" : "Vector2D",
+                "usage" : "// Where object is some Game Object \n let pos = object.transform.position"
+            }
+        },
+        "methods" : {
+            "spawnShip" : 
+            {
+                "description" : "Spawns a new ship near the base. \n Spawns the ship with the specified amount of energy, unless the base has less than specified.  \n If respawn is set to true, you will respawn a deceased ship. If respawn is set to false you will purchase a new ship slot.",
                 "arguments" : {
-                    "x" : "number",
-                    "y" : "number"
+                    "energy" : "number",
+                    "respawn" : "boolean"
                 },
-                "returnType" : "Vector2D",
-                "usage" : "let v = new Vector2D(0.0, 1.0)",
-                "output" : "Vector2D(0,0)"
+                "returnType" : "void",
+                "usage" : "// Purchase a new ship slot \n base.spawnShip(50.0, false) \n // Respawn a deceased ship \n base.spawnShip(50.0, true)"
+            }
+        }
+    },
+    "Game" : {
+        "description" : "Holds mass, position, and velocity information about a game object.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "fields" : {
+            "position" : {
+                "description" : "Position of the object in the world.",
+                "type" : "Vector2D",
+                "usage" : "// Where object is some Game Object \n let pos = object.transform.position"
+            }
+        },
+        "methods" : {
+            "spawnShip" : 
+            {
+                "description" : "Spawns a new ship near the base. \n Spawns the ship with the specified amount of energy, unless the base has less than specified.  \n If respawn is set to true, you will respawn a deceased ship. If respawn is set to false you will purchase a new ship slot.",
+                "arguments" : {
+                    "energy" : "number",
+                    "respawn" : "boolean"
+                },
+                "returnType" : "void",
+                "usage" : "// Purchase a new ship slot \n base.spawnShip(50.0, false) \n // Respawn a deceased ship \n base.spawnShip(50.0, true)"
+            }
+        }
+    },
+    "Graphics" : {
+        "description" : "Holds mass, position, and velocity information about a game object.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "fields" : {
+            "position" : {
+                "description" : "Position of the object in the world.",
+                "type" : "Vector2D",
+                "usage" : "// Where object is some Game Object \n let pos = object.transform.position"
+            }
+        },
+        "methods" : {
+            "spawnShip" : 
+            {
+                "description" : "Spawns a new ship near the base. \n Spawns the ship with the specified amount of energy, unless the base has less than specified.  \n If respawn is set to true, you will respawn a deceased ship. If respawn is set to false you will purchase a new ship slot.",
+                "arguments" : {
+                    "energy" : "number",
+                    "respawn" : "boolean"
+                },
+                "returnType" : "void",
+                "usage" : "// Purchase a new ship slot \n base.spawnShip(50.0, false) \n // Respawn a deceased ship \n base.spawnShip(50.0, true)"
             }
         }
     }

@@ -42,10 +42,12 @@
     <h3>Methods</h3>
         {#each Object.entries(object.methods) as [key, val]}
             <p><b>{key}</b></p>
+            {#if val.arguments}
             <p>Arguments: </p>
             {#each Object.entries(val.arguments) as [arg, argtype]}
                 <p>{arg} : <a href="/#/documentation-object/{argtype}">{argtype}</a> </p>
             {/each}
+            {/if}
             <p>returns: <a href="/#/documentation-object/{val.returnType}">{val.returnType}</a></p>
             <p>Usage:</p>
             <p>{val.usage}</p>
