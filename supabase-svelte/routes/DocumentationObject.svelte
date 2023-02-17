@@ -26,14 +26,19 @@
     <h3>Description</h3>
     <p>{object.description}</p>
     <!-- FIELDS -->
+    {#if object.fields}
     <h3>Fields</h3>
         {#each Object.entries(object.fields) as [key, val]}
             <p><b>{key}</b> type : <a href="/#/documentation-object/{val.type}">{val.type}</a></p>
             <p>{val.description}</p>
             <p>{val.usage}</p>
+            {#if val.output}
             <p>{val.output}</p>
+            {/if}
         {/each}
+    {/if}
     <!-- METHODS -->
+    {#if object.methods}
     <h3>Methods</h3>
         {#each Object.entries(object.methods) as [key, val]}
             <p><b>{key}</b></p>
@@ -47,5 +52,6 @@
             <p>Output:</p>
             <p>{val.output}</p>
         {/each}
+    {/if}
 </div>
 {/if}

@@ -21,9 +21,17 @@
 - [x] Allow users to rename code
 - [x] Allow users to delete code
 
+- [x] Add Vector2D docs
+- [x] Add transform docs
+- [x] Add collider docs
+- [x] Add resources docs
+- [ ] Add base docs
+- [ ] Add ship docs
+- [ ] Add Game docs
+- [ ] Add graphics docs
 
 - [x] Add all information about game to docs
-- [ ] Add Ability to load docs from json
-- [ ] Use routing to make each json field its own page
-- [ ] Add images
+- [x] Add Ability to load docs from json
+- [x] Use routing to make each json field its own page
+- [ ] Add images to documentation?
 - [ ] Make it look like actual docs
