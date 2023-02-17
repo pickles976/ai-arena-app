@@ -1,3 +1,26 @@
 {
-    "hello" : "hi"
+    "Globals" : {
+        "Description" : "These are objects that are globally available. Some of them like Math and console provided by the browser. Others are custom utilities for the game.",
+        "Fields" : {
+            "console" : {}, 
+            "Math" : {}, 
+            "Vector2D" : {}, 
+            "overlapCircle" : {}, 
+            "dist" : {}, 
+            "performance" : {}
+        },
+        "Functions" : {
+            "H" : {}, 
+            "W" : {}
+        }
+    },
+    "Game Objects" : {
+        "Description" : "These fields are shared by all game objects and are write-only.",
+        "Fields" : {
+            "transform" : {}, 
+            "collider" : {}, 
+            "resources" : {}
+        },
+        "Functions" : []
+    }
 }
