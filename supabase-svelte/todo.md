@@ -35,7 +35,6 @@
 - [x] Add all information about game to docs
 - [x] Add Ability to load docs from json
 - [x] Use routing to make each json field its own page
-- [ ] Add images to documentation?
-- [ ] Add code styling to documentation
-- [ ] Make Fields and Methods their own components
+- [x] Make Fields and Methods their own components
+- [x] Add code styling to documentation
 - [ ] Finish styling the documentation components

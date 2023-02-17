@@ -1,5 +1,4 @@
-There are 2 jsons for the documentation.
+## Documentation generators
 
-api.json is a flat structure holding the full documentation where each entry is its own page.
-
-apidoc.json is a tree where the pages are grouped by themes
+doc_pages.json contains the actual docpages with all of the fields, methods, links, examples, and whatnot else you need for documentation.
+doc_layout.json contains the layout of the doc pages.

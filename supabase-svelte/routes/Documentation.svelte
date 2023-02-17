@@ -1,15 +1,10 @@
 <!-- https://github.com/pickles976/ai-arena-site -->
 
 <script>
-	import Router, {location, link, params} from 'svelte-spa-router';
 	import * as data from '../src/assets/json/doc_layout.json';
 	
+	// load data from json
 	let objects = data.default
-	console.log(objects)
-
-	$: if ($params) {
-		console.log($params.object)
-	}
 
 </script>
 
@@ -18,6 +13,7 @@
 </h1>
 <div>
 
+	<!-- List all of the categories in doc_layout.json -->
 	{#each Object.entries(objects) as [key, val]}
 	<div>
 		<h2>{key}</h2>
