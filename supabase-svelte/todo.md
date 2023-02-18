@@ -18,6 +18,7 @@
 - [x] make game panel resizable
 - [ ] Add game visualization components to home page
 
+- [ ] Allow editor code to actually be ran
 - [ ] Allow users to load up NPC code to play against
 
 

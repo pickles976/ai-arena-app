@@ -2,8 +2,18 @@
   import { onMount } from "svelte";
   import EditorPanel from "../components/EditorPanel.svelte";
   import { initGame } from "../game";
+  import { gameData } from "../stores";
+  import { getGameState } from "ai-arena"
 
-  onMount(() => initGame())
+  // callback that runs on each frame
+  function callback () {
+    $gameData.gameObjects = getGameState()
+
+    // TODO: do something with this data
+    console.log($gameData)
+  }
+
+  onMount(() => initGame(callback))
 
 </script>
 

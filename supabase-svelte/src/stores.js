@@ -1,10 +1,10 @@
 // store.js
 import { writable } from 'svelte/store';
 
-// export const localCodeObjects = writable([])
-// export const remoteCodeObjects = writable([])
-// let localCodeObjects = {}
-// let remoteCodeObjects = {}
+export let gameData = writable({
+  gameObject: {},
+  gameObjects: []
+})
 
 export const defaultCode = {
   id : undefined,
@@ -18,6 +18,7 @@ export const defaultCode = {
 export const auth = writable({
   session: null,
 })
+
 
 export const code = writable(defaultCode)
 

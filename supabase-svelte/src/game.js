@@ -1,6 +1,7 @@
 import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './aiControls.js'
 import { stopGame, testPackage, runGame, togglePause, stepFrame, getScore, getGameState, getShipsInfo, setUserCode, setConfig, setCallbacks} from 'ai-arena'
 import { getCodeFromEditor } from './editor.js'
+import { gameData } from './stores.js'
 
 let memoryList, canvas, ctx
 
@@ -14,7 +15,7 @@ let RUNNING = false;
 let startTime = performance.now()
 let uuid = undefined
 
-export function initGame() {
+export function initGame(callback) {
     // INITIALIZATION
     console.log(testPackage())
 
@@ -31,9 +32,9 @@ export function initGame() {
     document.getElementById("warp").addEventListener("click", warp)
 
     // set the callbacks that the game will call during execution
-    // setCallbacks({
-    //     ui : callback,
-    // })
+    setCallbacks({
+        ui : callback,
+    })
     
     // Set the game configuration
     setConfig({
@@ -70,6 +71,7 @@ export function step(event) {
 };
 
 // https://github.com/pickles976/ai-arena/blob/main/src/index.ts#L154
+// TODO: CHANGE THIS
 export function compile(event) {
     var code = getCodeFromEditor()
     setUserCode({
@@ -113,44 +115,45 @@ export function warp(event) {
     document.getElementById("warp").innerHTML = TICKS_PER_FRAME === 1 ? "Warp" : "Normal"
 }
 
-// IN-GAME CALLBACKS
-var callback = function(){
+// // IN-GAME CALLBACKS
+// var callback = function(){
 
-    const start = performance.now()
+//     const start = performance.now()
 
-    const teamInfo = getScore()
-    const team0 = teamInfo['team 0']
-    const team1 = teamInfo['team 1']
+//     const teamInfo = getScore()
+//     const team0 = teamInfo['team 0']
+//     const team1 = teamInfo['team 1']
 
-    document.getElementById('team0-kills').innerHTML = team0["kills"]
-    document.getElementById('team0-deaths').innerHTML = team0["deaths"]
-    document.getElementById('team0-metal').innerHTML = Math.round(team0["metal"])
-    document.getElementById('team0-energy').innerHTML = Math.round(team0["energy"])
+//     // document.getElementById('team0-kills').innerHTML = team0["kills"]
+//     // document.getElementById('team0-deaths').innerHTML = team0["deaths"]
+//     // document.getElementById('team0-metal').innerHTML = Math.round(team0["metal"])
+//     // document.getElementById('team0-energy').innerHTML = Math.round(team0["energy"])
 
-    document.getElementById('team1-kills').innerHTML = team1["kills"]
-    document.getElementById('team1-deaths').innerHTML = team1["deaths"]
-    document.getElementById('team1-metal').innerHTML = Math.round(team1["metal"])
-    document.getElementById('team1-energy').innerHTML = Math.round(team1["energy"])
+//     // document.getElementById('team1-kills').innerHTML = team1["kills"]
+//     // document.getElementById('team1-deaths').innerHTML = team1["deaths"]
+//     // document.getElementById('team1-metal').innerHTML = Math.round(team1["metal"])
+//     // document.getElementById('team1-energy').innerHTML = Math.round(team1["energy"])
 
-    document.getElementById('timer').innerHTML = 'Timesteps: ' + ((performance.now() - startTime) * 60 / 1000).toFixed(0)
+//     // document.getElementById('timer').innerHTML = 'Timesteps: ' + ((performance.now() - startTime) * 60 / 1000).toFixed(0)
 
 
-    // Draw an index for every object in the game
-    const gameState = getGameState()
-    drawMemoryTags(memoryList,gameState)
+//     // Draw an index for every object in the game
+//     // const gameState = getGameState()
+//     // console.log(gameState)
+//     // drawMemoryTags(memoryList,gameState)
 
-    // Load selected object into memory panel if it exists
-    if(ObjectDict[uuid])
-        populateMemoryPanel(ObjectDict[uuid])
+//     // // Load selected object into memory panel if it exists
+//     // if(ObjectDict[uuid])
+//     //     populateMemoryPanel(ObjectDict[uuid])
 
-    // Draw all the ships on the ship panel
-    const ships = getShipsInfo()
-    if (ships['team0'] && ships['team1'])
-        populateShipPanel(ships['team0'],document.getElementById('ship-panel-0'))
-        populateShipPanel(ships['team1'],document.getElementById('ship-panel-1'))
+//     // // Draw all the ships on the ship panel
+//     // const ships = getShipsInfo()
+//     // if (ships['team0'] && ships['team1'])
+//     //     populateShipPanel(ships['team0'],document.getElementById('ship-panel-0'))
+//     //     populateShipPanel(ships['team1'],document.getElementById('ship-panel-1'))
 
-    // console.log(performance.now() - start)
-}
+//     // // console.log(performance.now() - start)
+// }
 
 // PANEL CONTROLS
 const populateShipPanel = function(ships,element){
