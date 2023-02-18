@@ -1,5 +1,4 @@
-<!-- https://github.com/pickles976/ai-arena-site -->
-
+<!-- This is a singe page in the documents. It takes in a documentation page object from JSON and renders it as a page -->
 <script>
 	import {params} from 'svelte-spa-router';
 	import * as data from '../src/assets/json/doc_pages.json';
@@ -17,15 +16,17 @@
 
 </script>
 
-<h1>
-	Documentation
-</h1>
+<div class="container-fluid">
+	<h1 class="mt-4">
+		Documentation
+	</h1>
 
 {#if $params}
 <div>
-    <h2><a href="{object.link}">{$params.object}</a></h2>
-    <h3>Description</h3>
-    <p>{object.description}</p>
+    <div class="api p-2">
+        <h3><a href="{object.link}">{$params.object}</a></h3>
+        <p>{object.description}</p>
+    </div>
     <!-- FIELDS -->
     {#if object.fields}
         <DocFields object={object}/>
@@ -36,3 +37,13 @@
     {/if}
 </div>
 {/if}
+</div>
+
+<style>
+.api {
+    border-top-color: #6ab0de;
+    border-top-width: 3px;
+    border-top-style: solid;
+    background-color: #e7f2fa;
+}
+</style>
