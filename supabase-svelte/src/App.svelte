@@ -20,13 +20,13 @@
 	</nav>
 </header>
 
-	<Router routes={{
-		'/home': Home,
-		'/documentation': Documentation,
-		'/documentation/:object': Documentation,
-		'/documentation-page/:object': DocumentationPage,
-		'/login': Login,
-	}} />
+<Router routes={{
+	'/home': Home,
+	'/documentation': Documentation,
+	'/documentation/:object': Documentation,
+	'/documentation-page/:object': DocumentationPage,
+	'/login': Login,
+}} />
 
 </body>
 

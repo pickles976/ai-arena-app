@@ -92,26 +92,49 @@
 
 </script>
 
-<div>
+<div class="main-div">
 
-  <button on:click={tryNew}>New</button>
-  <button on:click={tryFetchAllCode}>Load Code</button>
-  <button on:click={trySave}>Save</button>
-  <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
-
-  <h2>{$code.name === "" ? "untitled" : $code.name}</h2>
-
-  <form class="content">
-    <label>Base Start</label>
-      <input type="text" bind:value={$code.baseStart} />
-    <label>Base Update</label>
-      <input type="text" bind:value={$code.baseUpdate} />
-    <label>Ship Start</label>
-      <input type="text" bind:value={$code.shipStart} />
-    <label>Ship Update</label>
-      <input type="text" bind:value={$code.shipUpdate} />
-  </form>
-  <button on:click={trySubmitCode}>Submit Code</button>
+  <div class="vert-panel">
+  <div class="hor-panel">
+    <button on:click={tryNew}>New</button>
+    <button on:click={tryFetchAllCode}>Load Code</button>
+    <button on:click={trySave}>Save</button>
+    <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
+    <box>{$code.name === "" ? "untitled" : $code.name}</box>
+  </div>
+  <div class="hor-panel">
+    <form class="content">
+      <label>Base Start</label>
+        <input type="text" bind:value={$code.baseStart} />
+      <label>Base Update</label>
+        <input type="text" bind:value={$code.baseUpdate} />
+      <label>Ship Start</label>
+        <input type="text" bind:value={$code.shipStart} />
+      <label>Ship Update</label>
+        <input type="text" bind:value={$code.shipUpdate} />
+    </form>
+  </div>
+  <div class="hor-panel">
+    <button on:click={trySubmitCode}>Submit Code</button>
+  </div>
+  </div>
+  <div class="vert-panel">
+    <div class="hor-panel">
+      GAME PANEL
+    </div>
+    <div class="hor-panel">
+      <div class="vert-panel">
+        Game Object List
+      </div>
+      <div class="vert-panel">
+        Game Object inspector
+      </div>
+    </div>
+  </div>
+  <div class="vert-panel">
+    <div class="hor-panel">SCORE PANEL</div>
+    <div class="hor-panel">TEAMS PANEL</div>
+  </div>
 
   <!-- TODO: replace with those little status thingies that follow you between pages -->
   <Modal id='submission-status'>
@@ -143,7 +166,6 @@
       {#each Object.values(localCodeObjects) as codeObject}
         <div>
           <p>{codeObject.name}</p>
-                <!-- <p>{JSON.stringify(codeObject.code)}</p> -->
                 <button on:click={() => tryLoadLocalCode(codeObject.name)}>Open</button> 
                 <button on:click={() => tryDeleteLocalCode(codeObject.name)}>Delete</button> 
             </div>
@@ -169,3 +191,27 @@
   </Modal>
 
 </div>
+
+<style>
+  .main-div { 
+    height: 94.2vh;
+    overflow: hidden;
+    display: flex;
+  } 
+
+  .vert-panel {
+    border-width: 2px;
+    border-style: solid;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hor-panel {
+    border-width: 2px;
+    border-style: solid;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+  }
+</style>
