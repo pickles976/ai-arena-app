@@ -12,8 +12,10 @@
 - [x] Add code editor to home page
 - [x] Break code editor into its own component
 - [x] Allow for full editor logic integration with web app
-- [ ] Import AI-Arena into home page
-- [ ] Add game controls to home page
+- [x] Allow users to widen code editor
+- [x] Import AI-Arena into home page
+- [x] Add game controls to home page
+- [x] make game panel resizable
 - [ ] Add game visualization components to home page
 
 - [ ] Allow users to load up NPC code to play against

@@ -234,7 +234,7 @@
 #editor { 
   position: relative;
   min-height: 100px;
-  height: 85vh;
+  height: 84vh;
   width: 100%;
   top: 0;
   right: 0;
@@ -275,19 +275,35 @@ body .ace_scrollbar-h {
   background: #555;
 }
 
+/* Code editor and game page panels */
+.vert-panel {
+  border-width: 2px;
+  border-style: solid;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
 
-  .vert-panel {
-    border-width: 2px;
-    border-style: solid;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
+.hor-panel {
+  border-width: 2px;
+  border-style: solid;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
 
-  .hor-panel {
-    border-width: 2px;
-    border-style: solid;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-  }
+  /* Game canvas */
+.canvasContainer {
+  width: 100%;
+  /* height: 100%; */
+  border: 0;
+  margin: 0;
+  /* margin-left: 1%; */
+  display: flex;
+}
+
+.myCanvas {
+  width: 100%;
+  /* height: 100%; */
+  float: left;
+}

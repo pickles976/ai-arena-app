@@ -111,7 +111,7 @@
     })
 </script>
 
-<div style="width: 40vw; max-height: 94.2vh;">
+<div style="width: 40vw; max-height: 95vh; resize: horizontal; overflow: auto">
 <div class="vert-panel">
     <div class="hor-panel">
         <!-- CODE EDITOR BUTTONS -->
@@ -145,7 +145,7 @@
 <!-- CODE SUBMISSION PANELS -->
   <div class="hor-panel">
     <div class="vert-panel" style="flex-direction: row">
-        <button on:click={() => {}}>Compile</button>
+        <button id="compile" on:click={() => {}}>Compile</button>
         <button on:click={trySubmitCode}>Submit</button>
     </div>
     <div class="vert-panel" style="flex-direction: row-reverse">

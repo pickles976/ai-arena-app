@@ -1,5 +1,9 @@
 <script>
+  import { onMount } from "svelte";
   import EditorPanel from "../components/EditorPanel.svelte";
+  import { initGame } from "../game";
+
+  onMount(() => initGame())
 
 </script>
 
@@ -7,14 +11,17 @@
   <EditorPanel />
 
   <div class="vert-panel">
-    <div class="hor-panel">
-      GAME PANEL
+    <div class="hor-panel" style="resize: both; overflow: auto">
+      <!-- GAME SCREEN -->
+      <div class="canvasContainer">
+        <canvas id="game-canvas" width="640" height="480" class="myCanvas"></canvas>
+      </div>
     </div>
     <div class="hor-panel" style="flex-direction: row; max-height: 5vh; align-items: center; justify-content: center;">
-      <button>Run</button>
-      <button>Pause</button>
-      <button>Step</button>
-      <button>Normal</button>
+      <button id="run" on:click={run}>Run</button>
+      <button id="pause">Pause</button>
+      <button id="step">Step</button>
+      <button id="warp">Warp</button>
     </div>
     <div class="hor-panel">
       <div class="vert-panel">
