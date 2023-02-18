@@ -16,6 +16,7 @@
 - [ ] Add game controls to home page
 - [ ] Add game visualization components to home page
 
+- [ ] Allow users to load up NPC code to play against
 
 
 - [ ] Resizable panels

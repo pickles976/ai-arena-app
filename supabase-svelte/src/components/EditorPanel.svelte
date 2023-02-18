@@ -111,13 +111,13 @@
     })
 </script>
 
-<div style="width: 40vw">
+<div style="width: 40vw; max-height: 94.2vh;">
 <div class="vert-panel">
     <div class="hor-panel">
         <!-- CODE EDITOR BUTTONS -->
       <div class="vert-panel" style="flex-direction: row;">
         <button on:click={tryNew}>New</button>
-        <button on:click={tryFetchAllCode}>Load Code</button>
+        <button on:click={tryFetchAllCode}>Load</button>
         <button on:click={trySave}>Save</button>
         <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
       </div>
@@ -144,8 +144,13 @@
     </div>
 <!-- CODE SUBMISSION PANELS -->
   <div class="hor-panel">
-    <button on:click={() => {}}>Compile</button>
-    <button on:click={trySubmitCode}>Submit</button>
+    <div class="vert-panel" style="flex-direction: row">
+        <button on:click={() => {}}>Compile</button>
+        <button on:click={trySubmitCode}>Submit</button>
+    </div>
+    <div class="vert-panel" style="flex-direction: row-reverse">
+        <button>Select Enemy AI</button>
+    </div>
   </div>
 </div>
 

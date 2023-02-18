@@ -10,8 +10,11 @@
     <div class="hor-panel">
       GAME PANEL
     </div>
-    <div class="hor-panel">
-      CONTROLS PANEL
+    <div class="hor-panel" style="flex-direction: row; max-height: 5vh; align-items: center; justify-content: center;">
+      <button>Run</button>
+      <button>Pause</button>
+      <button>Step</button>
+      <button>Normal</button>
     </div>
     <div class="hor-panel">
       <div class="vert-panel">
@@ -22,7 +25,7 @@
       </div>
     </div>
   </div>
-  <div class="vert-panel">
+  <div class="vert-panel" style="max-width: 12vw;">
     <div class="hor-panel">SCORE PANEL</div>
     <div class="hor-panel">TEAMS PANEL</div>
   </div>

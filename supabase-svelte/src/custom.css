@@ -276,18 +276,18 @@ body .ace_scrollbar-h {
 }
 
 
-.vert-panel {
-  border-width: 2px;
-  border-style: solid;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
+  .vert-panel {
+    border-width: 2px;
+    border-style: solid;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-.hor-panel {
-  border-width: 2px;
-  border-style: solid;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: row;
-}
+  .hor-panel {
+    border-width: 2px;
+    border-style: solid;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+  }
