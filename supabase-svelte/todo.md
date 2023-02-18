@@ -11,7 +11,7 @@
 - [x] Start figuring out layout for editor page
 - [x] Add code editor to home page
 - [x] Break code editor into its own component
-- [ ] Allow for full editor logic integration with web app
+- [x] Allow for full editor logic integration with web app
 - [ ] Import AI-Arena into home page
 - [ ] Add game controls to home page
 - [ ] Add game visualization components to home page

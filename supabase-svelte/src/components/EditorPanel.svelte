@@ -6,10 +6,7 @@
     import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../features/storage.js"
     import Modal,{getModal} from '../components/Modal.svelte'
     import { onMount } from "svelte";
-    import { initEditor } from "../editor.js";
-
-    let localCodeObjects = {}
-    let remoteCodeObjects = {}
+    import { getCodeFromEditor, initEditor, oldSessionValue, selectScript } from "../editor.js";
 
     // Upsert code on submit
     function trySubmitCode() {
@@ -57,11 +54,13 @@
 
     function tryLoadLocalCode(name) {
       code.set(localCodeObjects[name])
+      initEditor($code)
       getModal('load-code').close(1)
     }
 
     function tryLoadRemoteCode(name) {
       code.set(remoteCodeObjects[name])
+      initEditor($code)
       getModal('load-code').close(1)
     }
 
@@ -82,6 +81,13 @@
         return
       }
 
+      // copy editor values into code object
+      let editorCode = getCodeFromEditor()
+      $code.baseStart = editorCode.baseStart
+      $code.baseUpdate = editorCode.baseUpdate
+      $code.shipStart = editorCode.shipStart
+      $code.shipUpdate = editorCode.shipUpdate
+
       storeCodeLocally($code)
       getModal('save-as').close(1)
 
@@ -91,45 +97,47 @@
       // Warn user about data loss
       getModal('unsaved-warning').open()
     }
+
+    let localCodeObjects = {}
+    let remoteCodeObjects = {}
     
-  onMount(() => {
-      initEditor()
+    onMount(() => {
+      initEditor($code)
     })
 </script>
 
-<div>
+<div style="width: 40vw">
 <div class="vert-panel">
     <div class="hor-panel">
+        <!-- CODE EDITOR BUTTONS -->
       <div class="vert-panel" style="flex-direction: row;">
         <button on:click={tryNew}>New</button>
         <button on:click={tryFetchAllCode}>Load Code</button>
         <button on:click={trySave}>Save</button>
         <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
       </div>
+      <!-- SCRIPT SELECTION -->
       <div class="vert-panel" style="flex-direction: row-reverse; ">
-        <button>Base Start</button>
-        <button>Base Update</button>
-        <button>Ship Start</button>
-        <button>Ship Update</button>
+        <select class="btn-main dropdown-toggle" id="select-script" on:change={(e) => selectScript(e.target.value)}>
+            <option value="shipUpdate" selected>Ship Update</option>
+            <option value="shipStart">Ship Start</option>
+            <option value="baseUpdate">Base Update</option>
+            <option value="baseStart">Base Start</option>
+        </select>
+        <!-- <button on:click={() => {selectScript("baseStart")}}>Base Start</button>
+        <button on:click={() => {selectScript("baseUpdate")}}>Base Update</button>
+        <button on:click={() => {selectScript("shipStart")}}>Ship Start</button>
+        <button on:click={() => {selectScript("shipUpdate")}}>Ship Update</button> -->
         <box>{$code.name === "" ? "untitled" : $code.name}</box>
       </div>
     </div>
+    <!-- EDITOR WINDOW-->
     <div class="hor-panel">
-      <!-- <form class="content">
-        <label>Base Start</label>
-          <input type="text" bind:value={$code.baseStart} />
-        <label>Base Update</label>
-          <input type="text" bind:value={$code.baseUpdate} />
-        <label>Ship Start</label>
-          <input type="text" bind:value={$code.shipStart} />
-        <label>Ship Update</label>
-          <input type="text" bind:value={$code.shipUpdate} />
-      </form> -->
-      <!-- EDITOR WINDOW-->
       <div class="codeContainer">
         <div id="editor">// Your code here</div>
       </div>
     </div>
+<!-- CODE SUBMISSION PANELS -->
   <div class="hor-panel">
     <button on:click={() => {}}>Compile</button>
     <button on:click={trySubmitCode}>Submit</button>
@@ -157,7 +165,7 @@
   <Modal id='unsaved-warning'>
     <h2>Unsaved Progress!</h2>
     <p>All unsaved progress will be lost! are you sure you want to start a new project?</p>
-    <button on:click={() => { code.set(defaultCode); getModal('unsaved-warning').close(1)}}>Create New</button>
+    <button on:click={() => { code.set(defaultCode); initEditor($code); getModal('unsaved-warning').close(1)}}>Create New</button>
     <button on:click={() => getModal('unsaved-warning').close(1)}>Cancel</button>
   </Modal>
 

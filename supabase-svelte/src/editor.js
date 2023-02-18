@@ -1,6 +1,9 @@
 import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './aiControls.js'
 import { customCompleter } from './completions.js'
 
+let editor, langTools, sessions
+export let oldSessionValue
+
 function setEditorOptions(editor){
     editor.session.setMode("ace/mode/javascript");
     editor.setOptions({
@@ -12,8 +15,8 @@ function setEditorOptions(editor){
 }
 
 // Sessions are saved when users switch between tabs
-function selectScript(event) {
-    const session = event.target.value;
+export function selectScript(value) {
+    const session = value;
     var code = editor.getSession().getValue();
     sessions[oldSessionValue] = ace.createEditSession(code)
     oldSessionValue = session
@@ -27,7 +30,8 @@ function selectScript(event) {
 }
 
 // Get object containing code from all editor sections
-export var getCodeFromEditor = function(){
+export function getCodeFromEditor(){
+
     sessions[oldSessionValue] = editor.getSession().getValue()
 
     var sessionCode = {}
@@ -37,36 +41,31 @@ export var getCodeFromEditor = function(){
         const value = sessions[key]
         if (typeof value === "string")
         {
-            sessionCode[key] = value
-            localStorage.setItem(key,value || " ") // if value is null, undefined, or '', replace it with a single space string
+            sessionCode[key] = value || " "
         }
         else
         {
-            sessionCode[key] = value.getValue();
-            localStorage.setItem(key,value.getValue() || " ")
+            sessionCode[key] = value.getValue() || " ";
         }
       });
 
     return sessionCode
 }
 
-export function initEditor() {
+export function initEditor(code) {
     
-    // document.getElementById("select-script").addEventListener("change", selectScript)
-
-    // Load the previous session from storage, or load the default code
-    var sessions = {
-        'Base Start' : localStorage.getItem("Base Start") || BaseStart,
-        'Base Update' : localStorage.getItem("Base Update") || BaseUpdate,
-        'Ship Start' : localStorage.getItem("Ship Start") || ShipStart,
-        'Ship Update' : localStorage.getItem("Ship Update") || ShipUpdate,
+    sessions = {
+        'baseStart' : code.baseStart || BaseStart,
+        'baseUpdate' : code.baseUpdate || BaseUpdate,
+        'shipStart' : code.shipStart || ShipStart,
+        'shipUpdate' : code.shipUpdate || ShipUpdate,
     }
 
-    var oldSessionValue = "Ship Update"
+    oldSessionValue = "shipUpdate"
 
-    var langTools = ace.require("ace/ext/language_tools");
+    langTools = ace.require("ace/ext/language_tools");
     langTools.addCompleter(customCompleter);
-    var editor = ace.edit("editor");
+    editor = ace.edit("editor");
     editor.setTheme("ace/theme/tomorrow_night_eighties");
     editor.session.setValue(sessions[oldSessionValue])
 

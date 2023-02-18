@@ -8,11 +8,11 @@ import { writable } from 'svelte/store';
 
 export const defaultCode = {
   id : undefined,
-  name: "",
-  baseStart: "",
-  baseUpdate: "",
-  shipStart: "",
-  shipUpdate: ""
+  name: " ",
+  baseStart: " ",
+  baseUpdate: " ",
+  shipStart: " ",
+  shipUpdate: " "
 }
 
 export const auth = writable({
