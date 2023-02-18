@@ -6,8 +6,9 @@
 - [x] Added documentation
 
 2/18
-- [ ] Finish styling the documentation components
-- [ ] Clean up project organization
+- [x] Finish styling the documentation components
+- [x] Clean up project organization
+- [ ] Start figuring out layout for editor page
 - [ ] Add code editor to home page
 - [ ] Create resizable panels
 - [ ] Import AI-Arena into home page

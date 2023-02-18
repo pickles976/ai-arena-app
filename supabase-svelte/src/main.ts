@@ -1,5 +1,3 @@
-// import './app.css'
-// import './bootstrap.css'
 import App from './App.svelte'
 
 const app = new App({

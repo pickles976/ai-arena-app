@@ -1,6 +1,6 @@
 <!-- This is the actual documentation route. This has links to all the code documentation. -->
 <script>
-	import * as data from '../src/assets/json/doc_layout.json';
+	import * as data from '../assets/json/doc_layout.json';
 	
 	// load data from json
 	let objects = data.default

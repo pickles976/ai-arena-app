@@ -1,9 +1,9 @@
 <!-- This is a singe page in the documents. It takes in a documentation page object from JSON and renders it as a page -->
 <script>
 	import {params} from 'svelte-spa-router';
-	import * as data from '../src/assets/json/doc_pages.json';
-  import DocFields from '../src/components/DocFields.svelte';
-  import DocMethods from '../src/components/DocMethods.svelte';
+	import * as data from '../assets/json/doc_pages.json';
+  import DocFields from '../components/documentation/DocFields.svelte';
+  import DocMethods from '../components/documentation/DocMethods.svelte';
 	
     // load data from json
 	let objects=data.default

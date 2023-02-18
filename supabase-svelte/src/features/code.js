@@ -1,4 +1,4 @@
-import { supabase } from '../src/supabaseClient'
+import { supabase } from '../supabaseClient'
 
 /**
  * Submit code for this user to the database

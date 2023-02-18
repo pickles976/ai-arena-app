@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { supabase } from '../src/supabaseClient'
+  import { supabase } from '../supabaseClient'
   import type { AuthSession } from '@supabase/supabase-js'
-  import Account from '../src/lib/Account.svelte'
-  import Auth from '../src/lib/Login.svelte'
-  import { auth } from '../src/stores';
+  import Account from '../components/login/Account.svelte'
+  import Auth from '../components/login/Login.svelte'
+  import { auth } from '../stores';
 
   // let session: AuthSession
 

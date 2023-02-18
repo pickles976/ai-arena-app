@@ -1,10 +1,10 @@
 <script>
-    import { code, defaultCode } from "../src/stores.js";
+    import { code, defaultCode } from "../stores.js";
     import { deleteCode, getCode, getUserCode, submitCode } from '../features/code.js'
-    import { auth } from "../src/stores.js";
+    import { auth } from "../stores.js";
     import {push, pop, replace} from 'svelte-spa-router'
     import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../features/storage.js"
-    import Modal,{getModal} from '../src/components/Modal.svelte'
+    import Modal,{getModal} from '../components/Modal.svelte'
 
     let localCodeObjects = {}
     let remoteCodeObjects = {}
