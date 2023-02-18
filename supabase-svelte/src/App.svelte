@@ -4,6 +4,7 @@
 	import Documentation from './routes/Documentation.svelte';
   	import Login from './routes/Login.svelte';
   import DocumentationPage from './routes/DocumentationPage.svelte';
+  import Test from './routes/Test.svelte';
 </script>
 
 <body class='bg-metalgun'>
@@ -22,6 +23,7 @@
 
 <Router routes={{
 	'/home': Home,
+	'/test': Test,
 	'/documentation': Documentation,
 	'/documentation/:object': Documentation,
 	'/documentation-page/:object': DocumentationPage,

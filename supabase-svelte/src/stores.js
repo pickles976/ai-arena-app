@@ -1,6 +1,11 @@
 // store.js
 import { writable } from 'svelte/store';
 
+// export const localCodeObjects = writable([])
+// export const remoteCodeObjects = writable([])
+// let localCodeObjects = {}
+// let remoteCodeObjects = {}
+
 export const defaultCode = {
   id : undefined,
   name: "",

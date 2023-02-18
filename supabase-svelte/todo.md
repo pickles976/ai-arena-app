@@ -8,10 +8,15 @@
 2/18
 - [x] Finish styling the documentation components
 - [x] Clean up project organization
-- [ ] Start figuring out layout for editor page
-- [ ] Add code editor to home page
-- [ ] Create resizable panels
+- [x] Start figuring out layout for editor page
+- [x] Add code editor to home page
+- [x] Break code editor into its own component
+- [ ] Allow for full editor logic integration with web app
 - [ ] Import AI-Arena into home page
 - [ ] Add game controls to home page
 - [ ] Add game visualization components to home page
 
+
+
+- [ ] Resizable panels
+https://svelte-grid.vercel.app/features
