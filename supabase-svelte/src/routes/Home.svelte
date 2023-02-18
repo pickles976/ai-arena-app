@@ -5,9 +5,13 @@
 
 <div class="main-div">
   <EditorPanel />
+
   <div class="vert-panel">
     <div class="hor-panel">
       GAME PANEL
+    </div>
+    <div class="hor-panel">
+      CONTROLS PANEL
     </div>
     <div class="hor-panel">
       <div class="vert-panel">

@@ -8,7 +8,7 @@
     import { onMount } from "svelte";
     import { getCodeFromEditor, initEditor, oldSessionValue, selectScript } from "../editor.js";
 
-    // Upsert code on submit
+    /** Upsert user code on submission */
     function trySubmitCode() {
 
       if (!$auth.session) {
@@ -24,6 +24,8 @@
         return
       }
 
+      trySave()
+
       // Popup modal with submission status
       getModal('submission-status').open()
 
@@ -31,7 +33,7 @@
       submitCode($code, $auth)
     }
 
-    // Get a list of code from localstorage
+    /** Fetch code from the local storage and the server */
     function tryFetchAllCode() {
 
       localCodeObjects = {}
@@ -52,12 +54,14 @@
       getModal('load-code').open()
     }
 
+    /** Try to load code into the editor*/
     function tryLoadLocalCode(name) {
       code.set(localCodeObjects[name])
       initEditor($code)
       getModal('load-code').close(1)
     }
 
+    /** Try to load code into the editor*/
     function tryLoadRemoteCode(name) {
       code.set(remoteCodeObjects[name])
       initEditor($code)
@@ -73,6 +77,7 @@
       deleteCode(id).then(() => tryFetchAllCode())
     }
 
+    /** Save code from the editor into local storage, update the code global object */
     function trySave() {
 
       // User must name code to save it
