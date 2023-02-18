@@ -6,17 +6,20 @@
   import DocumentationPage from './routes/DocumentationPage.svelte';
 </script>
 
+<body class='bg-metalgun'>
 <header class="site-header">
-	<nav class="navbar navbar-expand-md navbar-dark ">
+	<nav class="navbar navbar-expand-md navbar-dark bg-gunmetal">
 		<div class="container">
-			<a class="nav-item nav-link" href="/#/home">Home</a>
-			<a class="nav-item nav-link" href="/#/documentation">Documentation</a>
-			<a class="nav-item nav-link" href="/#/login">Login</a>
+			<a class="navbar-brand mr-4" href="/">AI Arena</a>
+			<div class="navbar-nav mr-auto">
+				<a class="nav-item nav-link" href="/#/home">Home</a>
+				<a class="nav-item nav-link" href="/#/documentation">Documentation</a>
+				<a class="nav-item nav-link" href="/#/login">Login</a>
+			</div>
 		</div>
 	</nav>
 </header>
 
-<main class="container-fluid">
 	<Router routes={{
 		'/home': Home,
 		'/documentation': Documentation,
@@ -24,7 +27,8 @@
 		'/documentation-page/:object': DocumentationPage,
 		'/login': Login,
 	}} />
-</main>
+
+</body>
 
 <style>
 

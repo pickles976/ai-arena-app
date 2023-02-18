@@ -7,8 +7,8 @@
 
 </script>
 
-<div class="container-fluid">
-	<h1 class="mt-4">
+<div class="container-fluid bg-egg">
+	<h1 class="pt-4 pb-4">
 		Documentation
 	</h1>
 			<!-- List all of the categories in doc_layout.json -->

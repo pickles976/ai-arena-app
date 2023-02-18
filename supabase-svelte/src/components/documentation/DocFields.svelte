@@ -9,12 +9,12 @@
             <p><b>{key}</b> : <a href="/#/documentation-page/{val.type}">{val.type}</a></p>
             <p>{val.description}</p>
         </div>
-        <p>Example:</p>
+        <p class="pt-2">Example:</p>
         <div class="highlight p-2">
             <code>{val.usage}</code>
         </div>
         {#if val.output}
-        <p>Output:</p>
+        <p class="pt-2">Output:</p>
         <div class="highlight p-2">
             <code>{val.output}</code>
         </div>
@@ -34,5 +34,6 @@
         border-top-width: 3px;
         border-top-style: solid;
         background-color: #e7f2fa;
+        font-size: large;
     }
 </style>
