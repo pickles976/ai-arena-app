@@ -1,40 +1,74 @@
 <script>
+    import { onMount } from "svelte";
+    import EditorPanel from "../components/EditorPanel.svelte";
+    import { initGame } from "../game";
+    import { gameData } from "../stores";
+    import { getGameState, getScore, getShipsInfo } from "ai-arena"
+    import GameObjectButton from "../components/GameObjectButton.svelte";
+    import GameObject from "../components/GameObject.svelte";
+    import Score from "../components/login/Score.svelte";
+    import Teams from "../components/login/Teams.svelte";
+    import { resizeEditor } from "../editor";
+  import GameControls from "./GameControls.svelte";
+  
+    // callback that runs on each frame
+    function callback () {
+  
+      // Sort this shit
+      $gameData.gameObjects = getGameState()
+      $gameData.score = getScore()
+      $gameData.ships = getShipsInfo()
+    }
+  
+    onMount(() => {
+      initGame(callback)
+    })
+  
+  </script>
 
-</script>
-
-<div class="main-div">
+<div style="position: absolute;">
+<div class="hor-panel" style="align-items: stretch;">
+    <!-- GAME PANEL -->
+    <div class="vert-panel" style="overflow: auto;">
+      <div class="canvasContainer">
+        <canvas id="game-canvas" width="640" height="480" class="myCanvas"></canvas>
+      </div>
+    </div>
+    <!-- GAME CONTROL PANEL -->
     <div class="vert-panel">
-        <div class="hor-panel" style="resize: both; overflow: auto">
-        <!-- GAME SCREEN -->
-        <div class="canvasContainer">
-            <canvas id="game-canvas" width="640" height="480" class="myCanvas"></canvas>
-        </div>
-        </div>
-        <div class="hor-panel" style="flex-direction: row; max-height: 5vh; align-items: center; justify-content: center;">
-        <button id="run">Run</button>
-        <button id="pause">Pause</button>
-        <button id="step">Step</button>
-        <button id="warp">Normal</button>
+        <GameControls />
+        <div class="hor-panel">
+            {#if $gameData.score}
+              <Score score={$gameData.score}/>
+            {/if}
         </div>
         <div class="hor-panel">
-        <div class="vert-panel">
-            Game Object List
+            {#if $gameData.ships}
+              <Teams ships={$gameData.ships}/>
+            {/if}
         </div>
-        <div class="vert-panel">
-            Game Object inspector
+        <div class="hor-panel" style="overflow: hidden; max-width: 25%;">
+            <div style="overflow-y: scroll;">
+              <!-- Game Object List -->
+              {#each $gameData.gameObjects as gameObject}
+                <GameObjectButton object={gameObject} />
+              {/each}
+            </div>
         </div>
+        <div class="hor-panel">
+            <!-- Game Object inspector -->
+            {#if $gameData.gameObject}
+            <GameObject object={$gameData.gameObject} />
+            {/if}
         </div>
     </div>
-    <div class="vert-panel" style="max-width: 12vw;">
-        <div class="hor-panel">SCORE PANEL</div>
-        <div class="hor-panel">TEAMS PANEL</div>
-    </div>
+</div>
 </div>
 
 <style>
-    .main-div { 
-      height: 94.2vh;
-      overflow: hidden;
-      display: flex;
-    } 
+  .main-div { 
+    height: 94.2vh;
+    overflow: hidden;
+    display: flex;
+  } 
 </style>

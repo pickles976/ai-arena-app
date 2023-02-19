@@ -1,19 +1,11 @@
 <script>
-  import { onMount } from "svelte";
+  import GamePanel from "../components/GamePanel.svelte";
   import Resizable from "../components/Resizable.svelte";
-  import { initEditor } from "../editor.js";
-  import { code } from "../stores.js";
-
-    onMount(() => {
-      initEditor($code)
-    })
 </script>
 
 <div class="main-div">
+  <GamePanel />
   <Resizable />
-  <!-- <div class="codeContainer">
-    <div id="editor"></div>
-  </div> -->
 </div>
 
 <style>
