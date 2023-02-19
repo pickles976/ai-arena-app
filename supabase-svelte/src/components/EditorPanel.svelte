@@ -111,7 +111,7 @@
     })
 </script>
 
-<div style="width: 40vw; max-height: 95vh; resize: horizontal; overflow: auto">
+<div style="width: 45vw; max-height: 95vh; resize: horizontal; overflow: auto">
 <div class="vert-panel">
     <div class="hor-panel">
         <!-- CODE EDITOR BUTTONS -->

@@ -3,7 +3,9 @@ import { writable } from 'svelte/store';
 
 export let gameData = writable({
   gameObject: {},
-  gameObjects: []
+  gameObjects: [],
+  score: {},
+  ships: {},
 })
 
 export const defaultCode = {
