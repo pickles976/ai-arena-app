@@ -17,7 +17,6 @@
 - [x] Add game controls to home page
 - [x] make game panel resizable
 - [ ] Allow for editor to be scaled
-- [ ] Create editor popout route
 - [ ] Add full editor logic to page
 - [ ] Bring AI-Arena game back into route
 - [ ] Add game data visualization stuff

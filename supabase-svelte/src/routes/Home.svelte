@@ -8,6 +8,7 @@
   import GameObject from "../components/GameObject.svelte";
   import Score from "../components/login/Score.svelte";
   import Teams from "../components/login/Teams.svelte";
+  import { resizeEditor } from "../editor";
 
   // callback that runs on each frame
   function callback () {
@@ -18,7 +19,10 @@
     $gameData.ships = getShipsInfo()
   }
 
-  onMount(() => initGame(callback))
+  onMount(() => {
+    initGame(callback)
+    resizeEditor()
+  })
 
 </script>
 
