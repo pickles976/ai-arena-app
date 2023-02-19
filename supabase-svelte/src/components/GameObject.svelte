@@ -1,11 +1,11 @@
 <script>
-    export let object
-    // TODO: Recursive field/function printing
-    // see traverseObject()
+  import ObjField from "./ObjField.svelte";
+
+  export let object
 </script>
 
 <div class="memory-slice bg-gunmetal">
-    {object.type} : {object.uuid}
+    <ObjField object={object}/>
 </div>
 
 <style>
