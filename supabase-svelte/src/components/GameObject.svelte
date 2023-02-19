@@ -5,7 +5,7 @@
 </script>
 
 <div class="memory-slice bg-gunmetal">
-    <ObjField object={object}/>
+    <ObjField object={object} indent={0}/>
 </div>
 
 <style>

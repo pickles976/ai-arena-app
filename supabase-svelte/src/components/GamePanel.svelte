@@ -38,7 +38,7 @@
                     {/each}
                 </div>
             </div>
-            <div class="hor-panel" style="overflow-y: scroll; max-height: 25vh">
+            <div class="hor-panel" style="overflow-y: scroll; overflow-x: hidden; max-height: 25vh">
                 <!-- Game Object inspector -->
                 {#if $gameData.gameObject}
                 <GameObject object={$gameData.gameObject} />

@@ -1,6 +1,6 @@
 Editor page
 - [x] Bring AI-Arena game back into route
-- [ ] Create recursive object printing component
+- [x] Create recursive object printing component
 - [ ] Create score visualization component
 - [ ] Create Teams visualization component
 - [ ] Make visualization components collapsible
