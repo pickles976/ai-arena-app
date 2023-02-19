@@ -30,8 +30,8 @@
 
 
         <div style="left: 0px; top: 0px; position: absolute; width: 15vw;">
-            <div class="hor-panel" style="overflow: hidden; width: 100%">
-                <div style="overflow-y: scroll;">
+            <div class="hor-panel" style="overflow: hidden; width: 100%; max-height: 25vh;">
+                <div style="overflow-y: scroll; width: 100%">
                     <!-- Game Object List -->
                     {#each $gameData.gameObjects as gameObject}
                         <GameObjectButton object={gameObject} />

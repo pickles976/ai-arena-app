@@ -15,13 +15,15 @@
     .memory-slice {
         cursor: pointer; 
         margin: auto; 
-        margin-top: 0.25%;
-        margin-bottom: 0.25%;
+        margin-top: 1%;
+        margin-bottom: 1%;
         width: 100%;
-        height: 5%;
+        height: 10%;
         display: flex;
         overflow: hidden;
         white-space: nowrap;
+        text-align: left;
+        /* justify-content: center; */
         /* flex-grow: 0; */
         /* align-self: auto; */
     }
