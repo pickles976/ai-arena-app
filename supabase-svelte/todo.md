@@ -16,8 +16,15 @@
 - [x] Import AI-Arena into home page
 - [x] Add game controls to home page
 - [x] make game panel resizable
-- [ ] Add game visualization components to home page
+- [ ] Allow for editor to be scaled
+- [ ] Create editor popout route
+- [ ] Add full editor logic to page
+- [ ] Bring AI-Arena game back into route
+- [ ] Add game data visualization stuff
+- [ ] Fully copy screeps layout
 
+
+- [ ] Add game visualization components to home page
 - [ ] Allow editor code to actually be ran
 - [ ] Allow users to load up NPC code to play against
 

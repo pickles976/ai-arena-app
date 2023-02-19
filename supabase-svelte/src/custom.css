@@ -231,10 +231,10 @@
   margin: auto;
 }
 
+/* DO NOT CHANGE THIS!!! ACE EDITOR NEEDS THIS TO RESIZE PROPERLY */
 #editor { 
   position: relative;
-  min-height: 100px;
-  height: 84vh;
+  height: 100%;
   width: 100%;
   top: 0;
   right: 0;

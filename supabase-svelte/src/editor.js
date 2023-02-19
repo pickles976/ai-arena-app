@@ -14,6 +14,10 @@ function setEditorOptions(editor){
     });
 }
 
+export function resizeEditor() {
+    editor.resize()
+}
+
 // Sessions are saved when users switch between tabs
 export function selectScript(value) {
     const session = value;
