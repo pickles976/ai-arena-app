@@ -108,7 +108,7 @@
     })
 </script>
 
-<div class:hide-grabber={!grabber} style="flex: 2; display: block; position: relative;">
+<div class:hide-grabber={!grabber} style="flex: 2; display: block; position: absolute; height: 35%; bottom: 0px;">
     
     <div id='top' class="grabber top"/>
 
@@ -120,7 +120,7 @@
 <style>
 	.box {
         bottom: 0px;
-		height: 35%;
+		height: 100%;
 		width: 100vw;
 		background: #e5e5e5;
 		display: flex;
