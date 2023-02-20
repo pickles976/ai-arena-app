@@ -1,9 +1,20 @@
-export const BaseStart = 'let t = "test"'
+export const BaseStart = `/*
+    This code runs at the very start of every game and only runs once.
+    You can use it for storing variables related to your strategic goals. 
+    Here I am determining how much energy I want each ship to have when I spawn it in.
+    These variables will be used in the Base Update script.
+*/
+console.log("Hello, world!")
+const energyPerShip = 100
+const shipEnergy = 50
+`
 
 
 export const BaseUpdate = 
-`const energyPerShip = 100
-const shipEnergy = 50
+`/*
+    This code runs for your base object every update. This example is just a bunch of if statements that
+    check whether or not to guy certain upgrades.
+*/
 
 if (base.resources.metal > base.shipCost && base.resources.energy > energyPerShip * Game.getShipsByTeam(base.team).length){
     base.spawnShip(shipEnergy,false)
@@ -29,11 +40,17 @@ if (base.resources.metal > base.upgradeHealRateCost){
     base.upgradeHealRate()
 }
 
-Graphics.drawText(base.resources.toString() + ' Health: ' + base.health.toFixed(2),base.transform.position.subtract(new Vector2D(100,0)),12,"#FFFFFF")
+Graphics.drawText(base.resources.toString() + ' Health: ' + base.health.toFixed(2),base.transform.position.subtract(new Vector2D(100,0)),15,"#FFFFFF")
 `
 
 export const ShipStart = 
-`ship.target = {}
+`/*
+    This code gets run once every time a new ship is created. 
+    It can be used to define your own variables. Here I am using it to create variables
+    that store a state for a state machine, some timer variables to determine how often to shoot, 
+    and a target object that can be used to keep tabs on what object my ship is moving towards.
+*/
+ship.target = {}
 ship.state = "IDLE"
 ship.arr = []
 ship.shootCooldown = 10
@@ -45,44 +62,22 @@ export const ShipUpdate =
 `/*
     Demo Ship AI code.
     This code gets run once every frame to determine what actions your ships (RED) will take.
-    There is no documentation ATM, but try tweaking the code and seeing what changes!
+    Try tweaking the code and seeing what changes! You can also visit the docs to get a better understanding of the API.
 
-    You can modify other behavior scripts too. Click the dropdown at the top-left of the page
+    You can modify other behavior scripts too. Click the dropdown at the top-right of the editor
     to see what other behaviors are available.
 */
 
 const speed = 2.5
 ship.shootTimer--
 
-function teammateHasTarget(target){
-    const teamShips = Game.getShipsByTeam(ship.team).filter((obj) => obj.uuid != ship.uuid)
-
-    teamShips.forEach(s => {
-        if (target != null && target != undefined && s.target.uuid == target.uuid)
-            return true
-    })
-
-    return false
-}
-
 // STATE MACHINE
 switch(ship.state){
 
     case "IDLE":
 
-        const asteroids = Game.getAsteroids()
-        let closest = [{},100000]
-
-        asteroids.forEach(asteroid => {
-            const d = dist(asteroid,ship)
-            if (d < closest[1] && !teammateHasTarget(asteroid)){
-                closest = [asteroid,d]
-            }
-        })
-
-        ship.target = closest[0]
+        ship.target = Game.getClosestAsteroid(ship.transform.position)
         ship.state = "MOVE_TO_ASTEROID"
-
         break;
 
     case "MOVE_TO_ASTEROID":
@@ -125,38 +120,28 @@ switch(ship.state){
 
 // seekTarget ENERGY
 if (ship.resources.energy < (ship.maxEnergy / 3)){
-    const energyCells = Game.getEnergyCells()
 
-    let closest = [base,dist(base,ship)]
-
-    energyCells.forEach(e => {
-        const d = dist(e,ship)
-        if (d < closest[1]){
-            if (!teammateHasTarget(e)){
-                closest = [e,d]
-            }
-        } 
-    })
-
-    ship.target = closest[0]
+    ship.target = Game.getClosestEnergyCell(ship.transform.position)
     ship.state = "MOVE_TO_ENERGY"
 }
 
 // COMBAT
 if(ship.resources.energy > (ship.maxEnergy / 2) && ship.shootTimer < 0){
+    
     const shootRadius = 300
     const ships = Game.getShips()
     
     let closest = [{},100000]
 
-    ships.forEach(other => {
-        if (other.team != ship.team){
-            const d = dist(ship,other)
+    for (const index in ships){
+        const otherShip = ships[index]
+        if (otherShip.team != ship.team){
+            const d = dist(ship,otherShip)
             if (d < closest[1]){
-                closest = [other,d]
+                closest = [otherShip,d]
             }
         }
-    })
+    }
 
     if (closest[1] < shootRadius){
         ship.shoot(closest[0].transform.position.add(closest[0].transform.velocity.multiply(720)).subtract(ship.transform.position))
@@ -173,11 +158,9 @@ if (base.resources.metal > ship.upgradeDamageCost && Game.getShipsByTeam(ship.te
     ship.upgradeDamage()
 }
 
-ship.targetID = ship.target.uuid
-
 // DEBUG DRAWING
-Graphics.drawText(ship.resources.toString(),ship.transform.position,10,"#FFFFFF")
-Graphics.drawText(ship.state,ship.transform.position.subtract(new Vector2D(0,1).multiply(-10)),8,"#FFFFFF")
+Graphics.drawText(ship.resources.toString(),ship.transform.position,15,"#FFFFFF")
+Graphics.drawText(ship.state,ship.transform.position.subtract(new Vector2D(1,1).multiply(-20)),15,"#FFFFFF")
 if (ship.target != undefined && ship.target.transform != undefined)
     Graphics.drawLine(ship.transform.position,ship.target.transform.position,"#00FF00")
 `

@@ -26,4 +26,5 @@ export const auth = writable({
 
 
 export const code = writable(defaultCode)
+export const enemyCode = writable(defaultCode)
 

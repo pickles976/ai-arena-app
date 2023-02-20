@@ -1,20 +1,18 @@
 <script>
-import { deleteCode, getCode, getUserCode, submitCode } from '../../features/code.js'
-import { code, defaultCode, gameData, auth } from "../../stores.js";
-import {push, pop, replace} from 'svelte-spa-router'
+import { deleteCode, getUserCode, submitCode } from '../../features/code.js'
+import { code, defaultCode, auth, enemyCode } from "../../stores.js";
 import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../../features/storage.js"
 import Modal,{getModal} from '../../components/Modal.svelte'
 import { onMount } from "svelte";
-import { getCodeFromEditor, initEditor, oldSessionValue, selectScript } from "../../editor.js";
-  import { setUserCode } from "ai-arena";
+import { getCodeFromEditor, initEditor, selectScript } from "../../editor.js";
+import { setUserCode } from "ai-arena";
 
 /** Upsert user code on submission */
 function trySubmitCode() {
 
   if (!$auth.session) {
     // Force user to log in
-    alert("Please log in")
-    push('/login/')
+    getModal('login-modal').open()
     return
   }
 
@@ -49,9 +47,7 @@ function tryFetchAllCode() {
     })
   }
 
-
   localCodeObjects = getAllLocalCode()
-  getModal('load-code').open()
 }
 
 /** Try to load code into the editor*/
@@ -114,6 +110,20 @@ function compile() {
   })
 }
 
+/** Try to load code into the editor*/
+function tryLoadEnemyCode(name) {
+  enemyCode.set(localCodeObjects[name])
+  setUserCode({
+    team1 : {
+      BaseStartCode : $enemyCode.baseStart,
+      BaseUpdateCode : $enemyCode.baseUpdate,
+      ShipStartCode : $enemyCode.shipStart,
+      ShipUpdateCode : $enemyCode.shipUpdate
+    }
+  })
+  getModal('load-enemy-code').close(1)
+}
+
 let localCodeObjects = {}
 let remoteCodeObjects = {}
 
@@ -130,7 +140,7 @@ onMount(() => {
     <!-- CODE EDITOR BUTTONS -->
   <div class="vert-panel" style="flex-direction: row;">
     <button on:click={tryNew}>New</button>
-    <button on:click={tryFetchAllCode}>Load</button>
+    <button on:click={() => {tryFetchAllCode(); getModal('load-code').open();}}>Load</button>
     <button on:click={trySave}>Save</button>
     <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
   </div>
@@ -158,7 +168,7 @@ onMount(() => {
     <button on:click={trySubmitCode}>Submit</button>
 </div>
 <div class="vert-panel" style="flex-direction: row-reverse">
-    <button>Select Enemy AI</button>
+    <button on:click={() => {tryFetchAllCode(); getModal('load-enemy-code').open();}}>Select Enemy AI</button>
 </div>
 </div>
 </div>
@@ -219,4 +229,24 @@ onMount(() => {
   {/each}
 </div>
 </Modal>
+
+
+<Modal id='load-enemy-code'>
+  <div class="code-objects">
+  
+    <!-- Just load the preset code for now -->
+    <h2>Code saved locally</h2>
+    {#each Object.values(localCodeObjects) as codeObject}
+      <div>
+        <p>{codeObject.name}</p>
+              <button on:click={() => tryLoadEnemyCode(codeObject.name)}>Open</button> 
+              <button on:click={() => tryDeleteLocalCode(codeObject.name)}>Delete</button> 
+          </div>
+    {:else}
+      <!-- this block renders when localCodeObjects.length === 0 -->
+      <p>loading...</p>
+    {/each}
+
+  </div>
+  </Modal>
 </div>

@@ -5,6 +5,7 @@
   	import Login from './routes/Login.svelte';
   import DocumentationPage from './routes/DocumentationPage.svelte';
   import Test from './routes/Test.svelte';
+  import Modal from './components/Modal.svelte'
 </script>
 
 <body class='bg-metalgun'>
@@ -20,6 +21,10 @@
 		</div>
 	</nav>
 </header>
+
+<Modal id='login-modal'>
+	<Login />
+</Modal>
 
 <Router routes={{
 	'/home': Home,

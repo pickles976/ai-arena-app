@@ -7,10 +7,7 @@ Editor page
 - [x] Allow editor code to actually be ran
 - [x] Clean up nasty ass css styles
 - [x] Add default code on startup
-- [ ] Allow users to load up NPC code to play against
-
-- [ ] Make visualization components collapsible
-
+- [x] Allow users to load up NPC code to play against
 
 User auth
 - [ ] Create sign-in modal
