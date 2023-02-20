@@ -10,7 +10,7 @@
 
 <style>
   .main-div { 
-    height: 94.2vh;
+    height: 90vh;
     overflow: hidden;
     display: flex;
   } 

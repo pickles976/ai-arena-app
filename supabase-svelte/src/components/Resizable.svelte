@@ -82,7 +82,7 @@
 				element.style.height = `${initialRect.height + delta}px`
 			}
 
-            // resizeEditor()
+            resizeEditor()
 		}
 		
 		window.addEventListener('mousemove', onMove)	

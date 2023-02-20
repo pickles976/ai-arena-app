@@ -10,8 +10,9 @@ function setEditorOptions(editor){
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: true,
-        fontSize: '12pt'
+        fontSize: '10.5pt'
     });
+    editor.setAutoScrollEditorIntoView(true);
 }
 
 export function resizeEditor() {
