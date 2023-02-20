@@ -13,11 +13,11 @@ export let gameData = writable({
 
 export const defaultCode = {
   id : undefined,
-  name: " ",
-  baseStart: " ",
-  baseUpdate: " ",
-  shipStart: " ",
-  shipUpdate: " "
+  name: "",
+  baseStart: "",
+  baseUpdate: "",
+  shipStart: "",
+  shipUpdate: ""
 }
 
 export const auth = writable({

@@ -58,7 +58,7 @@ export function getCodeFromEditor(){
 }
 
 export function initEditor(code) {
-    
+
     sessions = {
         'baseStart' : code.baseStart || BaseStart,
         'baseUpdate' : code.baseUpdate || BaseUpdate,

@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { initGame } from "../../game";
-  import { gameData } from "../../stores";
+  import { gameData, code } from "../../stores";
   import { getGameState, getScore, getShipsInfo } from "ai-arena";
   import GameObjectButton from "./GameObjectButton.svelte";
   import GameObject from "./GameObject.svelte";
@@ -48,7 +48,7 @@
 
   onMount(() => {
     ctx = document.getElementById("game-canvas").getContext("2d");
-    initGame(callback);
+    initGame(callback, $code);
   });
 </script>
 

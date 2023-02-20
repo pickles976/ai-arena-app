@@ -2,6 +2,7 @@ import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './aiControls.js'
 import { stopGame, testPackage, runGame, togglePause, stepFrame, getScore, getGameState, getShipsInfo, setUserCode, setConfig, setCallbacks} from 'ai-arena'
 import { getCodeFromEditor } from './editor.js'
 import { gameData } from './stores.js'
+import { getAllLocalCode } from './features/storage.js'
 
 let memoryList, canvas, ctx
 
@@ -15,7 +16,7 @@ let RUNNING = false;
 let startTime = performance.now()
 let uuid = undefined
 
-export function initGame(callback) {
+export function initGame(callback, code) {
     // INITIALIZATION
     console.log(testPackage())
 
@@ -43,14 +44,13 @@ export function initGame(callback) {
         ticksPerFrame: TICKS_PER_FRAME,
         framerate: 60,
     })
-    
-    // Set the code that the game will run
+
     setUserCode({
         team0 : {
-            BaseStartCode : localStorage.getItem("Base Start") || BaseStart,
-            BaseUpdateCode : localStorage.getItem("Base Update") || BaseUpdate,
-            ShipStartCode : localStorage.getItem("Ship Start") || ShipStart,
-            ShipUpdateCode : localStorage.getItem("Ship Update") || ShipUpdate
+            BaseStartCode : code.baseStart || BaseStart,
+            BaseUpdateCode : code.baseUpdate || BaseUpdate,
+            ShipStartCode : code.shipStart || ShipStart,
+            ShipUpdateCode : code.shipUpdate || ShipUpdate
         },
         team1 : {
             BaseStartCode : localStorage.getItem("Base Start") || BaseStart,

@@ -118,8 +118,10 @@ let localCodeObjects = {}
 let remoteCodeObjects = {}
 
 onMount(() => {
+  // load code from temp storage
   initEditor($code)
 })
+
 </script>
 
 <div style="height: 100%; width: 100%;">
