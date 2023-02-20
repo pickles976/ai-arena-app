@@ -9,15 +9,15 @@
     import Score from "./Score.svelte";
     import Teams from "./Teams.svelte";
     import { resizeEditor } from "../editor";
-  import GameControls from "./GameControls.svelte";
+    import GameControls from "./GameControls.svelte";
   
     // callback that runs on each frame
     function callback () {
-  
       // Sort this shit
       $gameData.gameObjects = getGameState()
       $gameData.score = getScore()
       $gameData.ships = getShipsInfo()
+      $gameData.time = ((performance.now() - $gameData.startTime) * 60 / 1000).toFixed(0)
     }
   
     onMount(() => {
@@ -58,6 +58,10 @@
             <div class="vert-panel">
                 <GameControls />
                 <Score />
+                <!-- TIMER -->
+                <div class="hor-panel">
+                  <div>{`Timesteps: ${$gameData.time}`}</div>
+                </div>
                 <div class="hor-panel">
                     {#if $gameData.ships}
                     <Teams ships={$gameData.ships}/>

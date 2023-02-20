@@ -38,7 +38,7 @@
 
 <style>
   .score-panel {
-    height: 12.5vh;
+    /* height: 12.5vh; */
     font-size: 16px;
     font-size: 1.7vmin;
     background-color: var(--secondary);

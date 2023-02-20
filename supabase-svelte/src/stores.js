@@ -6,6 +6,8 @@ export let gameData = writable({
   gameObjects: [],
   score: {},
   ships: {},
+  startTime: 0,
+  time: ""
 })
 
 export const defaultCode = {
