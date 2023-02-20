@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import EditorPanel from "../components/EditorPanel.svelte";
   import { initGame } from "../game";
   import { gameData } from "../stores";
   import { getGameState, getScore, getShipsInfo } from "ai-arena";
@@ -8,7 +7,6 @@
   import GameObject from "../components/GameObject.svelte";
   import Score from "./Score.svelte";
   import Teams from "./Teams.svelte";
-  import { resizeEditor } from "../editor";
   import GameControls from "./GameControls.svelte";
 
   let ctx;
@@ -57,7 +55,7 @@
 <div class="main-div">
   <!-- TODO: consolidate these guys into single components -->
   <!-- LEFT PANEL -->
-  <div class="gameobject-panel">
+  <div class="gameobject-panel bg-gunmetal">
       <div class="bg-gunmetal"> Game Objects </div>
       <div style="overflow-y: scroll; width: 100%; max-height: 25vh; border-width: 2px; border-style: solid;">
         <!-- Game Object List -->
@@ -82,7 +80,7 @@
   </div>
 
   <!-- RIGHT PANEL -->
-  <div style="right: 0px; top: 0px; position: absolute; width: 12.5vw;">
+  <div class="bg-gunmetal" style="right: 0px; top: 0px; position: absolute; width: 12.5vw; height: 100vh;">
     <div class="vert-panel">
       <GameControls />
       <div class="hor-panel timer bg-gunmetal"> Score </div>
@@ -125,6 +123,7 @@
     top: 0px; 
     position: absolute; 
     width: 12.5vw;
+    height: 100vh;
   }
 
   /* Game canvas */

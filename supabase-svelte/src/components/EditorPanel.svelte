@@ -1,5 +1,5 @@
 <script>
-  import { code, defaultCode } from "../stores.js";
+  import { code, defaultCode, gameData } from "../stores.js";
 import { deleteCode, getCode, getUserCode, submitCode } from '../features/code.js'
 import { auth } from "../stores.js";
 import {push, pop, replace} from 'svelte-spa-router'
@@ -7,6 +7,7 @@ import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../feature
 import Modal,{getModal} from '../components/Modal.svelte'
 import { onMount } from "svelte";
 import { getCodeFromEditor, initEditor, oldSessionValue, selectScript } from "../editor.js";
+  import { setUserCode } from "ai-arena";
 
 /** Upsert user code on submission */
 function trySubmitCode() {
@@ -103,6 +104,17 @@ function tryNew() {
   getModal('unsaved-warning').open()
 }
 
+function compile() {
+  setUserCode({
+    team0 : {
+      BaseStartCode : $code.baseStart,
+      BaseUpdateCode : $code.baseUpdate,
+      ShipStartCode : $code.shipStart,
+      ShipUpdateCode : $code.shipUpdate
+    }
+  })
+}
+
 let localCodeObjects = {}
 let remoteCodeObjects = {}
 
@@ -141,7 +153,7 @@ onMount(() => {
 <!-- CODE SUBMISSION PANELS -->
 <div class="hor-panel" style="flex-grow: 0;">
 <div class="vert-panel" style="flex-direction: row;">
-    <button id="compile" on:click={() => {}}>Compile</button>
+    <button id="compile" on:click={compile}>Compile</button>
     <button on:click={trySubmitCode}>Submit</button>
 </div>
 <div class="vert-panel" style="flex-direction: row-reverse">

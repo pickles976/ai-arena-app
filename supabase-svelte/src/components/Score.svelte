@@ -37,6 +37,11 @@
 </div>
 
 <style>
+
+  .teams-info {
+    margin: 2%;
+  }
+
   .score-panel {
     font-size: small;
     color: #BBB
@@ -55,9 +60,7 @@
   }
 
   .cell {
-    /* border:1px solid white; */
-    background-color: var(--primary);
-    margin: 5%;
+    margin: -15%;
   }
 
   .col-left {
@@ -67,7 +70,6 @@
     border: 0;
     margin: 0;
     float: left;
-    /* padding: 2px; */
     white-space: nowrap;
   }
 
@@ -78,7 +80,6 @@
     border: 0;
     margin: 0;
     float: left;
-    /* padding: 2px; */
     white-space: nowrap;
   }
 </style>
