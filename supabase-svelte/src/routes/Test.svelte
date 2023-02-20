@@ -1,6 +1,6 @@
 <script>
-  import GamePanel from "../components/GamePanel.svelte";
-  import Resizable from "../components/Resizable.svelte";
+  import GamePanel from "../components/game/GamePanel.svelte";
+  import Resizable from "../components/editor/Resizable.svelte";
 </script>
 
 <div class="main-div">
