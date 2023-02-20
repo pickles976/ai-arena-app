@@ -6,8 +6,8 @@
     import { getGameState, getScore, getShipsInfo } from "ai-arena"
     import GameObjectButton from "../components/GameObjectButton.svelte";
     import GameObject from "../components/GameObject.svelte";
-    import Score from "../components/login/Score.svelte";
-    import Teams from "../components/login/Teams.svelte";
+    import Score from "./Score.svelte";
+    import Teams from "./Teams.svelte";
     import { resizeEditor } from "../editor";
   import GameControls from "./GameControls.svelte";
   
@@ -57,11 +57,7 @@
         <div style="right: 0px; top: 0px; position: absolute; width: 15vw;">
             <div class="vert-panel">
                 <GameControls />
-                <div class="hor-panel">
-                    {#if $gameData.score}
-                    <Score score={$gameData.score}/>
-                    {/if}
-                </div>
+                <Score />
                 <div class="hor-panel">
                     {#if $gameData.ships}
                     <Teams ships={$gameData.ships}/>

@@ -9,7 +9,7 @@
         {#if typeof value == 'object'}
             <svelte:self object={value} indent={indent + 1}/>
         {:else}
-            {typeof value == "number" ? value.toFixed(2) : value} <br>
+            {typeof value == "number" && key !== "uuid" ? value.toFixed(2) : value} <br>
         {/if}
     {/each}
 </div>
