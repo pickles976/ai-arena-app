@@ -2,6 +2,7 @@
 import { writable } from 'svelte/store';
 
 export let gameData = writable({
+  selectedUUID: 0,
   gameObject: {},
   gameObjects: [],
   score: {},

@@ -292,17 +292,3 @@ body .ace_scrollbar-h {
   display: flex;
   flex-direction: row;
 }
-
-  /* Game canvas */
-.canvas-container {
-  width: 50%;
-  border: 0;
-  margin: 10;
-  display: flex;
-}
-
-.myCanvas {
-  width: 100%;
-  /* height: 100%; */
-  float: left;
-}

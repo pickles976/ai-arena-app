@@ -4,7 +4,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="memory-slice bg-gunmetal" on:click={() => {$gameData.gameObject = object}}>
+<div class="memory-slice bg-gunmetal" on:click={() => {$gameData.selectedUUID = object.uuid}}>
     {#if object}
         {object.type} : {object.uuid}
     {/if}
@@ -23,6 +23,7 @@
         overflow: hidden;
         white-space: nowrap;
         text-align: left;
+        color: #888;
         /* justify-content: center; */
         /* flex-grow: 0; */
         /* align-self: auto; */
