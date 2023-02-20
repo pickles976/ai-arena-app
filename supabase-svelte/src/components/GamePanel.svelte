@@ -82,15 +82,17 @@
   </div>
 
   <!-- RIGHT PANEL -->
-  <div style="right: 0px; top: 0px; position: absolute; width: 15vw;">
+  <div style="right: 0px; top: 0px; position: absolute; width: 12.5vw;">
     <div class="vert-panel">
       <GameControls />
+      <div class="hor-panel timer bg-gunmetal"> Score </div>
       <Score />
       <!-- TIMER -->
       <div class="hor-panel timer bg-gunmetal">
         <div style="width: 100%">{`Timesteps: ${$gameData.time}`}</div>
       </div>
-      <div class="hor-panel">
+      <div class="bg-gunmetal"> Team Info </div>
+      <div class="hor-panel" style="overflow-y: scroll; overflow-x: hidden; max-height: 30vh">
         {#if $gameData.ships}
           <Teams ships={$gameData.ships} />
         {/if}
@@ -122,7 +124,7 @@
     left: 0px; 
     top: 0px; 
     position: absolute; 
-    width: 15vw;
+    width: 12.5vw;
   }
 
   /* Game canvas */
