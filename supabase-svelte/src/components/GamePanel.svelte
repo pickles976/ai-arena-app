@@ -87,8 +87,8 @@
       <GameControls />
       <Score />
       <!-- TIMER -->
-      <div class="hor-panel">
-        <div>{`Timesteps: ${$gameData.time}`}</div>
+      <div class="hor-panel timer bg-gunmetal">
+        <div style="width: 100%">{`Timesteps: ${$gameData.time}`}</div>
       </div>
       <div class="hor-panel">
         {#if $gameData.ships}
@@ -100,6 +100,12 @@
 </div>
 
 <style>
+
+  .timer {
+    font-size: small;
+    text-align: center;
+    color: #BBB;
+  }
 
   .full-div {
     height: 100%; width: 100%; display: flex; justify-content: center; flex-direction: row;

@@ -4,7 +4,7 @@
   $: team1 = $gameData.score["team 1"];
 </script>
 
-<div class="score-panel">
+<div class="score-panel bg-gunmetal">
   <div class="teams-info" id="teams-info">
     <div class="container row">
       <div class="col-left">
@@ -38,14 +38,8 @@
 
 <style>
   .score-panel {
-    /* height: 12.5vh; */
-    font-size: 16px;
-    font-size: 1.7vmin;
-    background-color: var(--secondary);
-  }
-
-  .teams-info {
-    padding: 8px;
+    font-size: small;
+    color: #BBB
   }
 
   .container {
@@ -73,7 +67,7 @@
     border: 0;
     margin: 0;
     float: left;
-    padding: 2px;
+    /* padding: 2px; */
     white-space: nowrap;
   }
 
@@ -84,18 +78,7 @@
     border: 0;
     margin: 0;
     float: left;
-    padding: 2px;
-    white-space: nowrap;
-  }
-
-  .col-right {
-    width: 33%;
-    height: 100%;
-    border-collapse: collapse;
-    border: 0;
-    margin: 0;
-    float: left;
-    padding: 2px;
+    /* padding: 2px; */
     white-space: nowrap;
   }
 </style>
