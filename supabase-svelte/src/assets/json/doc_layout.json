@@ -1,0 +1,15 @@
+{
+    "Globals" : [
+        "console",
+        "Math",
+        "Vector2D",
+        "Graphics",
+        "Game"
+    ],
+    "Objects" : [
+        "Ship",
+        "Base",
+        "Asteroid",
+        "GameObject"
+    ]
+}
