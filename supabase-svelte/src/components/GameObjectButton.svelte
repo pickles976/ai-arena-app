@@ -15,18 +15,17 @@
     .memory-slice {
         cursor: pointer; 
         margin: auto; 
-        margin-top: 1%;
-        margin-bottom: 1%;
+        margin-top: 0.25%;
+        margin-bottom: 0.25%;
+        padding-left: 2.5%;
         width: 100%;
         height: 10%;
         display: flex;
         overflow: hidden;
         white-space: nowrap;
         text-align: left;
-        color: #888;
-        /* justify-content: center; */
-        /* flex-grow: 0; */
-        /* align-self: auto; */
+        color: #BBB;
+        font-size: small;
     }
 
 </style>

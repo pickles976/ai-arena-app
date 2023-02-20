@@ -15,9 +15,12 @@
         margin: auto; 
         margin-top: 0.25%;
         margin-bottom: 0.25%;
+        padding-left: 2.5%;
         width: 100%;
         height: 5%;
         display: flex;
+        font-size: small;
+        color: #BBB;
     }
 
 </style>

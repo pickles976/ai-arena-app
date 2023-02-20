@@ -13,6 +13,8 @@
 
   let ctx;
 
+  // TODO: move this logic into a dedicated Game component
+
   const drawCircle = function (pos) {
     ctx.fillStyle = "#FFFF00";
     ctx.globalAlpha = 0.3;
@@ -53,14 +55,17 @@
 </script>
 
 <div class="main-div">
+  <!-- TODO: consolidate these guys into single components -->
   <!-- LEFT PANEL -->
   <div class="gameobject-panel">
+      <div class="bg-gunmetal"> Game Objects </div>
       <div style="overflow-y: scroll; width: 100%; max-height: 25vh; border-width: 2px; border-style: solid;">
         <!-- Game Object List -->
         {#each $gameData.gameObjects as gameObject}
           <GameObjectButton object={gameObject} />
         {/each}
       </div>
+      <div class="bg-gunmetal"> Inspector </div>
     <div class="hor-panel" style="overflow-y: scroll; overflow-x: hidden; max-height: 25vh">
       <!-- Game Object inspector -->
       {#if $gameData.gameObject}
@@ -70,9 +75,7 @@
   </div>
 
   <!-- GAME PANEL -->
-  <div
-    style="height: 100%; width: 100%; display: flex; justify-content: center; flex-direction: row;"
-  >
+  <div class="full-div">
     <div class="canvas-container">
       <canvas id="game-canvas" width="640" height="480" class="game-canvas" />
     </div>
@@ -98,11 +101,15 @@
 
 <style>
 
+  .full-div {
+    height: 100%; width: 100%; display: flex; justify-content: center; flex-direction: row;
+  }
+
   .main-div {
     position: absolute; 
     width: 100%; 
     overflow: hidden;
-    color: #888;
+    color: #BBB;
   }
 
   .gameobject-panel {
@@ -110,24 +117,6 @@
     top: 0px; 
     position: absolute; 
     width: 15vw;
-  }
-
-  .hor-panel {
-    border-width: 2px;
-    border-style: solid;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-  }
-
-  /* Code editor and game page panels */
-  .vert-panel {
-    border-width: 2px;
-    border-style: solid;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
   }
 
   /* Game canvas */
