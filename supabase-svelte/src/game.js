@@ -16,7 +16,7 @@ let RUNNING = false;
 let startTime = performance.now()
 let uuid = undefined
 
-export function initGame(callback, code) {
+export function initGame(uiCallback, physCallback, code) {
     // INITIALIZATION
     console.log(testPackage())
 
@@ -26,15 +26,17 @@ export function initGame(callback, code) {
     ctx.fillRect(0,0,2000,2000)
 
     // Add listeners to buttons
+    // TODO: move these event listeners to the buttons themselves
     document.getElementById("pause").addEventListener("click", pause)
     document.getElementById("step").addEventListener("click", step)
     document.getElementById("compile").addEventListener("click", compile)
-    document.getElementById("run").addEventListener("click", run)
+    // document.getElementById("run").addEventListener("click", run)
     document.getElementById("warp").addEventListener("click", warp)
 
     // set the callbacks that the game will call during execution
     setCallbacks({
-        ui : callback,
+        'ui' : uiCallback,
+        'physics' : physCallback
     })
     
     // Set the game configuration

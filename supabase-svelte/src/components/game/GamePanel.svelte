@@ -10,6 +10,7 @@
   import GameControls from "./GameControls.svelte";
 
   let ctx;
+  let steps = 0;
 
   // TODO: move this logic into a dedicated Game component
 
@@ -22,8 +23,12 @@
     ctx.globalAlpha = 1.0;
   };
 
+  function physCallback() {
+    $gameData.time = $gameData.time + 1;
+  }
+
   // callback that runs on each frame
-  function callback() {
+  function uiCallback() {
     // Sort this shit
     $gameData.gameObjects = getGameState();
 
@@ -35,10 +40,6 @@
 
     $gameData.score = getScore();
     $gameData.ships = getShipsInfo();
-    $gameData.time = (
-      ((performance.now() - $gameData.startTime) * 60) /
-      1000
-    ).toFixed(0);
 
     // draw circle
     if ($gameData.gameObject && $gameData.gameObject.transform) {
@@ -48,7 +49,7 @@
 
   onMount(() => {
     ctx = document.getElementById("game-canvas").getContext("2d");
-    initGame(callback, $code);
+    initGame(uiCallback, physCallback, $code);
   });
 </script>
 
