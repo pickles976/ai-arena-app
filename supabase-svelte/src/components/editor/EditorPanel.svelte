@@ -1,5 +1,5 @@
 <script>
-import { deleteCode, getUserCode, submitCode } from '../../features/code.js'
+import { deleteCode, getUserCode, submitCode, submitCodeLambda } from '../../features/code.js'
 import { code, defaultCode, auth, enemyCode } from "../../stores.js";
 import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../../features/storage.js"
 import Modal,{getModal} from '../../components/Modal.svelte'
@@ -28,7 +28,8 @@ function trySubmitCode() {
   getModal('submission-status').open()
 
   // Upload code
-  submitCode($code, $auth)
+  // submitCode($code, $auth)
+  submitCodeLambda($code, $auth)
 }
 
 /** Fetch code from the local storage and the server */
@@ -108,6 +109,8 @@ function compile() {
       ShipUpdateCode : $code.shipUpdate
     }
   })
+
+  console.log($auth)
 }
 
 /** Try to load code into the editor*/

@@ -1,4 +1,31 @@
 import { supabase } from '../supabaseClient'
+import axios from 'axios';
+
+export async function submitCodeLambda(code, session) {
+
+  axios.defaults.withCredentials = true
+
+  // TODO: move this elsewhere
+  const lambdaURL = "http://localhost:9000/2015-03-31/functions/function/invocations"
+
+  let data = {
+    id: code.id,
+    owner : session.session.user.id,
+    code : code,
+    userkey : session.session.access_token
+  }
+
+  fetch(lambdaURL, {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+   .then(response => console.log(response.json()))
+   .then(response => console.log(JSON.stringify(response)))
+}
 
 /**
  * Submit code for this user to the database
