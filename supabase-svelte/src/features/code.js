@@ -31,7 +31,7 @@ export async function submitCodeLambda(code, session, callback) {
     body: JSON.stringify(data)
   })
    .then(response => response.json())
-   .then(result => {console.log(JSON.stringify(result)); callback(result)})
+   .then(result => {console.log(result); callback(result)}) // Read result
    .catch((error) => {console.log(error); callback({ 'message' : { 'status' : 'Server Error, try again.'}})})
 }
 
@@ -68,9 +68,9 @@ export async function getCode(name) {
     let { data: TacticalCode, error } = await supabase
     .from('TacticalCode')
     .select('*')
-    .eq('name', 'Second Code') // filtering
+    .eq('name', name) // filtering
 
-    console.log(TacticalCode)
+    return TacticalCode
 }
 
 /**

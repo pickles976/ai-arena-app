@@ -1,5 +1,5 @@
 <script>
-import { deleteCode, getUserCode, submitCode, submitCodeLambda } from '../../features/code.js'
+import { deleteCode, getCode, getUserCode, submitCode, submitCodeLambda } from '../../features/code.js'
 import { code, defaultCode, auth, enemyCode } from "../../stores.js";
 import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../../features/storage.js"
 import Modal,{getModal} from '../../components/Modal.svelte'
@@ -32,18 +32,20 @@ async function trySubmitCode() {
 
   function callback(data) { 
     let message = data.message
-    submissionStatus = message.status
+    submissionStatus = message.status ?? "Server error, please try again."
     if (message.elapsed) {
       codeDuration = message.elapsed.toFixed(2)
     }
+
+    // Get id of code and plug it into the local code object
+    // Then save updated code locally
+    getCode($code.name)
+    .then((data) => $code.id = data[0].id)
+    .then(() => trySave())
   }
 
   // Upload code
   submitCodeLambda($code, $auth, callback)
-
-  // Get id of code and plug it into the local code object
-
-  // Save updated code
 }
 
 /** Fetch code from the local storage and the server */
