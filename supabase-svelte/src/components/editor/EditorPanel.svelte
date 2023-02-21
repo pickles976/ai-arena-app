@@ -8,7 +8,10 @@ import { getCodeFromEditor, initEditor, selectScript } from "../../editor.js";
 import { setUserCode } from "ai-arena";
 
 /** Upsert user code on submission */
-function trySubmitCode() {
+async function trySubmitCode() {
+
+  submissionStatus = "running"
+  codeDuration = null
 
   if (!$auth.session) {
     // Force user to log in
@@ -27,9 +30,20 @@ function trySubmitCode() {
   // Popup modal with submission status
   getModal('submission-status').open()
 
+  function callback(data) { 
+    let message = data.message
+    submissionStatus = message.status
+    if (message.elapsed) {
+      codeDuration = message.elapsed.toFixed(2)
+    }
+  }
+
   // Upload code
-  // submitCode($code, $auth)
-  submitCodeLambda($code, $auth)
+  submitCodeLambda($code, $auth, callback)
+
+  // Get id of code and plug it into the local code object
+
+  // Save updated code
 }
 
 /** Fetch code from the local storage and the server */
@@ -129,6 +143,8 @@ function tryLoadEnemyCode(name) {
 
 let localCodeObjects = {}
 let remoteCodeObjects = {}
+$: submissionStatus = "running"
+$: codeDuration = null
 
 onMount(() => {
   // load code from temp storage
@@ -182,8 +198,10 @@ onMount(() => {
 <!-- TODO: replace with those little status thingies that follow you between pages -->
 <Modal id='submission-status'>
 <h2>Submission Status</h2>
-<p>Evaluation status: </p>
-<p>Your code ran in X seconds!</p>
+<p>Evaluation status: {submissionStatus}</p>
+{#if codeDuration}
+  <p>Your code ran in {codeDuration}ms!</p>
+{/if}
 <button on:click={() => getModal('submission-status').close(1)}>close</button>
 </Modal>
 

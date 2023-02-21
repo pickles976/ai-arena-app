@@ -1,12 +1,13 @@
 import { supabase } from '../supabaseClient'
 import axios from 'axios';
 
-export async function submitCodeLambda(code, session) {
+export async function submitCodeLambda(code, session, callback) {
 
   axios.defaults.withCredentials = true
 
   // TODO: move this elsewhere
-  const lambdaURL = "http://localhost:9000/2015-03-31/functions/function/invocations"
+  const lambdaURL = "https://bq7ler0dkb.execute-api.us-east-1.amazonaws.com/default/ai-arena-test"
+  const lambdaKey = "bXPvvyL9fC7NnSE4x5ZwX2Hd7h2CIzqaqSJu0Xta"
 
   let data = {
     id: code.id,
@@ -15,16 +16,23 @@ export async function submitCodeLambda(code, session) {
     userkey : session.session.access_token
   }
 
+  // IMPORTANT: API gateway needs all of these headers in its 'Access-Control-Allow-Headers' 
+  // in order to work with this request
+  // 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, X-PINGOTHER, Accept'
   fetch(lambdaURL, {
     method: 'POST',
     headers: {
+        'Access-Control-Request-Method' : 'POST',
+        'Access-Control-Request-Headers': 'X-PINGOTHER, Content-Type',
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-api-key' : lambdaKey
     },
     body: JSON.stringify(data)
   })
-   .then(response => console.log(response.json()))
-   .then(response => console.log(JSON.stringify(response)))
+   .then(response => response.json())
+   .then(result => {console.log(JSON.stringify(result)); callback(result)})
+   .catch((error) => {console.log(error); callback({ 'message' : { 'status' : 'Server Error, try again.'}})})
 }
 
 /**
