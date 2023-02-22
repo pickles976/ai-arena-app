@@ -55,7 +55,6 @@
 
 <div class="main-div">
   
-  <!-- TODO: consolidate these guys into single components -->
   <!-- LEFT PANEL -->
   <div class="gameobject-panel bg-gunmetal">
       <div class="bg-gunmetal"> Game Objects </div>

@@ -60,10 +60,10 @@ export function getCodeFromEditor(){
 export function initEditor(code) {
 
     sessions = {
-        'baseStart' : code.baseStart || BaseStart,
-        'baseUpdate' : code.baseUpdate || BaseUpdate,
-        'shipStart' : code.shipStart || ShipStart,
-        'shipUpdate' : code.shipUpdate || ShipUpdate,
+        'baseStart' : code.baseStart || "",
+        'baseUpdate' : code.baseUpdate || "",
+        'shipStart' : code.shipStart || "",
+        'shipUpdate' : code.shipUpdate || ""
     }
 
     oldSessionValue = "shipUpdate"

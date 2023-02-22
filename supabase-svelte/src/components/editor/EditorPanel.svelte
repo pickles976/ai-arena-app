@@ -1,7 +1,7 @@
 <script>
 import { deleteCode, getCode, getUserCode, submitCode, submitCodeLambda } from '../../features/code.js'
-import { code, defaultCode, auth, enemyCode } from "../../stores.js";
-import {deleteCodeLocally, getAllLocalCode, storeCodeLocally } from  "../../features/storage.js"
+import { code, newCode, auth, enemyCode } from "../../stores.js";
+import {deleteCodeLocally, getAllLocalCode, loadLastCode, setActiveCode, storeCodeLocally } from  "../../features/storage.js"
 import Modal,{getModal} from '../../components/Modal.svelte'
 import { onMount } from "svelte";
 import { getCodeFromEditor, initEditor, selectScript } from "../../editor.js";
@@ -71,6 +71,7 @@ function tryFetchAllCode() {
 function tryLoadLocalCode(name) {
   code.set(localCodeObjects[name])
   initEditor($code)
+  setActiveCode(name)
   getModal('load-code').close(1)
 }
 
@@ -78,6 +79,7 @@ function tryLoadLocalCode(name) {
 function tryLoadRemoteCode(name) {
   code.set(remoteCodeObjects[name])
   initEditor($code)
+  setActiveCode(name)
   getModal('load-code').close(1)
 }
 
@@ -125,8 +127,6 @@ function compile() {
       ShipUpdateCode : $code.shipUpdate
     }
   })
-
-  console.log($auth)
 }
 
 /** Try to load code into the editor*/
@@ -150,6 +150,7 @@ $: codeDuration = null
 
 onMount(() => {
   // load code from temp storage
+  $code = loadLastCode()
   initEditor($code)
 })
 
@@ -164,6 +165,7 @@ onMount(() => {
     <button on:click={() => {tryFetchAllCode(); getModal('load-code').open();}}>Load</button>
     <button on:click={trySave}>Save</button>
     <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
+    <box class='code-name'>{$code.name === "" ? "untitled" : $code.name}</box>
   </div>
   <!-- SCRIPT SELECTION -->
   <div class="vert-panel" style="flex-direction: row-reverse; ">
@@ -173,7 +175,6 @@ onMount(() => {
         <option value="baseUpdate">Base Update</option>
         <option value="baseStart">Base Start</option>
     </select>
-    <box>{$code.name === "" ? "untitled" : $code.name}</box>
   </div>
 </div>
 <!-- EDITOR WINDOW-->
@@ -196,8 +197,6 @@ onMount(() => {
 
 
 <!-- YARR, HERE BE POPUPS -->
-
-<!-- TODO: replace with those little status thingies that follow you between pages -->
 <Modal id='submission-status'>
 <h2>Submission Status</h2>
 <p>Evaluation status: {submissionStatus}</p>
@@ -217,7 +216,7 @@ onMount(() => {
 <Modal id='unsaved-warning'>
 <h2>Unsaved Progress!</h2>
 <p>All unsaved progress will be lost! are you sure you want to start a new project?</p>
-<button on:click={() => { code.set(defaultCode); initEditor($code); getModal('unsaved-warning').close(1)}}>Create New</button>
+<button on:click={() => { code.set(newCode); initEditor($code); getModal('unsaved-warning').close(1)}}>Create New</button>
 <button on:click={() => getModal('unsaved-warning').close(1)}>Cancel</button>
 </Modal>
 
@@ -273,3 +272,11 @@ onMount(() => {
   </div>
   </Modal>
 </div>
+
+<style>
+  .code-name {
+    z-index: 10;
+    color: #aaa;
+    padding-left: 2.5%;
+  }
+</style>

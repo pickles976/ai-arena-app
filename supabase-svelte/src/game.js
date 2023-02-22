@@ -1,20 +1,13 @@
 import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './aiControls.js'
 import { stopGame, testPackage, runGame, togglePause, stepFrame, getScore, getGameState, getShipsInfo, setUserCode, setConfig, setCallbacks} from 'ai-arena'
 import { getCodeFromEditor } from './editor.js'
-import { gameData } from './stores.js'
-import { getAllLocalCode } from './features/storage.js'
 
 let memoryList, canvas, ctx
-
-let ObjectDict = {}
 
 let PAUSED = false;
 let TICKS_PER_FRAME = 1;
 let WARP_SPEED = 8;
 let RUNNING = false;
-
-let startTime = performance.now()
-let uuid = undefined
 
 export function initGame(uiCallback, physCallback, code) {
     // INITIALIZATION
@@ -49,10 +42,10 @@ export function initGame(uiCallback, physCallback, code) {
 
     setUserCode({
         team0 : {
-            BaseStartCode : code.baseStart || BaseStart,
-            BaseUpdateCode : code.baseUpdate || BaseUpdate,
-            ShipStartCode : code.shipStart || ShipStart,
-            ShipUpdateCode : code.shipUpdate || ShipUpdate
+            BaseStartCode : code.baseStart,
+            BaseUpdateCode : code.baseUpdate,
+            ShipStartCode : code.shipStart,
+            ShipUpdateCode : code.shipUpdate
         },
         team1 : {
             BaseStartCode : localStorage.getItem("Base Start") || BaseStart,
@@ -79,7 +72,7 @@ export function step(event) {
 };
 
 // https://github.com/pickles976/ai-arena/blob/main/src/index.ts#L154
-// TODO: CHANGE THIS
+// TODO: CHANGE THIS TO NOT ACCESS EDITOR DIRECTLY
 export function compile(event) {
     var code = getCodeFromEditor()
     setUserCode({
@@ -93,7 +86,6 @@ export function compile(event) {
 };
 
 export function run(event) {
-    startTime = performance.now()
 
     if (RUNNING)
         stopGame()

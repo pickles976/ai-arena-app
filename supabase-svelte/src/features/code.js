@@ -1,13 +1,13 @@
 import { supabase } from '../supabaseClient'
 import axios from 'axios';
 
+// TODO: move this elsewhere
+const lambdaURL = "https://bq7ler0dkb.execute-api.us-east-1.amazonaws.com/default/ai-arena-test"
+const lambdaKey = "bXPvvyL9fC7NnSE4x5ZwX2Hd7h2CIzqaqSJu0Xta"
+
 export async function submitCodeLambda(code, session, callback) {
 
   axios.defaults.withCredentials = true
-
-  // TODO: move this elsewhere
-  const lambdaURL = "https://bq7ler0dkb.execute-api.us-east-1.amazonaws.com/default/ai-arena-test"
-  const lambdaKey = "bXPvvyL9fC7NnSE4x5ZwX2Hd7h2CIzqaqSJu0Xta"
 
   let data = {
     id: code.id,
@@ -46,7 +46,7 @@ export async function submitCode(code, session) {
         { 
           id : code.id,
           name: code.name, 
-          owner: session.session.user.id, // TODO: should be easier to get user id
+          owner: session.session.user.id,
           code: {
             "name" : code.name,
             "baseStart" : code.baseStart,
@@ -56,8 +56,6 @@ export async function submitCode(code, session) {
           },
         },
     ])
-
-    console.log(code)
 }
 
 /**

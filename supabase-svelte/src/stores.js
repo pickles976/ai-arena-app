@@ -1,6 +1,8 @@
 // store.js
 import { writable } from 'svelte/store';
 
+export let activeCode = writable(null)
+
 export let gameData = writable({
   selectedUUID: 0,
   gameObject: {},
@@ -10,6 +12,15 @@ export let gameData = writable({
   startTime: 0,
   time: 0,
 })
+
+export const newCode = {
+  id : undefined,
+  name: "",
+  baseStart: "",
+  baseUpdate: "",
+  shipStart: "",
+  shipUpdate: ""
+}
 
 export const defaultCode = {
   id : undefined,
