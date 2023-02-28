@@ -15,7 +15,7 @@ $: codeList = []
   $: selected = null
 
   let champion
-  $: champion = { name: "", color: "#00ff00"}
+  $: champion = { name: "", color: "#00ff00", code: null}
 
     onMount(() => {
         getChampionsForUser($auth)
@@ -46,23 +46,48 @@ $: codeList = []
     {/each}
     </div>
 
+    <!-- CREATE -->
     <Modal id='champion-create'>
         <h2>Create new Champion</h2>
-        <label for='name'>Name</label>
-        <input id='name' name='name' type="text" bind:value={champion.name} />
-        <label for='color'>Color</label>
-        <input type="color" id="head" name="head" bind:value={champion.color}/>
-        <div>Select</div>
-
-        <button on:click={() => {console.log(champion); getModal('champion-create').close(1)}}>Save Changes</button>
+        <div class="vert-panel">
+            <label for='name'>Name</label>
+            <input id='name' name='name' type="text" bind:value={champion.name} />
+            <label for='code'>Code</label>
+            <select bind:value={champion.code} on:change="{(e) => champion.code = e.target.value}" id="code">
+                {#each codeList as code}
+                    <option value={code.id}>
+                        {code.name}
+                    </option>
+                {/each}
+            </select>
+            <label for='color'>Color</label>
+            <input type="color" id="head" name="head" bind:value={champion.color}/>
+            <button on:click={() => {console.log(champion); getModal('champion-create').close(1)}}>Create</button>
+        </div>
     </Modal>
 
+    <!-- EDITOR -->
     <Modal id='champion-editor'>
         {#if selected}
-            <h2>{selected.name}</h2>
-            <div>{selected.color}</div>
-            <button on:click={() => getModal('champion-editor').close(1)}>Save Changes</button>
+        <h2>{selected.name}</h2>
+        <div class="vert-panel">
+            <label for='name'>Name</label>
+            <input id='name' name='name' type="text" bind:value={selected.name} />
+            <label for='code'>Code</label>
+            <select bind:value={selected.code} on:change="{(e) => selected.code = e.target.value}" id="code">
+                {#each codeList as code}
+                    <option value={code.id}>
+                        {code.name}
+                    </option>
+                {/each}
+            </select>
+            <label for='color'>Color</label>
+            <input type="color" id="head" name="head" bind:value={selected.color}/>
+            <label for="active">Set Active</label><br>
+            <input type="checkbox" id="active" name="active" value="false">
+            <button on:click={() => {console.log(selected); getModal('champion-editor').close(1)}}>Save Changes</button>
             <button on:click={() => getModal('champion-editor').close(1)}>Delete</button>
+        </div>
         {/if}
     </Modal>
 
