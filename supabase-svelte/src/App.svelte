@@ -6,6 +6,8 @@
   import DocumentationPage from './routes/DocumentationPage.svelte';
   import Test from './routes/Test.svelte';
   import Modal from './components/Modal.svelte'
+  import Multiplayer from './routes/Multiplayer.svelte';
+  import Browser from './routes/Browser.svelte';
 </script>
 
 <body class='bg-metalgun'>
@@ -14,7 +16,9 @@
 		<div class="container">
 			<a class="navbar-brand mr-4" href="/">AI Arena</a>
 			<div class="navbar-nav mr-auto">
-				<a class="nav-item nav-link" href="/#/home">Home</a>
+				<a class="nav-item nav-link" href="/#">Home</a>
+				<a class="nav-item nav-link" href="/#/multiplayer">Multiplayer</a>
+				<a class="nav-item nav-link" href="/#/browser">Browser</a>
 				<a class="nav-item nav-link" href="/#/documentation">Documentation</a>
 				<a class="nav-item nav-link" href="/#/login">Login</a>
 			</div>
@@ -27,8 +31,10 @@
 </Modal>
 
 <Router routes={{
-	'/home': Home,
+	'/': Home,
 	'/test': Test,
+	'/multiplayer': Multiplayer,
+	'/browser' : Browser,
 	'/documentation': Documentation,
 	'/documentation/:object': Documentation,
 	'/documentation-page/:object': DocumentationPage,

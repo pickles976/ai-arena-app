@@ -59,7 +59,7 @@ export async function submitCode(code, session) {
 }
 
 /**
- * Get a specific piece of code by id
+ * Get a specific piece of code by name
  */
 export async function getCode(name) {
         
@@ -72,6 +72,20 @@ export async function getCode(name) {
 }
 
 /**
+ * Get a specific piece of code by id
+ */
+export async function getCodeByID(id) {
+        
+  let { data: TacticalCode, error } = await supabase
+  .from('TacticalCode')
+  .select('*')
+  .eq('id', id) // filtering
+
+  return TacticalCode
+}
+
+/**
+ * TODO: filtering, right now we are abusinig the RLS to only get certain values
  * Get the code for a given user
  */
 export async function getUserCode() {
