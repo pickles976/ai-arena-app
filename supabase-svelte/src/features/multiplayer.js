@@ -14,22 +14,6 @@ export async function getAllStarsForWar(war_id) {
       .eq('galactic_war', war_id)
     return stars
 }
-
-export async function getAllChampions(champion_ids) {
-    let { data: champions, error } = await supabase
-      .from('champion')
-      .select('*')
-      .in('id', champion_ids)
-    return champions
-}
-
-export async function getChampionsForUser(session) {
-  let { data: champions, error } = await supabase
-    .from('champion')
-    .select('*')
-    .eq('owner', session.session.user.id)
-  return champions
-}
   
 export async function getAllUsers(user_ids) {
     let { data: users, error } = await supabase

@@ -2,11 +2,11 @@
   import { UserData } from "ai-arena-map-headless";
   import { onMount } from "svelte";
   import {
-    getAllChampions,
     getAllStarsForWar,
     getAllUsers,
     getAllWars,
   } from "../features/multiplayer";
+  import { getAllChampions } from "../features/champions";
   import { initializeViewer, galaxy3D } from "../galaxy";
   import { supabase } from "../supabaseClient";
 

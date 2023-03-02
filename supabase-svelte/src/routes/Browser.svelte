@@ -1,12 +1,47 @@
 <script>
   import { onMount } from "svelte";
   import Modal, { getModal } from "../components/Modal.svelte";
+  import { createChampion, deleteChampion, updateChampions } from "../features/champions";
   import { getUserCode } from "../features/code";
-  import { getChampionsForUser } from "../features/multiplayer";
+  import { getChampionsForUser } from "../features/champions";
   import { auth, code } from "../stores";
 
-let codeList
-$: codeList = []
+    async function tryCreateChampion() {
+        let result = await createChampion(champion, $auth); 
+        champions = champions.concat(result)
+        getModal('champion-create').close(1)
+    }
+
+    async function tryUpdateChampions() {
+
+        if (selected.active) {
+            champions.forEach(element => {
+                if (element.id !== selected.id) {
+                    element.active = false
+                }
+            });
+        }
+
+        for(let i = 0; i < champions.length; i++) {
+            if (champions[i].id === selected.id) {
+                champions[i] = selected
+                break;
+            }
+        }
+
+        champions = await updateChampions(champions); 
+        getModal('champion-editor').close(1)
+    }
+
+    async function tryDeleteChampion() {
+        let removed = await deleteChampion(selected)
+        console.log(removed)
+        champions = champions.filter((champ) => champ.id !== removed[0].id)
+        getModal('champion-editor').close(1)
+    }
+
+  let codeList
+  $: codeList = []
 
   let champions
   $: champions = []
@@ -37,7 +72,7 @@ $: codeList = []
             <div>{champion.name}</div>
             <div>
                 <div style='background-color: {champion.color}'>stuff</div>
-                <div>Code: {champion.code}</div>
+                <!-- <div>Code: {codeList.filter((code) => code.id == champion.code)[0].name}</div>  -->
                 <div>Wins: {champion.wins}</div>
                 <div>Losses: {champion.losses}</div>
                 <div>{champion.active}</div>
@@ -48,47 +83,62 @@ $: codeList = []
 
     <!-- CREATE -->
     <Modal id='champion-create'>
-        <h2>Create new Champion</h2>
-        <div class="vert-panel">
+        <h2>Create New Champion</h2>
+        <form on:submit|preventDefault={tryCreateChampion}>
+        <div class="form-group">
             <label for='name'>Name</label>
-            <input id='name' name='name' type="text" bind:value={champion.name} />
+          <input type="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Champion Name" bind:value={champion.name} required={true}/>
+        </div>
+        <div class="form-group">
             <label for='code'>Code</label>
-            <select bind:value={champion.code} on:change="{(e) => champion.code = e.target.value}" id="code">
+            <select class="form-control" bind:value={champion.code} id="code" required={true}>
                 {#each codeList as code}
                     <option value={code.id}>
                         {code.name}
                     </option>
                 {/each}
             </select>
-            <label for='color'>Color</label>
-            <input type="color" id="head" name="head" bind:value={champion.color}/>
-            <button on:click={() => {console.log(champion); getModal('champion-create').close(1)}}>Create</button>
         </div>
+        <div class="form-group">
+            <label for='color'>Color</label>
+            <input class="form-control" type="color" id="head" name="head" bind:value={champion.color} required={true}/>
+        </div>
+        <button type="submit">Save</button>
+        </form>
     </Modal>
 
     <!-- EDITOR -->
     <Modal id='champion-editor'>
         {#if selected}
-        <h2>{selected.name}</h2>
-        <div class="vert-panel">
+        <h2>Edit {selected.name}</h2>
+        <form on:submit|preventDefault={tryUpdateChampions}>
+        <div class="form-group">
             <label for='name'>Name</label>
-            <input id='name' name='name' type="text" bind:value={selected.name} />
+          <input type="name" class="form-control" id="name" bind:value={selected.name} required={true}>
+        </div>
+        <div class="form-group">
             <label for='code'>Code</label>
-            <select bind:value={selected.code} on:change="{(e) => selected.code = e.target.value}" id="code">
+            <select class="form-control" bind:value={selected.code} id="code" required={true}>
                 {#each codeList as code}
                     <option value={code.id}>
                         {code.name}
                     </option>
                 {/each}
             </select>
-            <label for='color'>Color</label>
-            <input type="color" id="head" name="head" bind:value={selected.color}/>
-            <label for="active">Set Active</label><br>
-            <input type="checkbox" id="active" name="active" value="false">
-            <button on:click={() => {console.log(selected); getModal('champion-editor').close(1)}}>Save Changes</button>
-            <button on:click={() => getModal('champion-editor').close(1)}>Delete</button>
         </div>
-        {/if}
+        <div class="form-group">
+            <label for='color'>Color</label>
+            <input class="form-control" type="color" id="head" name="head" bind:value={selected.color} required={true}/>
+        </div>
+        <div class="form-group">
+            <label class="form-check-label" for="active">Set Active</label>
+            <input class="form-check-input" type="checkbox" bind:checked={selected.active} id="active">
+        </div>
+        <!-- <button on:click={tryUpdateChampions}>Save Changes</button> -->
+        <button type="submit">Save</button>
+    </form>
+    <button style="float: right" on:click={tryDeleteChampion}>Delete</button>
+      {/if}
     </Modal>
 
 </div>
