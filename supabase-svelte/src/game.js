@@ -1,6 +1,7 @@
 import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from './aiControls.js'
-import { stopGame, testPackage, runGame, togglePause, stepFrame, getScore, getGameState, getShipsInfo, setUserCode, setConfig, setCallbacks} from 'ai-arena'
+import { stopGame, testPackage, runGame, togglePause, stepFrame, setUserCode, setCallbacks, setupLoops, setEngineConfig} from 'ai-arena'
 import { getCodeFromEditor } from './editor.js'
+import { Code, TeamCode } from 'ai-arena';
 
 let memoryList, canvas, ctx
 
@@ -9,7 +10,7 @@ let TICKS_PER_FRAME = 1;
 let WARP_SPEED = 8;
 let RUNNING = false;
 
-export function initGame(uiCallback, physCallback, code) {
+export function initGame(uiCallback, physCallback, errorCallback, code) {
     // INITIALIZATION
     console.log(testPackage())
 
@@ -29,11 +30,13 @@ export function initGame(uiCallback, physCallback, code) {
     // set the callbacks that the game will call during execution
     setCallbacks({
         'ui' : uiCallback,
-        'physics' : physCallback
+        'physics' : physCallback,
+        'error' : errorCallback
     })
     
     // Set the game configuration
-    setConfig({
+    setEngineConfig({
+        // @ts-ignore
         canvas: canvas,
         graphics: true,
         ticksPerFrame: TICKS_PER_FRAME,
@@ -41,18 +44,12 @@ export function initGame(uiCallback, physCallback, code) {
     })
 
     setUserCode({
-        team0 : {
-            BaseStartCode : code.baseStart,
-            BaseUpdateCode : code.baseUpdate,
-            ShipStartCode : code.shipStart,
-            ShipUpdateCode : code.shipUpdate
-        },
-        team1 : {
-            BaseStartCode : localStorage.getItem("Base Start") || BaseStart,
-            BaseUpdateCode : localStorage.getItem("Base Update") || BaseUpdate,
-            ShipStartCode : localStorage.getItem("Ship Start") || ShipStart,
-            ShipUpdateCode : localStorage.getItem("Ship Update") || ShipUpdate
-        }
+        team0 : new TeamCode(code.baseStart,code.baseUpdate,code.shipStart,code.shipUpdate),
+        team1 : new TeamCode(localStorage.getItem("Base Start") || BaseStart,
+                localStorage.getItem("Base Update") || BaseUpdate,
+                localStorage.getItem("Ship Start") || ShipStart,
+                localStorage.getItem("Ship Update") || ShipUpdate
+        )
     })
     
 
@@ -76,13 +73,13 @@ export function step(event) {
 export function compile(event) {
     var code = getCodeFromEditor()
     setUserCode({
-        team0 : {
-            BaseStartCode : code["Base Start"],
-            BaseUpdateCode : code["Base Update"],
-            ShipStartCode : code["Ship Start"],
-            ShipUpdateCode : code["Ship Update"]
-        }
-    })
+        team0 : new TeamCode(
+            code.baseStart,
+            code.baseUpdate,
+            code.shipStart,
+            code.shipUpdate
+        ), team1: 
+        null })
 };
 
 export function run(event) {
@@ -108,9 +105,10 @@ export function warp(event) {
         PAUSED = false
     }
     TICKS_PER_FRAME = TICKS_PER_FRAME === 1 ? WARP_SPEED : 1
-    setConfig({
+    setEngineConfig({
         ticksPerFrame: TICKS_PER_FRAME
     })
+    setupLoops()
     document.getElementById("pause").innerHTML = "Pause"
     document.getElementById("warp").innerHTML = TICKS_PER_FRAME === 1 ? "Warp" : "Normal"
 }

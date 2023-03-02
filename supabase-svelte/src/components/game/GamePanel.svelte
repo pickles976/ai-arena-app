@@ -47,9 +47,13 @@
     }
   }
 
+  function errorCallback(e) {
+    console.log(e)
+  }
+
   onMount(() => {
     ctx = document.getElementById("game-canvas").getContext("2d");
-    initGame(uiCallback, physCallback, $code);
+    initGame(uiCallback, physCallback, errorCallback, $code);
   });
 </script>
 

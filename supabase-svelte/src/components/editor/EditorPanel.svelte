@@ -6,6 +6,7 @@ import Modal,{getModal} from '../../components/Modal.svelte'
 import { onMount } from "svelte";
 import { getCodeFromEditor, initEditor, selectScript } from "../../editor.js";
 import { setUserCode } from "ai-arena";
+  import { TeamCode } from '../../../../../ai-arena/lib/dist/types.js';
 
 /** Upsert user code on submission */
 async function trySubmitCode() {
@@ -133,13 +134,13 @@ function compile() {
 function tryLoadEnemyCode(name) {
   enemyCode.set(localCodeObjects[name])
   setUserCode({
-    team1 : {
-      BaseStartCode : $enemyCode.baseStart,
-      BaseUpdateCode : $enemyCode.baseUpdate,
-      ShipStartCode : $enemyCode.shipStart,
-      ShipUpdateCode : $enemyCode.shipUpdate
-    }
-  })
+    team1 : new TeamCode(
+      $enemyCode.baseStart,
+      $enemyCode.baseUpdate,
+      $enemyCode.shipStart,
+      $enemyCode.shipUpdate
+    )}
+  )
   getModal('load-enemy-code').close(1)
 }
 
