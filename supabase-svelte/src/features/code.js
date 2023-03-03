@@ -41,7 +41,7 @@ export async function submitCodeLambda(code, session, callback) {
 export async function submitCode(code, session) {
     
     const { data, error } = await supabase
-    .from('TacticalCode')
+    .from('battle_code')
     .upsert([
         { 
           id : code.id,
@@ -64,7 +64,7 @@ export async function submitCode(code, session) {
 export async function getCode(name) {
         
     let { data: TacticalCode, error } = await supabase
-    .from('TacticalCode')
+    .from('battle_code')
     .select('*')
     .eq('name', name) // filtering
 
@@ -77,7 +77,7 @@ export async function getCode(name) {
 export async function getCodeByID(id) {
         
   let { data: TacticalCode, error } = await supabase
-  .from('TacticalCode')
+  .from('battle_code')
   .select('*')
   .eq('id', id) // filtering
 
@@ -91,7 +91,7 @@ export async function getCodeByID(id) {
 export async function getUserCode() {
         
   let { data: TacticalCode, error } = await supabase
-  .from('TacticalCode')
+  .from('battle_code')
   .select('*')
   return TacticalCode
 
@@ -102,7 +102,7 @@ export async function getUserCode() {
  */
 export async function deleteCode(id) {
   let { data: TacticalCode, error } = await supabase
-  .from('TacticalCode')
+  .from('battle_code')
   .delete()
   .eq('id', id) // filtering
 }

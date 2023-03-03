@@ -1,8 +1,8 @@
 <script>
-  import { onMount } from "svelte";
-  import { initGame } from "../../game";
+  import { onDestroy, onMount } from "svelte";
+  import { initGame, stop } from "../../game";
   import { gameData, code } from "../../stores";
-  import { getGameState, getScore, getShipsInfo } from "ai-arena";
+  import { getGameState, getScore, getShipsInfo, stopGame } from "ai-arena";
   import GameObjectButton from "./GameObjectButton.svelte";
   import GameObject from "./GameObject.svelte";
   import Score from "./Score.svelte";
@@ -49,12 +49,17 @@
 
   function errorCallback(e) {
     console.log(e)
+    alert(e)
   }
 
   onMount(() => {
     ctx = document.getElementById("game-canvas").getContext("2d");
     initGame(uiCallback, physCallback, errorCallback, $code);
   });
+
+  onDestroy(() => {
+    stop()
+  })
 </script>
 
 <div class="main-div">

@@ -10,6 +10,11 @@ let TICKS_PER_FRAME = 1;
 let WARP_SPEED = 8;
 let RUNNING = false;
 
+export function stop() {
+    RUNNING = false
+    stopGame()
+}
+
 export function initGame(uiCallback, physCallback, errorCallback, code) {
     // INITIALIZATION
     console.log(testPackage())
