@@ -157,24 +157,24 @@ onMount(() => {
 
 </script>
 
-<div style="height: 100%; width: 100%;">
+<div style="height: 100%; width: 100%;" class="bg-steel">
 <div class="vert-panel" style="height: 100%">
 <div class="hor-panel" style="flex-grow: 0;">
     <!-- CODE EDITOR BUTTONS -->
   <div class="vert-panel" style="flex-direction: row;">
-    <button on:click={tryNew}>New</button>
-    <button on:click={() => {tryFetchAllCode(); getModal('load-code').open();}}>Load</button>
-    <button on:click={trySave}>Save</button>
-    <button on:click={() => {$code.name = ""; trySave()}}>Save As</button>
-    <box class='code-name'>{$code.name === "" ? "untitled" : $code.name}</box>
+    <button class="btn-custom" on:click={tryNew}>New</button>
+    <button class="btn-custom" on:click={() => {tryFetchAllCode(); getModal('load-code').open();}}>Load</button>
+    <button class="btn-custom" on:click={trySave}>Save</button>
+    <button class="btn-custom" on:click={() => {$code.name = ""; trySave()}}>Save As</button>
+    <div class='code-name'>{$code.name === "" ? "untitled" : $code.name}</div>
   </div>
   <!-- SCRIPT SELECTION -->
   <div class="vert-panel" style="flex-direction: row-reverse; ">
-    <select class="btn-main dropdown-toggle" id="select-script" on:change={(e) => selectScript(e.target.value)}>
-        <option value="shipUpdate" selected>Ship Update</option>
-        <option value="shipStart">Ship Start</option>
-        <option value="baseUpdate">Base Update</option>
-        <option value="baseStart">Base Start</option>
+    <select class="selector-custom" id="select-script" on:change={(e) => selectScript(e.target.value)}>
+        <option class="option-custom" value="shipUpdate" selected>Ship Update</option>
+        <option class="option-custom" value="shipStart">Ship Start</option>
+        <option class="option-custom" value="baseUpdate">Base Update</option>
+        <option class="option-custom" value="baseStart">Base Start</option>
     </select>
   </div>
 </div>
@@ -187,11 +187,11 @@ onMount(() => {
 <!-- CODE SUBMISSION PANELS -->
 <div class="hor-panel" style="flex-grow: 0;">
 <div class="vert-panel" style="flex-direction: row;">
-    <button id="compile" on:click={compile}>Compile</button>
-    <button on:click={trySubmitCode}>Submit</button>
+    <button class="btn-custom" id="compile" on:click={compile}>Compile</button>
+    <button class="btn-custom" on:click={trySubmitCode}>Submit</button>
 </div>
 <div class="vert-panel" style="flex-direction: row-reverse">
-    <button on:click={() => {tryFetchAllCode(); getModal('load-enemy-code').open();}}>Select Enemy AI</button>
+    <button class="btn-custom" on:click={() => {tryFetchAllCode(); getModal('load-enemy-code').open();}}>Select Enemy AI</button>
 </div>
 </div>
 </div>
@@ -276,8 +276,9 @@ onMount(() => {
 
 <style>
   .code-name {
-    z-index: 10;
-    color: #aaa;
-    padding-left: 2.5%;
+    z-index: 1;
+    color: #ccc;
+    position: absolute;
+    transform: translateX(-50%) translateX(50vw);
   }
 </style>

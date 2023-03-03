@@ -136,12 +136,23 @@
 	}
 	
 	:global(.grabber.top) {
-		height: 4vh;
+		height: 3.2vh;
 		/* width: 100%; */
-		background: green;
+		/* background: green; */
+		background-color: transparent;
 		top: 0vh;
-        left: 13vw;
-        right: 7vw;
+        left: 0vw;
+        right: 0vw;
+		cursor: row-resize;
+	}
+
+	:global(.grabber.top:hover) {
+		height: 3.2vh;
+		/* width: 100%; */
+		background-color: #ffffff0f;
+		top: 0vh;
+        left: 0vw;
+        right: 0vw;
 		cursor: row-resize;
 	}
 	
