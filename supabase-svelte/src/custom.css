@@ -321,3 +321,31 @@ body .ace_scrollbar-h {
 .option-custom {
   color: #000;
 }
+
+.collapsible {
+  color: #cccccc;
+  text-align: center;
+  width: 100%;
+}
+
+.collapsible:hover {
+  z-index: 5;
+  color: #cccccc;
+  background-color: #ffffff2f;
+  border-color: transparent;
+}
+
+/* aside {
+  position: absolute;
+  left: -500px;
+  transition: all .5s;
+  height: 500px;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #efefef;
+}
+
+.active {
+  left: 0px
+} */

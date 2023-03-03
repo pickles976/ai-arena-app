@@ -66,14 +66,14 @@
   
   <!-- LEFT PANEL -->
   <div class="gameobject-panel bg-gunmetal">
-      <div class="bg-gunmetal"> Game Objects </div>
-      <div style="overflow-y: scroll; width: 100%; max-height: 25vh; border-width: 2px; border-style: solid;">
+      <div class="bg-steel collapsible"> Game Objects </div>
+      <div style="overflow-y: scroll; width: 100%; max-height: 25vh; border-width: 2px;">
         <!-- Game Object List -->
         {#each $gameData.gameObjects as gameObject}
           <GameObjectButton object={gameObject} />
         {/each}
       </div>
-      <div class="bg-gunmetal"> Inspector </div>
+      <div class="bg-steel collapsible"> Inspector </div>
     <div class="hor-panel" style="overflow-y: scroll; overflow-x: hidden; max-height: 25vh">
       <!-- Game Object inspector -->
       {#if $gameData.gameObject}
@@ -93,13 +93,13 @@
   <div class="bg-gunmetal" style="right: 0px; top: 0px; position: absolute; width: 12.5vw; height: 100vh;">
     <div class="vert-panel">
       <GameControls />
-      <div class="hor-panel timer bg-gunmetal"> Score </div>
+      <div class="bg-steel collapsible"> Score </div>
       <Score />
       <!-- TIMER -->
       <div class="hor-panel timer bg-gunmetal">
         <div style="width: 100%">{`Timesteps: ${$gameData.time}`}</div>
       </div>
-      <div class="bg-gunmetal"> Team Info </div>
+      <div class="bg-steel collapsible"> Team Info </div>
       <div class="hor-panel" style="overflow-y: scroll; overflow-x: hidden; max-height: 30vh">
         {#if $gameData.ships}
           <Teams ships={$gameData.ships} />

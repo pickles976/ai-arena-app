@@ -4,7 +4,7 @@
   $: team1 = $gameData.score["team 1"];
 </script>
 
-<div class="score-panel bg-gunmetal">
+<aside class="score-panel bg-gunmetal">
   <div class="teams-info" id="teams-info">
     <div class="container row">
       <div class="col-left">
@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-</div>
+</aside>
 
 <style>
 
