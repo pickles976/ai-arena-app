@@ -16,6 +16,10 @@
     background-color: #444444;
   }
 
+  .bg-knife {
+    background-color: #29393f;
+  }
+
   .bg-gunmetal {
     background-color: #253237;
     color: #fffafb;
@@ -334,18 +338,3 @@ body .ace_scrollbar-h {
   background-color: #ffffff2f;
   border-color: transparent;
 }
-
-/* aside {
-  position: absolute;
-  left: -500px;
-  transition: all .5s;
-  height: 500px;
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  background-color: #efefef;
-}
-
-.active {
-  left: 0px
-} */

@@ -74,7 +74,7 @@
         {/each}
       </div>
       <div class="bg-steel collapsible"> Inspector </div>
-    <div class="hor-panel" style="overflow-y: scroll; overflow-x: hidden; max-height: 25vh">
+    <div class="hor-panel" style="overflow-y: scroll; overflow-x: hidden; max-height: 30vh">
       <!-- Game Object inspector -->
       {#if $gameData.gameObject}
         <GameObject object={$gameData.gameObject} />

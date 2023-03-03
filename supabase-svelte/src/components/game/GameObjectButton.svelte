@@ -13,7 +13,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="memory-slice bg-gunmetal" on:click={() => {selectObject(object)}}>
+<div class="memory-slice btn-custom" on:click={() => {selectObject(object)}}>
     {#if object}
         {object.type} : {object.uuid}
     {/if}

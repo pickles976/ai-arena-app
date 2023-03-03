@@ -276,7 +276,7 @@ onMount(() => {
 
 <style>
   .code-name {
-    z-index: 1;
+    z-index: 0;
     color: #ccc;
     position: absolute;
     transform: translateX(-50%) translateX(50vw);

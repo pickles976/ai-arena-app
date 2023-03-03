@@ -3,7 +3,7 @@
     export let indent
 </script>
 
-<div class="field">
+<div class="field bg-knife">
     {#each Object.entries(object) as [key, value]}
         {'\u2003'.repeat(indent) + key} : 
         {#if typeof value == 'object'}

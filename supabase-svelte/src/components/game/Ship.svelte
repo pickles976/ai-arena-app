@@ -14,7 +14,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="ship bg-metalgun" on:click={() => {selectObject(ship)}}>
+<div class="ship btn-custom" on:click={() => {selectObject(ship)}}>
     <div class="data-field">UUID: {ship.uuid}</div>
     <div class="data-field">Damage: {ship.damage.toFixed(1)}</div>
     <div class="data-field">Energy: {ship.resources.energy.toFixed(1)} / {ship.maxEnergy.toFixed(1)}</div>
