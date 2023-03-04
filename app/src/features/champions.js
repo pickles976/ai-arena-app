@@ -37,7 +37,7 @@ export async function deleteChampion(champion) {
     let { data: champions, error } = await supabase
       .from('champion')
       .delete()
-      .eq('id', champion.id)
+      .eq('id', champion)
       .select('*')
     return champions
 }

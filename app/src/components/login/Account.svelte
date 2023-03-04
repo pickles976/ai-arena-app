@@ -49,7 +49,6 @@
         const updates = {
           id: user.id,
           username,
-          website,
           avatar_url: avatarUrl,
           updated_at: new Date().toISOString(),
         }
@@ -74,10 +73,6 @@
     <div>
       <label for="username">Name</label>
       <input id="username" type="text" bind:value={username} />
-    </div>
-    <div>
-      <label for="website">Website</label>
-      <input id="website" type="text" bind:value={website} />
     </div>
     <div>
       <button type="submit" class="button primary block" disabled={loading}>

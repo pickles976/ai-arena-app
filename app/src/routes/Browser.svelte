@@ -4,7 +4,7 @@
   import { createChampion, deleteChampion, updateChampions } from "../features/champions";
   import { getUserCode } from "../features/code";
   import { getChampionsForUser } from "../features/champions";
-  import { auth, code } from "../stores";
+  import { activeCode, auth, code } from "../stores";
 
     async function tryCreateChampion() {
         let result = await createChampion(champion, $auth); 
@@ -33,12 +33,16 @@
         getModal('champion-editor').close(1)
     }
 
-    async function tryDeleteChampion() {
-        let removed = await deleteChampion(selected)
-        console.log(removed)
+    async function tryDeleteChampion(val) {
+        let removed = await deleteChampion(val)
         champions = champions.filter((champ) => champ.id !== removed[0].id)
         getModal('champion-editor').close(1)
     }
+
+    function loadCode(name) {
+        activeCode.set(name)
+    }
+
 
   let codeList
   $: codeList = []
@@ -61,24 +65,32 @@
     })
 </script>
 
-<div class='main-div' style="flex-direction: column;">
-
-    <h2>Your Champions</h2>
-    <button on:click={() => getModal('champion-create').open()}>Create New</button>
-    <div class="vertical-list">
-    {#each champions as champion}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div class='champion' on:click={() => {selected = champion; getModal('champion-editor').open()}}>
-            <div>{champion.name}</div>
+<div class='main-div'>
+        <div class="vert-panel" style="align-items: center;">
+            <h2 style="padding-top: 2%">Your Champions</h2>
             <div>
-                <div style='background-color: {champion.color}'>stuff</div>
-                <!-- <div>Code: {codeList.filter((code) => code.id == champion.code)[0].name}</div>  -->
-                <div>Wins: {champion.wins}</div>
-                <div>Losses: {champion.losses}</div>
-                <div>{champion.active}</div>
+                <button class="btn btn-primary" on:click={() => getModal('champion-create').open()}>Create New</button>
             </div>
-        </div>
-    {/each}
+            <div class="vertical-list" style="overflow-y: scroll; height: 75vh;" >
+                {#each champions as champion}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <div class='champion bg-gunmetal'>
+                        <div>{champion.name}</div>
+                        <div>
+                            <div style='background-color: {champion.color}; width: 100%'> ⠀ </div>
+                            <!-- <div>Code: {codeList.filter((code) => code.id == champion.code)[0].name}</div>  -->
+                            {#if codeList.length > 0}
+                                <div>Code: {codeList.filter((code) => code.id == champion.code)[0].name}</div>
+                            {/if}
+                            <div>Wins: {champion.wins}</div>
+                            <div>Losses: {champion.losses}</div>
+                            <div>Active: {champion.active}</div>
+                        </div>
+                        <button class="btn-custom" on:click={() => {selected = champion; getModal('champion-editor').open()}}>Edit</button>
+                        <button class="btn-custom" style="float: right;" on:click={()=> {tryDeleteChampion(champion.id)}}>Delete</button>
+                    </div>
+                {/each}
+            </div>
     </div>
 
     <!-- CREATE -->
@@ -137,8 +149,7 @@
         <!-- <button on:click={tryUpdateChampions}>Save Changes</button> -->
         <button type="submit">Save</button>
     </form>
-    <button style="float: right" on:click={tryDeleteChampion}>Delete</button>
-      {/if}
+    {/if}
     </Modal>
 
 </div>
@@ -149,20 +160,24 @@
         width: 25%
     }
 
-    .champion:hover {
-        background-color: #ffffff;
-    }
+    /* .champion:hover {
+        background-color: #ffffff20;
+    } */
 
     .champion {
         outline-width: 1px;
         outline-color: aqua;
-        outline-style: solid;
+        /* outline-style: solid; */
         margin: 2%;
+        padding: 2%;
+        border-radius: 6px;
     }
 
     .main-div { 
-      height: 90vh;
-      overflow: hidden;
+      height: 90%;
+      width: 100vw;
+      overflow-y: hidden;
       display: flex;
+        justify-content: center;
     } 
   </style>

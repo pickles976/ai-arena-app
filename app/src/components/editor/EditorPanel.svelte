@@ -203,6 +203,7 @@ onMount(() => {
 <p>Evaluation status: {submissionStatus}</p>
 {#if codeDuration}
   <p>Your code ran in {codeDuration}ms!</p>
+  <p>Visit the browser tab to create a Champion with this code</p>
 {/if}
 <button on:click={() => getModal('submission-status').close(1)}>close</button>
 </Modal>

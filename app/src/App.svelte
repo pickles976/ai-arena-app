@@ -26,13 +26,17 @@
 	</nav>
 </header>
 
+<div class='main-div bg-metalgun'>
+
+</div>
+
 <Modal id='login-modal'>
 	<Login />
 </Modal>
 
 <Router routes={{
 	'/': Home,
-	'/test': Test,
+	// '/test': Test,
 	'/multiplayer': Multiplayer,
 	'/browser' : Browser,
 	'/documentation': Documentation,
@@ -44,5 +48,14 @@
 </body>
 
 <style>
-
+    .main-div { 
+        z-index: -10;
+		position: absolute;
+		top: 0;
+		left: 0;
+      height: 100vh;
+      width: 100vw;
+      overflow-y: hidden;
+      display: flex;
+    } 
 </style>

@@ -70,7 +70,7 @@
       <div style="overflow-y: scroll; width: 100%; max-height: 25vh; border-width: 2px;">
         <!-- Game Object List -->
         {#each $gameData.gameObjects as gameObject}
-          <GameObjectButton object={gameObject} />
+          <GameObjectButton object={gameObject} draw={drawCircle}/>
         {/each}
       </div>
       <div class="bg-steel collapsible"> Inspector </div>

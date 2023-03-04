@@ -101,7 +101,7 @@ export async function getUserCode() {
  * Delete a specific piece of code by id
  */
 export async function deleteCode(id) {
-  let { data: TacticalCode, error } = await supabase
+  let { data: battle_code, error } = await supabase
   .from('battle_code')
   .delete()
   .eq('id', id) // filtering

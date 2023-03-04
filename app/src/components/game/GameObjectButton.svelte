@@ -1,6 +1,7 @@
 <script>
     import { gameData } from "../../stores";
     export let object
+    export let draw
 
     function selectObject(object) {
         $gameData.selectedUUID = object.uuid
@@ -9,6 +10,7 @@
         $gameData.gameObjects.filter(
             (obj) => obj?.uuid === $gameData.selectedUUID
         )[0] ?? {};
+        draw($gameData.gameObject.transform.position)
     }
 </script>
 
