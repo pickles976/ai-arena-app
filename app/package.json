@@ -22,9 +22,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.8.0",
-    "ai-arena": "^1.0.20",
-    "ai-arena-map": "^1.1.3",
-    "ai-arena-map-headless": "^1.0.9",
+    "ai-arena": "^1.0.22",
+    "ai-arena-map": "^1.1.7",
+    "ai-arena-map-headless": "^1.0.10",
     "axios": "^1.3.3",
     "seedrandom": "3.0.5",
     "svelte-spa-router": "^3.3.0",

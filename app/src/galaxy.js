@@ -21,6 +21,8 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 export let galaxy, galaxy3D
 let canvas, renderer, camera, scene, orbit, baseComposer, bloomComposer, overlayComposer, skybox
 
+let request = null
+
 function initThree() {
 
     // grab canvas
@@ -137,7 +139,7 @@ async function render() {
     // Run each pass of the render pipeline
     renderPipeline()
 
-    requestAnimationFrame(render)
+    request = requestAnimationFrame(render)
 
 }
 
@@ -180,6 +182,10 @@ export function initializeViewer(seed, numStars) {
     galaxy = new GalaxyData(numStars, GALAXY_PARAMS)
     galaxy3D = new Galaxy3D(scene, galaxy)
 
-    requestAnimationFrame(render)
+    request = requestAnimationFrame(render)
 
+}
+
+export function killGalaxy(){
+    window.cancelAnimationFrame(request)
 }

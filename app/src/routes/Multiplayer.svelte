@@ -1,15 +1,18 @@
 <script>
   import { UserData } from "ai-arena-map-headless";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import {
     getAllStarsForWar,
     getAllUsers,
     getAllWars,
   } from "../features/multiplayer";
-  import { getAllChampions } from "../features/champions";
-  import { initializeViewer, galaxy3D } from "../galaxy";
+  import { getAllChampions, getChampionsForUser } from "../features/champions";
+  import { initializeViewer, galaxy3D, killGalaxy } from "../galaxy";
   import { supabase } from "../supabaseClient";
   import UserPanel from "../components/multiplayer/UserPanel.svelte";
+  import Actions from "../components/multiplayer/Actions.svelte";
+  import Modal, { getModal } from "../components/Modal.svelte";
+  import { auth }  from '../stores';
 
   let galaxyData;
 
@@ -22,7 +25,9 @@
   let champions = [];
   let usersIds = [];
 
+  // props for child components
   let strengthData = {}
+  let updates = []
 
   function buildInfo(stars){
 
@@ -51,6 +56,17 @@
 
   // TODO: convert to await
   onMount(() => {
+
+    if ($auth.session){
+      getChampionsForUser($auth)
+        .then((data) => {
+          if (data.length <= 0) {
+            getModal('no-champion').open()
+          }
+        })
+    } else {
+      getModal('no-champion').open()
+    }
 
     // Get the current war
     getAllWars()
@@ -94,6 +110,10 @@
                   let update = payload.new
                   galaxy3D.updateStar(update.relative_id, championMap[update.champion])
                   strengthData = buildInfo(galaxy3D.stars)
+                  updates = updates.concat([{'star': galaxy3D.starDict[update.relative_id], 'user': championMap[update.champion]}])
+                  if (updates.length > 10){
+                    updates.shift()
+                  }
                   // console.log('Change received!', payload)
                   console.log("change received")
                 })
@@ -102,11 +122,25 @@
           });
       });
   });
+
+  onDestroy(()=>{
+	  supabase.channel('any').unsubscribe()
+    supabase.removeAllChannels()
+    killGalaxy()
+  })
 </script>
 
 <div>
   <canvas id="multiplayer-canvas" data-engine="three.js r146" class="multiplayer-canvas"/>
   <UserPanel data={strengthData}></UserPanel>
+  <Actions actions={updates}></Actions>
+
+  <Modal id='no-champion'>
+    <h2>You don't have any champions!</h2>
+    <p>To play in the galactic battle royale, you'll need to create a Champion with some code and set it active!</p>
+    <p>Visit the <b>homepage</b> to write some code. When you're done, create a Champion in the  <b>browser</b> and set it active.</p>
+    <p>Active champions will automatically participate in each new battle royale.</p>
+  </Modal>
 </div>
 
 <style>

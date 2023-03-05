@@ -7,7 +7,7 @@
     <div class="vertical-list user-panel">
     {#each Object.values(data) as entry}
         <div class="item" style="padding: 0.5%;">
-            <div class='color-box' style='background-color: {entry.color}c0; margin-right: 2%;'></div>
+            <div class='color-box' style='background-color: {entry.color}a0; margin-right: 2%;'></div>
             <div>{entry.name} : {entry.strength}</div>
         </div>
     {/each}
@@ -19,7 +19,8 @@
 
     .user-panel {
         overflow-y: scroll; 
-        max-height: 75vh;
+        overflow-x: hidden;
+        max-height: 50vh;
         background-color: #ffffff09;
         padding: 2%;
     }
