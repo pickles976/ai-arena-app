@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp ./src/assets ./dist/src/",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "deploy": "aws s3 sync ./dist s3://ai-arena.com/ && aws s3 sync ./dist s3://www.ai-arena.com/"
   },
   "devDependencies": {
     "@smui/list": "^7.0.0-beta.0",
@@ -22,8 +23,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.8.0",
-    "ai-arena": "^1.0.22",
-    "ai-arena-map": "^1.1.7",
+    "ai-arena": "^1.0.25",
+    "ai-arena-map": "^1.1.9",
     "ai-arena-map-headless": "^1.0.10",
     "axios": "^1.3.3",
     "seedrandom": "3.0.5",

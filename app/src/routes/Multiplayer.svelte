@@ -134,6 +134,7 @@
   <canvas id="multiplayer-canvas" data-engine="three.js r146" class="multiplayer-canvas"/>
   <UserPanel data={strengthData}></UserPanel>
   <Actions actions={updates}></Actions>
+  <div id='controls-gui' class='controls-gui'></div>
 
   <Modal id='no-champion'>
     <h2>You don't have any champions!</h2>
@@ -144,6 +145,12 @@
 </div>
 
 <style>
+
+  .controls-gui {
+    position: absolute;
+    bottom: 0;
+  }
+
   .multiplayer-canvas {
     z-index: -1;
     position: absolute;

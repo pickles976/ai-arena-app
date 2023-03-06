@@ -19,9 +19,27 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
 export let galaxy, galaxy3D
-let canvas, renderer, camera, scene, orbit, baseComposer, bloomComposer, overlayComposer, skybox
+let canvas, renderer, camera, scene, orbit, baseComposer, bloomComposer, overlayComposer, skybox, controlGUI
 
 let request = null
+
+function initControlsGUI() {
+
+    const container = document.getElementById("controls-gui")
+    controlGUI = new GUI({ width: window.innerWidth / 8, container: container, title: "Controls" })
+
+    let controls = 
+    {   
+        "showBubbles": true,
+        "Show Territory": () => { 
+            controls.showBubbles = !controls.showBubbles 
+            galaxy3D.toggleBubbles(controls.showBubbles)
+        },
+    }
+
+    controlGUI.add( controls, 'Show Territory')
+    controlGUI.open()
+}
 
 function initThree() {
 
@@ -175,6 +193,7 @@ export function initializeViewer(seed, numStars) {
     // console.log(seed, numStars)
 
     initThree()
+    initControlsGUI()
     initSkybox()
 
     seedrandom(seed, { global: true });

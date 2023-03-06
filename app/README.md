@@ -7,3 +7,5 @@ Things to know about supabase
 
 
 https://github.com/ItalyPaleAle/svelte-spa-router
+
+Need to copy assets into dist/src/assets before deploying
