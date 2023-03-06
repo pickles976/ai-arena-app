@@ -88,11 +88,12 @@ export async function getCodeByID(id) {
  * TODO: filtering, right now we are abusinig the RLS to only get certain values
  * Get the code for a given user
  */
-export async function getUserCode() {
+export async function getUserCode(id) {
         
   let { data: TacticalCode, error } = await supabase
   .from('battle_code')
   .select('*')
+  .eq('owner', id)
   return TacticalCode
 
 }

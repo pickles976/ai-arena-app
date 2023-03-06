@@ -57,7 +57,7 @@ function tryFetchAllCode() {
 
   // Get code from db
   if ($auth.session) {
-    getUserCode().then((data) => {
+    getUserCode($auth.session.user.id).then((data) => {
       data.forEach((entry) => {
         remoteCodeObjects[entry.name] = entry.code
         remoteCodeObjects[entry.name].id = entry.id // id needed for upsert
@@ -212,7 +212,7 @@ onMount(() => {
 <h2>Save As:</h2>
 <label>Code name</label>
   <input type="text" bind:value={$code.name} />
-<button on:click={trySave}>Save</button>
+  <button on:click={() => {$code.id = undefined; trySave()}}>Save</button>
 </Modal>
 
 <Modal id='unsaved-warning'>
