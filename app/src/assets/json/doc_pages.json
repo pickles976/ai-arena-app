@@ -25,7 +25,7 @@
     }, 
     "Vector2D" : {
         "description": "A 2D vector utility class.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L6",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/engine/physics.ts#L6",
         "fields" : 
         {
             "x" : {
@@ -162,7 +162,7 @@
     },
     "transform" : {
         "description" : "Holds mass, position, and velocity information about a game object.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/engine/physics.ts#L77",
         "fields" : {
             "position" : {
                 "description" : "Position of the object in the world.",
@@ -222,7 +222,7 @@
     },
     "Base" : {
         "description" : "Your Base is your lifeline in AI-Arena. When your Base health drops to zero, you lose the game. The Base can purchase upgrades and build ships.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/objects.ts#L650",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/objects/objects.ts#L654",
         "fields" : {
             "uuid" : {
                 "description" : "The unique identifier of a base object. Useful when you want to reference it directly.",
@@ -371,8 +371,8 @@
         }
     },
     "Ship" : {
-        "description" : "Holds mass, position, and velocity information about a game object.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "description" : "The Ship is your main unit in AI-Arena.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/objects/objects.ts#L283",
         "fields" : {
             "uuid" : {
                 "description" : "uuid of a ship object. Useful for keeping track of ships directly.",
@@ -451,7 +451,7 @@
     },
     "GameObject" : {
         "description" : "Every object you see in AI-Arena is a GameObject. All game object share certain properties in common.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/gameObject.ts",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/objects/gameObject.ts#L4",
         "fields" : {
             "uuid" : {
                 "description" : "Unique identifier of a Game Object",
@@ -472,7 +472,7 @@
     },
     "Asteroid" : {
         "description" : "Asteroid objects contain resources to collect.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/objects.ts#L110",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/objects/objects.ts#L114",
         "fields" : {
             "resources" : {
                 "description" : "Resources contained in the asteroid",
@@ -482,8 +482,8 @@
         }
     },
     "Game" : {
-        "description" : "Holds mass, position, and velocity information about a game object.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/renderer.ts",
+        "description" : "API used for getting information about the state of the game.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/managers/objectManager.ts",
         "fields" : {
             "H" : {
                 "description" : "Height of the game world.",
@@ -581,8 +581,8 @@
         }
     },
     "Graphics" : {
-        "description" : "Holds mass, position, and velocity information about a game object.",
-        "link" : "https://github.com/pickles976/ai-arena/blob/main/src/physics.ts#L77",
+        "description" : "API for drawing on the screen.",
+        "link" : "https://github.com/pickles976/ai-arena/blob/main/main/src/engine/renderer.ts#L18",
         "methods" : {
             "drawText" : 
             {

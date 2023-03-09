@@ -57,16 +57,19 @@
   $: champion = { name: "", color: "#00ff00", code: null}
 
     onMount(() => {
-        getChampionsForUser($auth)
-        .then((data) => champions = data)
+        if($auth.session) {
+            getChampionsForUser($auth)
+            .then((data) => champions = data)
 
-        getUserCode()
-        .then((data) => codeList = data)
+            getUserCode($auth.session.user.id)
+            .then((data) => codeList = data)
+        }
     })
 </script>
 
 <div class='main-div'>
         <div class="vert-panel" style="align-items: center;">
+            {#if $auth.session}
             <h2 style="padding-top: 2%">Your Champions</h2>
             <div>
                 <button class="btn btn-primary" on:click={() => getModal('champion-create').open()}>Create New</button>
@@ -91,6 +94,9 @@
                     </div>
                 {/each}
             </div>
+            {:else}
+                <h2>Please Log In to access champions</h2>  
+            {/if}
     </div>
 
     <!-- CREATE -->
