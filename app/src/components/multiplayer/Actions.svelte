@@ -6,7 +6,7 @@
     <div class="actions-panel">
         {#each actions as entry}
             <div class="item" style="padding: 0.5%;">
-                <div>{entry.user.name} captured {entry.star.name}!</div>
+                <div><span style="color: {entry.user.color}">{entry.user.name}</span> captured {entry.star.name}!</div>
             </div>
         {/each}
     </div>

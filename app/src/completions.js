@@ -6,7 +6,7 @@ export var customCompleter = {
             // utils
 
             { name: 'Vector2D()', description: 'Vector2D(x : number, y : number)'},
-            { name: 'dist()', description: 'dist(v1 : Vector2D, v2 : Vector2D) => number'},
+            { name: 'dist()', description: 'dist(obj1 : GameObject, obj2 : GameObject) => number'},
             { name: 'overlapCircle()', description: 'overlapCircle(pos : Vector2D, radius : number) => GameObject[]'},
             {name: 'console.log()', description: 'console.log()'},
 

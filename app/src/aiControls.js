@@ -5,8 +5,8 @@ export const BaseStart = `/*
     These variables will be used in the Base Update script.
 */
 console.log("Hello, world!")
-const energyPerShip = 100
-const shipEnergy = 50
+base.energyPerShip = 100
+base.shipEnergy = 50
 `
 
 
@@ -16,8 +16,8 @@ export const BaseUpdate =
     check whether or not to guy certain upgrades.
 */
 
-if (base.resources.metal > base.shipCost && base.resources.energy > energyPerShip * Game.getShipsByTeam(base.team).length){
-    base.spawnShip(shipEnergy,false)
+if (base.resources.metal > base.shipCost && base.resources.energy > base.energyPerShip * Game.getShipsByTeam(base.team).length){
+    base.spawnShip(base.shipEnergy,false)
 }
 
 if (base.resources.metal > base.upgradeMaxEnergyCost){

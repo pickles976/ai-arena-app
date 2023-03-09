@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp ./src/assets ./dist/src/",
+    "build": "vite build && ncp ./src/assets ./dist/src/",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "deploy": "aws s3 sync ./dist s3://ai-arena.com/ && aws s3 sync ./dist s3://www.ai-arena.com/"

@@ -57,7 +57,7 @@ function tryFetchAllCode() {
 
   // Get code from db
   if ($auth.session) {
-    getUserCode($auth.session.user.id).then((data) => {
+    getUserCode($auth).then((data) => {
       data.forEach((entry) => {
         remoteCodeObjects[entry.name] = entry.code
         remoteCodeObjects[entry.name].id = entry.id // id needed for upsert
@@ -74,6 +74,7 @@ function tryLoadLocalCode(name) {
   initEditor($code)
   setActiveCode(name)
   getModal('load-code').close(1)
+  document.getElementById("select-script").selectedIndex = 0;
 }
 
 /** Try to load code into the editor*/
@@ -82,6 +83,7 @@ function tryLoadRemoteCode(name) {
   initEditor($code)
   setActiveCode(name)
   getModal('load-code').close(1)
+  document.getElementById("select-script").selectedIndex = 0;
 }
 
 function tryDeleteLocalCode(name) {

@@ -5,7 +5,7 @@
 <div class='panel'>
 
     <div class="vertical-list user-panel">
-    {#each Object.values(data) as entry}
+    {#each Object.values(data).sort((a,b) => b.strength - a.strength) as entry}
         <div class="item" style="padding: 0.5%;">
             <div class='color-box' style='background-color: {entry.color}a0; margin-right: 2%;'></div>
             <div>{entry.name} : {entry.strength}</div>

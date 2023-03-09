@@ -5,15 +5,15 @@ import axios from 'axios';
 const lambdaURL = "https://bq7ler0dkb.execute-api.us-east-1.amazonaws.com/default/ai-arena-test"
 const lambdaKey = "bXPvvyL9fC7NnSE4x5ZwX2Hd7h2CIzqaqSJu0Xta"
 
-export async function submitCodeLambda(code, session, callback) {
+export async function submitCodeLambda(code, auth, callback) {
 
   axios.defaults.withCredentials = true
 
   let data = {
     id: code.id,
-    owner : session.session.user.id,
+    owner : auth.session.user.id,
     code : code,
-    userkey : session.session.access_token
+    userkey : auth.session.access_token
   }
 
   // IMPORTANT: API gateway needs all of these headers in its 'Access-Control-Allow-Headers' 
@@ -38,7 +38,7 @@ export async function submitCodeLambda(code, session, callback) {
 /**
  * Submit code for this user to the database
  */
-export async function submitCode(code, session) {
+export async function submitCode(code, auth) {
     
     const { data, error } = await supabase
     .from('battle_code')
@@ -46,7 +46,7 @@ export async function submitCode(code, session) {
         { 
           id : code.id,
           name: code.name, 
-          owner: session.session.user.id,
+          owner: auth.session.user.id,
           code: {
             "name" : code.name,
             "baseStart" : code.baseStart,
@@ -85,15 +85,14 @@ export async function getCodeByID(id) {
 }
 
 /**
- * TODO: filtering, right now we are abusinig the RLS to only get certain values
- * Get the code for a given user
+  * Select the code for a given user 
  */
-export async function getUserCode(id) {
+export async function getUserCode(auth) {
         
   let { data: TacticalCode, error } = await supabase
   .from('battle_code')
   .select('*')
-  .eq('owner', id)
+  .eq('owner', auth.session.user.id)
   return TacticalCode
 
 }

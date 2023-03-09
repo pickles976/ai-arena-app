@@ -207,4 +207,5 @@ export function initializeViewer(seed, numStars) {
 
 export function killGalaxy(){
     window.cancelAnimationFrame(request)
+    
 }
