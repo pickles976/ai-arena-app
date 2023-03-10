@@ -19,6 +19,7 @@ let prevOnTop
 let closeCallback
 
 export let id=''
+export let closeButton = true
 
 function keyPress(ev){
 	//only respond if the current modal is the top one
@@ -62,11 +63,13 @@ onDestroy(()=>{
 
 <div id="topModal" class:visible bind:this={topDiv} on:click={()=>close()}>
 	<div id='modal' on:click|stopPropagation={()=>{}}>
+		{#if closeButton}
 		<svg id="close" on:click={()=>close()} viewBox="0 0 12 12">
 			<circle cx=6 cy=6 r=6 />
 			<line x1=3 y1=3 x2=9 y2=9 />
 			<line x1=9 y1=3 x2=3 y2=9 />
 		</svg>
+		{/if}
 		<div id='modal-content'>
 			<slot></slot>
 		</div>

@@ -89,6 +89,7 @@ export async function getCodeByID(id) {
  */
 export async function getUserCode(auth) {
         
+  console.log(auth)
   let { data: TacticalCode, error } = await supabase
   .from('battle_code')
   .select('*')

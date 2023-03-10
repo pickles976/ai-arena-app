@@ -8,6 +8,7 @@
   import Modal from './components/Modal.svelte'
   import Multiplayer from './routes/Multiplayer.svelte';
   import Browser from './routes/Browser.svelte';
+  import { auth } from './stores';
 </script>
 
 <body class='bg-metalgun'>
@@ -20,7 +21,7 @@
 				<a class="nav-item nav-link" href="/#/multiplayer">Multiplayer</a>
 				<a class="nav-item nav-link" href="/#/browser">Browser</a>
 				<a class="nav-item nav-link" href="/#/documentation">Documentation</a>
-				<a class="nav-item nav-link" href="/#/login">Login</a>
+				<a class="nav-item nav-link" href="/#/login">{#if $auth.session}Profile{:else}Login{/if}</a>
 			</div>
 		</div>
 	</nav>

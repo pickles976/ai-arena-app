@@ -6,12 +6,13 @@ import Modal,{getModal} from '../../components/Modal.svelte'
 import { onMount } from "svelte";
 import { getCodeFromEditor, initEditor, selectScript } from "../../editor.js";
 import { setUserCode } from "ai-arena";
-  import { TeamCode } from '../../../../../ai-arena/lib/dist/types.js';
+import { TeamCode } from '../../../../../ai-arena/lib/dist/types.js';
+import Spinner from 'svelte-spinner';
 
 /** Upsert user code on submission */
 async function trySubmitCode() {
 
-  submissionStatus = "running"
+  submissionStatus = "validating"
   codeDuration = null
 
   if (!$auth.session) {
@@ -148,7 +149,7 @@ function tryLoadEnemyCode(name) {
 
 let localCodeObjects = {}
 let remoteCodeObjects = {}
-$: submissionStatus = "running"
+$: submissionStatus = "validating"
 $: codeDuration = null
 
 onMount(() => {
@@ -168,7 +169,7 @@ onMount(() => {
     <button class="btn-custom" on:click={() => {tryFetchAllCode(); getModal('load-code').open();}}>Load</button>
     <button class="btn-custom" on:click={trySave}>Save</button>
     <button class="btn-custom" on:click={() => {$code.name = ""; trySave()}}>Save As</button>
-    <div class='code-name'>{$code.name === "" ? "untitled" : $code.name}</div>
+    <div class='code-name'>{$code.name ? $code.name : "untitled"}</div>
   </div>
   <!-- SCRIPT SELECTION -->
   <div class="vert-panel" style="flex-direction: row-reverse; ">
@@ -200,14 +201,21 @@ onMount(() => {
 
 
 <!-- YARR, HERE BE POPUPS -->
-<Modal id='submission-status'>
+<Modal id='submission-status' closeButton={false}>
 <h2>Submission Status</h2>
 <p>Evaluation status: {submissionStatus}</p>
 {#if codeDuration}
   <p>Your code ran in {codeDuration}ms!</p>
   <p>Visit the browser tab to create a Champion with this code</p>
+  <button on:click={() => getModal('submission-status').close(1)}>close</button>
+{:else}
+  <div class="vert-panel">
+    <div style="margin: 4%; align-self: center;">
+      <Spinner></Spinner>
+    </div>
+    <button on:click={() => getModal('submission-status').close(1)}>cancel</button>
+  </div>
 {/if}
-<button on:click={() => getModal('submission-status').close(1)}>close</button>
 </Modal>
 
 <Modal id='save-as'>

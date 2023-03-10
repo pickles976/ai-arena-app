@@ -7,6 +7,12 @@
   import { activeCode, auth, code } from "../stores";
 
     async function tryCreateChampion() {
+
+        // make sure the first champion is active by default
+        if (champions.length <= 0) {
+            champion.active = true
+        }
+
         let result = await createChampion(champion, $auth); 
         champions = champions.concat(result)
         getModal('champion-create').close(1)
@@ -61,7 +67,7 @@
             getChampionsForUser($auth)
             .then((data) => champions = data)
 
-            getUserCode($auth.session.user.id)
+            getUserCode($auth)
             .then((data) => codeList = data)
         }
     })
