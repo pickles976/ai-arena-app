@@ -162,8 +162,8 @@ onMount(() => {
 
 <div style="height: 100%; width: 100%;" class="bg-steel">
 <div class="vert-panel" style="height: 100%">
-<div class="hor-panel" style="flex-grow: 0;">
-    <!-- CODE EDITOR BUTTONS -->
+<div class="hor-panel" style="flex-grow: 0;" id="top-editor-panel">
+  <!-- CODE EDITOR BUTTONS -->
   <div class="vert-panel" style="flex-direction: row;">
     <button class="btn-custom" on:click={tryNew}>New</button>
     <button class="btn-custom" on:click={() => {tryFetchAllCode(); getModal('load-code').open();}}>Load</button>

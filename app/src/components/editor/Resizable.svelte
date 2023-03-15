@@ -101,16 +101,21 @@
 	}
 
 	let grabber = true
+	let grabberHeight = '10%'
 
     onMount(() => {
       initEditor($code)
       resizeEditor()
+
+	  // make sure that the grabber object is the same height as the panel
+	  grabberHeight = document.getElementById('top-editor-panel').offsetHeight + 'px'
+		console.log(grabberHeight)
     })
 </script>
 
 <div class:hide-grabber={!grabber} style="flex: 2; display: block; position: absolute; height: 35%; bottom: 0px;">
     
-    <div id='top' class="grabber top"/>
+    <div id='top' class="grabber top" style='--grabberHeight:{grabberHeight};'/>
 
     <div class="box" use:move use:resize style="position: absolute;">
         <EditorPanel />
@@ -136,7 +141,8 @@
 	}
 	
 	:global(.grabber.top) {
-		height: 3.2vh;
+		/* height: 3.2vh; */
+		height: var(--grabberHeight);
 		/* width: 100%; */
 		/* background: green; */
 		background-color: transparent;
@@ -147,7 +153,8 @@
 	}
 
 	:global(.grabber.top:hover) {
-		height: 3.2vh;
+		/* height: 3.2vh; */
+		height: var(--grabberHeight);
 		/* width: 100%; */
 		background-color: #ffffff0f;
 		top: 0vh;

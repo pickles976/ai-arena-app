@@ -1,4 +1,4 @@
-import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from "../aiControls"
+import { BaseStart, BaseUpdate, ShipStart, ShipUpdate } from "../aiControls.js"
 
 /**
  * Wrapper around cookies

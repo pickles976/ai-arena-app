@@ -90,7 +90,7 @@
   </div>
 
   <!-- RIGHT PANEL -->
-  <div class="bg-gunmetal" style="right: 0px; top: 0px; position: absolute; width: 12.5vw; height: 100vh;">
+  <div class="bg-gunmetal" style="right: 0px; top: 0px; position: absolute; max-width: 100%; height: 100vh;">
     <div class="vert-panel">
       <GameControls />
       <div class="bg-steel collapsible"> Score </div>
